@@ -1,11 +1,28 @@
+import { cn } from 'src/utils/classnames';
+
 interface Props {
   children?: React.ReactNode;
+  isFirstChild?: boolean;
 }
 
-export function EvolutionConnector({ children }: Props) {
+export function EvolutionConnector({ children, isFirstChild = false }: Props) {
   return (
-    <div className="absolute -left-24 top-0 flex h-full w-24 items-center bg-red-500 after:absolute after:inset-x-[2px] after:h-[2px] after:rounded-full after:bg-gray-100">
-      <div className="relative flex size-full items-center justify-center">{children}</div>
-    </div>
+    <>
+      <div
+        className={cn(
+          'after:h-evoconnector-thickness after:bg-evonode-primary absolute top-0 flex h-full items-center after:absolute after:inset-x-0',
+          '-left-evochain-col w-evochain-col',
+        )}
+      >
+        <div className="relative flex size-full items-center justify-center">{children}</div>
+      </div>
+      <div
+        className={cn(
+          !isFirstChild &&
+            '-ml-evochain-col before:h-evoconnector-thickness after:w-evoconnector-thickness before:bg-evonode-primary after:bg-evonode-primary absolute -left-full top-0 -z-10 flex h-full w-full items-center justify-end before:absolute before:w-1/2 before:rounded-l-full after:absolute after:bottom-1/2 after:left-1/2',
+          'after:h-[calc(100%+var(--gap-evochain-row))]',
+        )}
+      ></div>
+    </>
   );
 }

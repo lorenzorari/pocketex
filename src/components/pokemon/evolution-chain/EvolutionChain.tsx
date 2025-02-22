@@ -22,19 +22,30 @@ export function EvolutionChain({ evolutionChainUrl }: Props) {
   if (!evolutionChainUrl) return null;
 
   return (
-    <div className="grid grid-cols-3 gap-24">
-      {data?.chain && <EvolutionNode {...data.chain.species} hasParent={false} />}
+    <div className="gap-x-evochain-col grid grid-cols-3">
+      {data?.chain && (
+        <div>
+          <EvolutionNode {...data.chain.species} hasParent={false} />
+        </div>
+      )}
 
-      <div className="col-span-2 grid gap-0">
-        {data?.chain?.evolvesTo?.map((evo2) => (
-          <div className="grid grid-cols-2 gap-24" key={evo2.species.url}>
-            <EvolutionNode {...evo2.species} details={evo2.evolutionDetails} />
+      <div className="gap-evochain-row col-span-2 grid">
+        {data?.chain?.evolvesTo?.map((evo2, evo2Idx) => (
+          <div className="gap-x-evochain-col grid grid-cols-2" key={evo2.species.url}>
+            <EvolutionNode {...evo2.species} details={evo2.evolutionDetails} isFirstChild={evo2Idx === 0} />
 
-            <div className="grid gap-5">
-              {evo2.evolvesTo.map((evo3) => (
-                <EvolutionNode key={evo3.species.url} {...evo3.species} details={evo3.evolutionDetails} />
-              ))}
-            </div>
+            {!!evo2.evolvesTo.length && (
+              <div className="gap-evochain-row grid">
+                {evo2.evolvesTo.map((evo3, evo3Idx) => (
+                  <EvolutionNode
+                    key={evo3.species.url}
+                    {...evo3.species}
+                    details={evo3.evolutionDetails}
+                    isFirstChild={evo3Idx === 0}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
