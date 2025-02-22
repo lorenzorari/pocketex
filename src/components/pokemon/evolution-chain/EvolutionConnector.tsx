@@ -8,12 +8,7 @@ interface Props {
 export function EvolutionConnector({ children, isFirstChild = false }: Props) {
   return (
     <>
-      <div
-        className={cn(
-          'after:h-evoconnector-thickness after:bg-evonode-primary absolute top-0 flex h-full items-center after:absolute after:inset-x-0',
-          '-left-evochain-col w-evochain-col',
-        )}
-      >
+      <div className="after:h-evoconnector-thickness after:bg-evonode-primary -left-evochain-col w-evochain-col absolute top-0 -z-10 flex h-full items-center after:absolute after:inset-x-0">
         <div className="relative flex size-full items-center justify-center">{children}</div>
       </div>
       <div

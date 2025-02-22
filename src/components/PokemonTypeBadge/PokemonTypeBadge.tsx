@@ -48,10 +48,7 @@ const PokemonTypeBadge = (props: Props) => {
       title={withLabel ? undefined : typeLabel}
     >
       <figure className="size-4">
-        <SVG
-          className="size-full"
-          src={`/assets/svg/pokemon-types/${variant}.svg`}
-        />
+        <SVG className="size-full" src={`/assets/svg/pokemon-types/${variant}.svg`} />
       </figure>
 
       {withLabel && typeLabel}

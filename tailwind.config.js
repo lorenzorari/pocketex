@@ -29,12 +29,14 @@ export default {
       colors: {
         primary: 'var(--color-primary)',
         black: 'var(--color-black)',
-        ...TYPES.map((type) => ({
-          [type]: {
-            1: `var(--color-${type}-1)`,
-            2: `var(--color-${type}-2)`,
-          },
-        })),
+        ...TYPES.reduce((acc, t) => {
+          acc[t] = {
+            1: `var(--color-${t}-1)`,
+            2: `var(--color-${t}-2)`,
+          };
+          return acc;
+        }, {}),
+
         evonode: {
           primary: colors.gray[100],
         },
