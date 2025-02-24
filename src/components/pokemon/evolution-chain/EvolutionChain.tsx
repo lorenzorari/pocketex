@@ -22,20 +22,23 @@ export function EvolutionChain({ evolutionChainUrl }: Props) {
   if (!evolutionChainUrl) return null;
 
   return (
-    <div className="gap-x-evochain-col grid grid-cols-3">
+    <div className="grid gap-x-evochain-col gap-y-evochain-row md:grid-cols-3">
       {data?.chain && (
         <div>
           <EvolutionNode {...data.chain.species} hasParent={false} />
         </div>
       )}
 
-      <div className="gap-evochain-row col-span-2 grid">
+      <div className="grid gap-evochain-row md:col-span-2">
         {data?.chain?.evolvesTo?.map((evo2, evo2Idx) => (
-          <div className="gap-x-evochain-col grid grid-cols-2" key={evo2.species.url}>
+          <div
+            className="ml-14 grid gap-x-evochain-col gap-y-evochain-row md:ml-0 md:grid-cols-2"
+            key={evo2.species.url}
+          >
             <EvolutionNode {...evo2.species} details={evo2.evolutionDetails} isFirstChild={evo2Idx === 0} />
 
             {!!evo2.evolvesTo.length && (
-              <div className="gap-evochain-row grid">
+              <div className="ml-14 grid gap-evochain-row md:ml-0">
                 {evo2.evolvesTo.map((evo3, evo3Idx) => (
                   <EvolutionNode
                     key={evo3.species.url}

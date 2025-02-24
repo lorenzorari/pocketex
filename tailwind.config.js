@@ -36,7 +36,6 @@ export default {
           };
           return acc;
         }, {}),
-
         evonode: {
           primary: colors.gray[100],
         },
@@ -86,6 +85,7 @@ export default {
       },
       spacing: {
         'evochain-col': 'var(--gap-evochain-col)',
+        'evochain-col-mobile': 'var(--gap-evochain-col-mobile)',
         'evochain-row': 'var(--gap-evochain-row)',
         'evoconnector-thickness': 'var(--evoconnector-thickness)',
       },

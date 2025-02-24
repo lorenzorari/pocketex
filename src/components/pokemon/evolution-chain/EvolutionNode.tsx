@@ -23,11 +23,11 @@ export function EvolutionNode({ name, url, details, hasParent = true, isFirstChi
       <EvolutionNodeCtx.Provider value={{ details: details || [] }}>
         <div className={hasParent ? 'relative' : undefined}>
           <a href={`/pokemon/${name}`}>
-            <article className="bg-evonode-primary flex items-center gap-2 rounded-lg p-3 text-lg font-bold transition-all hover:bg-gray-200">
+            <article className="flex items-center gap-2 rounded-lg bg-evonode-primary p-3 font-bold transition-all hover:bg-gray-200">
               <picture className="block size-[48px] text-xs">
                 <Image src={imageUrl} alt={name} />
               </picture>
-              <h3 className="capitalize">{name}</h3>
+              <h3 className="capitalize md:text-lg">{name}</h3>
             </article>
           </a>
           {hasParent && (
