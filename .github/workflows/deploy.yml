@@ -1,0 +1,45 @@
+name: Netlify Deployment
+
+on:
+  push:
+    branches:
+      - canary
+    tags:
+      - v*
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code from the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Enable corepack
+        run: corepack enable
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies and build
+        run: |
+          yarn install --frozen-lockfile  # Ensure dependencies match yarn.lock
+          yarn build  # Run build script
+
+      # Deploy to Netlify Canary (triggered when pushing to the 'canary' branch)
+      - name: Deploy to Canary
+        if: github.ref == 'refs/heads/canary'
+        run: yarn netlify deploy --dir=build --alias canary
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      # Deploy to Netlify Production (triggered when pushing a tag, e.g., v1.0.0)
+      - name: Deploy to Production
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: yarn netlify deploy --dir=build --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
