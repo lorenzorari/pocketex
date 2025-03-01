@@ -14,16 +14,14 @@ jobs:
       # Checkout code from the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      # Set up Node.js environment (use the version your project is compatible with)
+        
+      - name: Enable corepack
+        run: corepack enable && corepack prepare yarn@4.2.2 --activate
+        
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'  # Cache Yarn dependencies for faster installs
-
-      - name: Install Yarn
-        run: corepack enable && corepack prepare yarn@4.2.2 --activate
 
       - name: Install dependencies and build
         run: |
