@@ -4,7 +4,7 @@
   /* BASE */
   --color-black: #3f3f3f;
   --color-white: white;
-  --color-primary: hsl(350, 91%, 45%);
+  --color-primary: #DC0A2D;
   --color-type-1: var(--color-normal-1);
   --color-type-2: var(--color-normal-2);
 
@@ -87,4 +87,10 @@
   /* 💧 WATER */
   --color-water-1: #6890f0;
   --color-water-2: #bbcfff;
+
+  /* Evolution Chain */
+  --gap-evochain-col: 6rem;
+  --gap-evochain-col-mobile: 3.5rem;
+  --gap-evochain-row: 1.25rem;
+  --evoconnector-thickness: 3px;
 }

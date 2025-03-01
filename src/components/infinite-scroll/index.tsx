@@ -5,24 +5,18 @@ interface Props {
   observerCallback: IntersectionObserverCallback;
   page: number;
   loaderElement: JSX.Element;
-  loadMore: () => Promise<void>;
+  loadMore: () => void;
 }
 
 const InfiniteScroll = forwardRef(
-  ({ children, observerCallback, page, loadMore, loaderElement }: Props, ref: any) => {
+  ({ children, observerCallback, loaderElement }: Props, ref: any) => {
     const Loader = () => loaderElement;
 
     useEffect(() => {
       const observer = new IntersectionObserver(observerCallback);
-
       if (ref?.current) observer.observe(ref.current);
-
       return () => observer.disconnect();
     }, [ref, observerCallback]);
-
-    useEffect(() => {
-      if (page > 1) loadMore();
-    }, [page]);
 
     return (
       <>
@@ -30,7 +24,7 @@ const InfiniteScroll = forwardRef(
         <Loader />
       </>
     );
-  }
+  },
 );
 
 InfiniteScroll.displayName = 'InfiniteScroll';

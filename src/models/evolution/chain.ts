@@ -1,5 +1,5 @@
 import { NamedAPIResource } from './../named-api-resource';
-import { EvolutionDetails } from './detail';
+import { EvolutionDetail } from './detail';
 
 export interface EvolutionChain {
   id?: number;
@@ -7,13 +7,9 @@ export interface EvolutionChain {
   chain?: ChainLink;
 }
 
-export declare type EvolutionChains = EvolutionChain[];
-
 export interface ChainLink {
   isBaby: boolean;
   species: NamedAPIResource;
-  evolutionDetails: EvolutionDetails;
-  evolvesTo: ChainLinks;
+  evolutionDetails: EvolutionDetail[];
+  evolvesTo: ChainLink[];
 }
-
-export declare type ChainLinks = ChainLink[];

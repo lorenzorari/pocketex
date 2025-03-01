@@ -1,30 +1,47 @@
-import axios from 'axios';
-import { convertUnderscoreToCamelcase } from 'src/helpers/utils/convert-underscore-to-camelcase';
 import { Pokemon } from 'src/models/pokemon';
 import { PokemonPagination } from 'src/models/pokemon/pagination';
+import { pokeapi } from 'src/helpers/http';
+import { getAnthropometry } from 'src/helpers/getAnthropometry';
+import { POKEMON_QUANTITY } from 'src/constants';
+import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
+import { PokemonAutocompleteItem } from 'src/components/autocomplete/types';
+import { getArtworkUrl } from 'src/helpers/get-artwork-url';
+import { capitalize } from 'src/utils/capitalize';
 
-const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
+const getPokemon = async (id: string): Promise<Pokemon> => {
+  const pokemonData = await pokeapi.get(`pokemon/${id}`).json<Pokemon>();
 
-const getPokemon = async (pokemon: string): Promise<Pokemon> => {
-  return axios
-    .get(`${INITIAL_URL}/${pokemon}`)
-    .then((res) => {
-      const data = convertUnderscoreToCamelcase(res.data);
-      return data as Pokemon;
-    })
-    .catch(({ response }) => response);
+  pokemonData.name = capitalize(pokemonData?.name ?? '');
+  pokemonData.height = getAnthropometry(pokemonData.height ?? -1);
+  pokemonData.weight = getAnthropometry(pokemonData.weight ?? -1);
+
+  return pokemonData;
 };
 
 const getAllPokemons = async (
   offset?: number,
   limit?: number,
-  url: string = INITIAL_URL
 ): Promise<PokemonPagination> => {
-  if (offset || limit) {
-    url = INITIAL_URL + `?offset=${offset}&limit=${limit}`;
-  }
+  const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
+  const url = `pokemon${params}`;
 
-  return axios.get(url).then(({ data }) => data as PokemonPagination);
+  return await pokeapi.get(url).json<PokemonPagination>();
 };
 
-export { getPokemon, getAllPokemons };
+const getPokemonAutocompleteItems = async () => {
+  const { results } = await getAllPokemons(undefined, POKEMON_QUANTITY);
+
+  if (!results) return [];
+
+  return results.map(({ name, url }) => {
+    const id = getIdFromResourceUrl(url);
+
+    return {
+      id,
+      name,
+      imageUrl: getArtworkUrl(id),
+    } as PokemonAutocompleteItem;
+  });
+};
+
+export { getPokemon, getAllPokemons, getPokemonAutocompleteItems };
