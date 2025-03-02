@@ -46,10 +46,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
 
     if (!suggestions.length) {
       if (isNaN(+value)) setError(`${value} is not a Pokémon.`);
-      else
-        setError(
-          `No Pokémon has this id, please choose an id from 1 to ${POKEMON_QUANTITY}.`,
-        );
+      else setError(`No Pokémon has this id, please choose an id from 1 to ${POKEMON_QUANTITY}.`);
 
       return false;
     }
@@ -57,11 +54,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
     const { name, id } = suggestions[0];
     value = value.toLowerCase();
 
-    if (
-      suggestionSelected === -1 &&
-      name !== value &&
-      id.toString() !== value
-    ) {
+    if (suggestionSelected === -1 && name !== value && id.toString() !== value) {
       setSuggestions([]);
       setError(`${value} is not a Pokémon`);
       return false;
@@ -96,8 +89,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
 
     if (!isValueValidated(searchValue)) return;
 
-    if (suggestionSelected !== -1)
-      return navigateToDetails(suggestions[suggestionSelected].name);
+    if (suggestionSelected !== -1) return navigateToDetails(suggestions[suggestionSelected].name);
 
     navigateToDetails(searchValue);
   };
@@ -135,7 +127,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
     >
       <div className="flex items-center rounded-full bg-white pr-4 transition-all">
         <input
-          className="w-full rounded-[inherit] bg-transparent py-2 pl-4 outline-none"
+          className="w-full rounded-[inherit] bg-transparent py-2 pl-4 outline-none placeholder:text-xs md:placeholder:text-sm"
           type="text"
           placeholder={placeholder}
           onChange={handleChangeSearch}
