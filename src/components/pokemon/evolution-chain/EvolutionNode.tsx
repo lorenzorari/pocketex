@@ -1,0 +1,42 @@
+import { Image } from '@/components/ui/Image';
+import { getArtworkUrl } from '@/helpers/get-artwork-url';
+import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
+import { EvolutionDetail } from '@/models/evolution/detail';
+import { NamedAPIResource } from '@/models/named-api-resource';
+import { EvolutionConnector } from './EvolutionConnector';
+import { EvolutionTrigger } from './EvolutionTrigger';
+import { EvolutionNodeCtx } from './evolution-node.context';
+import { Root } from '@radix-ui/react-slot';
+
+type Props = NamedAPIResource & { details?: EvolutionDetail[] } & {
+  hasParent?: boolean;
+  isFirstChild?: boolean;
+};
+
+export function EvolutionNode({ name, url, details, hasParent = true, isFirstChild = false }: Props) {
+  const pokemonId = getIdFromResourceUrl(url);
+  const imageUrl = getArtworkUrl(pokemonId);
+  const Tag = hasParent ? 'div' : Root;
+
+  return (
+    <Tag>
+      <EvolutionNodeCtx.Provider value={{ details: details || [] }}>
+        <div className={hasParent ? 'relative' : undefined}>
+          <a href={`/pokemon/${name}`}>
+            <article className="flex items-center gap-2 rounded-lg bg-evonode-primary p-3 font-bold transition-all hover:bg-gray-200">
+              <picture className="block size-[48px] text-xs">
+                <Image src={imageUrl} alt={name} />
+              </picture>
+              <h3 className="capitalize md:text-lg">{name}</h3>
+            </article>
+          </a>
+          {hasParent && (
+            <EvolutionConnector isFirstChild={isFirstChild}>
+              <EvolutionTrigger />
+            </EvolutionConnector>
+          )}
+        </div>
+      </EvolutionNodeCtx.Provider>
+    </Tag>
+  );
+}
