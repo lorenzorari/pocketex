@@ -6,7 +6,7 @@ interface Props {
 
 const PokemonBackgroundImage = ({ pokemonType }: Props) => {
   return (
-    <div className="absolute -bottom-[2.4rem] -right-12 left-10 -z-[1]">
+    <div className="absolute -bottom-[2.4rem] -right-12 left-10 -z-1">
       <SVG
         className="size-full"
         style={{ color: 'var(--color-type-2)' }}

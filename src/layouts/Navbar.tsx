@@ -21,7 +21,7 @@ export const Navbar = ({ isHome }: Props) => {
       className={cn(
         'sticky top-0 z-20 mx-auto border-b border-b-[#ffffff4d] px-5 py-6 backdrop-blur-lg lg:px-10 xl:px-32 2xl:max-w-[1440px]',
         {
-          'relative animate-fadeIn border-none opacity-0 backdrop-blur-none [animation-delay:1.5s]': isHome,
+          'relative animate-fade-in border-none opacity-0 backdrop-blur-none [animation-delay:1.5s]': isHome,
         },
       )}
     >
