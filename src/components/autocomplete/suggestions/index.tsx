@@ -18,7 +18,7 @@ const Suggestions = ({
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
-    <ul className="absolute top-[50%] z-[-1] w-full overflow-hidden rounded-b-2xl bg-white pt-6 shadow-sm">
+    <ul className="absolute top-[50%] z-[-1] w-full overflow-hidden rounded-b-2xl bg-white pt-6 shadow-xs">
       {suggestions.map((suggestion, i) => (
         <li
           key={i}

@@ -21,15 +21,15 @@ const HeroBanner = (props: Props) => {
   return (
     <section className="relative h-screen bg-primary">
       <Particles
-        className="absolute inset-0 scale-0 animate-scaleUp [animation-delay:2s]"
+        className="absolute inset-0 opacity-0 animate-scale-up [animation-delay:2s]"
         init={initParticles as any}
         options={tsparticlesOptions}
       />
 
       <div className="flex h-full items-center justify-center">
-        <div className="relative z-[1]">
+        <div className="relative z-1">
           <div className="overflow-hidden">
-            <h1 className="-translate-y-full animate-slideFromTop text-[20vw] font-semibold leading-snug text-white [animation-delay:0.5s] lg:text-[10vw] xl:text-[8.59755vw]">
+            <h1 className="opacity-0 animate-slide-from-top text-[20vw] font-semibold leading-snug text-white [animation-delay:0.5s] lg:text-[10vw] xl:text-[8.59755vw]">
               {props.heading}
             </h1>
           </div>

@@ -125,11 +125,11 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
     <form
       ref={inputRef}
       onSubmit={handleSubmit}
-      className="relative w-full animate-fadeIn opacity-0 [animation-delay:1s]"
+      className="relative w-full animate-fade-in opacity-0 [animation-delay:1s]"
     >
       <div className="flex items-center rounded-full bg-white pr-4 transition-all">
         <input
-          className="w-full rounded-[inherit] bg-transparent py-2 pl-4 outline-none placeholder:text-xs md:placeholder:text-sm"
+          className="w-full rounded-[inherit] bg-transparent py-2 pl-4 outline-hidden placeholder:text-xs md:placeholder:text-sm"
           type="text"
           placeholder={placeholder}
           onChange={handleChangeSearch}

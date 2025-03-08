@@ -1,8 +1,156 @@
-@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap')
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-black: var(--color-black);
+
+  --color-bug-1: var(--color-bug-1);
+  --color-bug-2: var(--color-bug-2);
+
+  --color-dark-1: var(--color-dark-1);
+  --color-dark-2: var(--color-dark-2);
+
+  --color-dragon-1: var(--color-dragon-1);
+  --color-dragon-2: var(--color-dragon-2);
+
+  --color-electric-1: var(--color-electric-1);
+  --color-electric-2: var(--color-electric-2);
+
+  --color-fairy-1: var(--color-fairy-1);
+  --color-fairy-2: var(--color-fairy-2);
+
+  --color-fighting-1: var(--color-fighting-1);
+  --color-fighting-2: var(--color-fighting-2);
+
+  --color-fire-1: var(--color-fire-1);
+  --color-fire-2: var(--color-fire-2);
+
+  --color-flying-1: var(--color-flying-1);
+  --color-flying-2: var(--color-flying-2);
+
+  --color-ghost-1: var(--color-ghost-1);
+  --color-ghost-2: var(--color-ghost-2);
+
+  --color-grass-1: var(--color-grass-1);
+  --color-grass-2: var(--color-grass-2);
+
+  --color-ground-1: var(--color-ground-1);
+  --color-ground-2: var(--color-ground-2);
+
+  --color-ice-1: var(--color-ice-1);
+  --color-ice-2: var(--color-ice-2);
+
+  --color-normal-1: var(--color-normal-1);
+  --color-normal-2: var(--color-normal-2);
+
+  --color-poison-1: var(--color-poison-1);
+  --color-poison-2: var(--color-poison-2);
+
+  --color-psychic-1: var(--color-psychic-1);
+  --color-psychic-2: var(--color-psychic-2);
+
+  --color-rock-1: var(--color-rock-1);
+  --color-rock-2: var(--color-rock-2);
+
+  --color-steel-1: var(--color-steel-1);
+  --color-steel-2: var(--color-steel-2);
+
+  --color-water-1: var(--color-water-1);
+  --color-water-2: var(--color-water-2);
+
+  --color-evonode-primary: #f3f4f6;
+
+  --spacing-evochain-col: var(--gap-evochain-col);
+  --spacing-evochain-col-mobile: var(--gap-evochain-col-mobile);
+  --spacing-evochain-row: var(--gap-evochain-row);
+  --spacing-evoconnector-thickness: var(--evoconnector-thickness);
+
+  --animate-levitate: levitate 4s ease-in-out infinite;
+  --animate-scale-up: scaleUp 0.5s forwards;
+  --animate-slide-from-top: slideFromTop 0.5s forwards;
+  --animate-fade-in: fadeIn 0.5s forwards;
+  --animate-wiggle: wiggle 0.3s ease-in-out forwards;
+
+  --breakpoint-3xl: 1792px;
+
+  @keyframes levitate {
+    0%,
+    100% {
+      transform: translateY(-6px);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+  @keyframes scaleUp {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes slideFromTop {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(0);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 html {
   /* Scalable font : 
@@ -13,17 +161,6 @@ html {
   /* font-size: calc(8px + (16 - 8) * ((100vw - 320px) / (1536 - 320))); */
   font-family: "Urbanist", sans-serif;
 }
-
-/* html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: "Nunito", sans-serif;
-} */
 
 body {
   color: var(--color-black);

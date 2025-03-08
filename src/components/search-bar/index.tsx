@@ -21,7 +21,7 @@ const SearchBar = (props: Props) => {
       )}
     >
       <input
-        className="w-full rounded-[inherit] bg-transparent py-2 pl-4 outline-none"
+        className="w-full rounded-[inherit] bg-transparent py-2 pl-4 outline-hidden"
         type={props.type}
         placeholder={props.placeholder}
         onChange={props.onChange}
