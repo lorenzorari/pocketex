@@ -1,11 +1,11 @@
-import { Pokemon } from '@/models/pokemon';
-import { PokemonPagination } from '@/models/pokemon/pagination';
-import { pokeapi } from '@/helpers/http';
-import { getAnthropometry } from '@/helpers/getAnthropometry';
+import { type PokemonAutocompleteItem } from '@/components/autocomplete/types';
 import { POKEMON_QUANTITY } from '@/constants';
-import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
-import { PokemonAutocompleteItem } from '@/components/autocomplete/types';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
+import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
+import { getAnthropometry } from '@/helpers/getAnthropometry';
+import { pokeapi } from '@/helpers/http';
+import { type Pokemon } from '@/models/pokemon';
+import { type PokemonPagination } from '@/models/pokemon/pagination';
 import { capitalize } from '@/utils/capitalize';
 
 const getPokemon = async (id: string): Promise<Pokemon> => {

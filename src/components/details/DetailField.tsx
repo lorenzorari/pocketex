@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { PanelField } from '../ui/panel/PanelField';
 import { PanelLabel } from '../ui/panel/PanelLabel';
 

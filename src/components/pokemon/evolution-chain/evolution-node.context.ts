@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { EvolutionDetail } from '@/models/evolution/detail';
+import { type EvolutionDetail } from '@/models/evolution/detail';
 
 type EvolutionNodeContext = {
   details: EvolutionDetail[];

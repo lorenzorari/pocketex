@@ -1,10 +1,10 @@
-import { NamedAPIResource, NamedAPIResources } from "../named-api-resource";
-import { PokemonAbilities } from "./ability";
-import { PokemonHeldItems } from "./held-item";
-import { PokemonMoves } from "./move";
-import { PokemonSprites } from "./sprite";
-import { PokemonStat } from "./stat";
-import { PokemonTypes } from "./type";
+import { type NamedAPIResource, type NamedAPIResources } from "../named-api-resource";
+import { type PokemonAbilities } from "./ability";
+import { type PokemonHeldItems } from "./held-item";
+import { type PokemonMoves } from "./move";
+import { type PokemonSprites } from "./sprite";
+import { type PokemonStat } from "./stat";
+import { type PokemonTypes } from "./type";
 
 export interface Pokemon {
   id?: number;

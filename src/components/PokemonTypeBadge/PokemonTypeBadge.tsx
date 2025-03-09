@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { capitalize } from '@/utils/capitalize';
-import { SVG } from '@/components/SVG';
 import { useMemo } from 'react';
+import { SVG } from '@/components/SVG';
 import { PokemonType } from '@/models/types';
+import { capitalize } from '@/utils/capitalize';
 
 interface Props {
   variant: PokemonType;

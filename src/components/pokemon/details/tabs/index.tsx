@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
 import Tab from '@/components/tab';
 import styles from './tabs.module.scss';
 

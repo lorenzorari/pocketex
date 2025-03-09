@@ -1,7 +1,7 @@
 
 import { createContext, useContext } from 'react';
-import { PokemonType } from '@/models/types';
-import { Nullable } from '@/models/utils';
+import { type PokemonType } from '@/models/types';
+import { type Nullable } from '@/models/utils';
 
 type PrimaryTypeContext = Nullable<PokemonType>;
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import TypeTag from '@/components/type-tag';
 import PokemonBackgroundImage from '@/components/pokemon/card/background-image';
 import PokemonCardId from '@/components/pokemon/card/id';
 import PokemonCardTitle from '@/components/pokemon/card/title';
-import { Pokemon } from '@/models/pokemon';
-import PokemonCardImage from './image';
+import TypeTag from '@/components/type-tag';
+import { type Pokemon } from '@/models/pokemon';
 import { cn } from '@/utils/classnames';
+import PokemonCardImage from './image';
 
 interface Props {
   pokemon: Pokemon;

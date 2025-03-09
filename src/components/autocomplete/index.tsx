@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import React, { useRef, useState } from 'react';
+import { IconSearch } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
+import React, { type RefObject, useRef, useState } from 'react';
+import { useOnClickOutside } from 'usehooks-ts';
 import { POKEMON_QUANTITY } from '@/constants';
+import { usePokemonAutocomplete } from '@/hooks/pokemon/usePokemonAutocomplete';
+import { isStringEmpty } from '@/utils/string';
 import AutocompleteError from './error';
 import Suggestions from './suggestions';
-import { usePokemonAutocomplete } from '@/hooks/pokemon/usePokemonAutocomplete';
-import { PokemonAutocompleteItem } from './types';
-import { IconSearch } from '@tabler/icons-react';
-import { isStringEmpty } from '@/utils/string';
-import { useOnClickOutside } from 'usehooks-ts';
-import { useRouter } from 'next/navigation';
+import { type PokemonAutocompleteItem } from './types';
 
 interface Props {
   suggestionsSize?: number;
@@ -25,9 +25,9 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
   const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
   const [error, setError] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLFormElement | null>(null);
 
-  useOnClickOutside(inputRef, () => setIsOpen(false));
+  useOnClickOutside(inputRef as RefObject<HTMLFormElement>, () => setIsOpen(false));
 
   const navigateToDetails = (pokemonId: string | number) => {
     if (typeof pokemonId === 'string') {
@@ -72,8 +72,8 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
 
     if (error) setError('');
 
-    const filteredData = pokemonAutocompleteItems?.filter(({ name, id }) => {
-      const nameLowercased = name!.toLowerCase();
+    const filteredData = (pokemonAutocompleteItems || []).filter(({ name, id }) => {
+      const nameLowercased = name.toLowerCase();
       const valueLowercased = value.toLowerCase();
 
       if (isNaN(+value)) return nameLowercased.includes(valueLowercased);
@@ -81,7 +81,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
       return id.toString().includes(value);
     });
 
-    setSuggestions(filteredData!.slice(0, suggestionsSize));
+    setSuggestions(filteredData.slice(0, suggestionsSize));
     setSearchValue(value);
     setSuggestionSelected(-1);
   };
@@ -125,7 +125,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
     <form
       ref={inputRef}
       onSubmit={handleSubmit}
-      className="relative w-full animate-fade-in opacity-0 [animation-delay:1s]"
+      className="animate-fade-in relative w-full opacity-0 [animation-delay:1s]"
     >
       <div className="flex items-center rounded-full bg-white pr-4 transition-all">
         <input

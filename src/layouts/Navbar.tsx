@@ -1,10 +1,10 @@
 'use client'
 
 import { IconBrandGithub } from '@tabler/icons-react';
+import Link from 'next/link';
 import { Logo } from '@/components/Logo';
 import { usePrimaryType } from '@/pages/details/contexts/usePrimaryType';
 import { cn } from '@/utils/classnames';
-import Link from 'next/link';
 
 interface Props {
   isHome?: boolean;

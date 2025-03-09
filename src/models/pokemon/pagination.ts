@@ -1,4 +1,4 @@
-import { NamedAPIResources } from './../named-api-resource';
+import { type NamedAPIResources } from './../named-api-resource';
 
 export interface PokemonPagination {
   count?: number;

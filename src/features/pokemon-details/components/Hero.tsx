@@ -1,10 +1,10 @@
+import InfoTile from '@/components/info-tile/InfoTile';
 import PokemonTypeBadge from '@/components/PokemonTypeBadge';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
-import { Pokemon } from '@/models/pokemon';
-import PokemonDetailHeroImage from './HeroImage';
-import InfoTile from '@/components/info-tile/InfoTile';
-import { PokemonType } from '@/models/types';
 import { getPokemonNumber } from '@/helpers/getPokemonNumber';
+import { type Pokemon } from '@/models/pokemon';
+import { type PokemonType } from '@/models/types';
+import PokemonDetailHeroImage from './HeroImage';
 
 interface Props {
   pokemon: Pokemon;

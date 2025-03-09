@@ -1,12 +1,12 @@
-import { Names } from "../name";
-import { APIResource } from "./../api-resource";
-import { Descriptions } from "./../description";
-import { NamedAPIResource } from "./../named-api-resource";
-import { SpeciesDexEntries } from "./dex-entry";
-import { FlavorTexts } from "./flavor-text";
-import { Genera } from "./genus";
-import { PalParkEncounterAreas } from "./pal-park-encounter-area";
-import { SpeciesVarieties } from "./variety";
+import { type Names } from "../name";
+import { type APIResource } from "./../api-resource";
+import { type Descriptions } from "./../description";
+import { type NamedAPIResource } from "./../named-api-resource";
+import { type SpeciesDexEntries } from "./dex-entry";
+import { type FlavorTexts } from "./flavor-text";
+import { type Genera } from "./genus";
+import { type PalParkEncounterAreas } from "./pal-park-encounter-area";
+import { type SpeciesVarieties } from "./variety";
 
 export interface Species {
   id?: number;

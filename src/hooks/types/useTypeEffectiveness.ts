@@ -1,5 +1,5 @@
-import { getTypeEffectiveness } from '@/services/types';
 import useSWR from "swr";
+import { getTypeEffectiveness } from '@/services/types';
 
 export enum TypeEffectivenessGroupLabel {
   Defense = "defense",

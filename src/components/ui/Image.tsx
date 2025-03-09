@@ -1,4 +1,4 @@
-import { ImgHTMLAttributes, useState } from 'react';
+import { type ImgHTMLAttributes, useState } from 'react';
 import { Loader } from '@/components/ui/Loader';
 import { cn } from '@/utils/classnames';
 

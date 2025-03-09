@@ -1,4 +1,4 @@
-import { BaseComponentWithChildren } from '@/models/utils';
+import { type BaseComponentWithChildren } from '@/models/utils';
 
 interface PanelProps {
   title: string;

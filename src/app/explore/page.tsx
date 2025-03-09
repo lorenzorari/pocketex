@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react';
-import PokemonList from '@/features/explore/components/pokemon-list';
 import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from '@/components/select';
+import PokemonList from '@/features/explore/components/pokemon-list';
+import { useGenerations } from '@/hooks/pokemon/useGenerations';
 import { DefaultLayout } from '@/layouts/DefaultLayout';
 import { cn } from '@/utils/classnames';
-import { PokemonCounter, PokemonCounterContext } from './contexts/usePokemonCounter';
-import { useGenerations } from '@/hooks/pokemon/useGenerations';
+import { type PokemonCounter, PokemonCounterContext } from './contexts/usePokemonCounter';
 
 const ExplorePage = () => {
   const { generations, formatGenerationName } = useGenerations();

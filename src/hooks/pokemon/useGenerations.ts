@@ -1,6 +1,6 @@
+import useSWR from 'swr';
 import { getGenerations } from '@/services/generations';
 import { capitalize } from '@/utils/capitalize';
-import useSWR from 'swr';
 
 export function useGenerations() {
   const { data, isLoading } = useSWR(`generations`, () => getGenerations());

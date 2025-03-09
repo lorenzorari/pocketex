@@ -2,7 +2,7 @@ import { IconGenderFemale, IconGenderMale } from '@tabler/icons-react';
 import { useMemo } from 'react';
 import { DetailField } from '@/components/details';
 import { Panel } from '@/components/ui/panel';
-import { Species } from '@/models/species';
+import { type Species } from '@/models/species';
 
 interface Props {
   species: Species;

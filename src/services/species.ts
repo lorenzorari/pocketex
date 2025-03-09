@@ -1,6 +1,6 @@
-import { Species } from '@/models/species';
 import { pokeapi } from '@/helpers/http';
-import { PokemonPagination } from '@/models/pokemon/pagination';
+import { type PokemonPagination } from '@/models/pokemon/pagination';
+import { type Species } from '@/models/species';
 
 const BASE_URL = 'pokemon-species';
 

@@ -1,11 +1,11 @@
+import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import InfiniteScroll from '@/components/infinite-scroll';
 import Loading from '@/components/loading';
-import { usePokemonPagination } from '@/hooks/pokemon/usePokemonPagination';
 import PokemonCard from '@/components/pokemon/card';
 import { Loader } from '@/components/ui/Loader';
+import { usePokemonPagination } from '@/hooks/pokemon/usePokemonPagination';
 import styles from './pokemon-list.module.scss';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   isFiltering: boolean;
@@ -13,7 +13,7 @@ interface Props {
 
 const PokemonList = (props: Props) => {
   const { pagination, size, setSize, isValidating } = usePokemonPagination();
-  const router = useRouter()
+  const router = useRouter();
   const [page, setPage] = useState<number>(1);
   const loaderRef = useRef(null);
 
@@ -67,7 +67,7 @@ const PokemonList = (props: Props) => {
                 <PokemonCard
                   key={pokemon.id}
                   className={styles.card}
-                  onClick={() => handleClickCard(pokemon.name!.toLowerCase())}
+                  onClick={() => handleClickCard((pokemon.name as string).toLowerCase())}
                   pokemon={pokemon}
                 />
               )),

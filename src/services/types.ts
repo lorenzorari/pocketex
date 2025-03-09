@@ -1,5 +1,5 @@
 import { pokeapi } from "@/helpers/http";
-import { Type } from "@/models/types";
+import { type Type } from "@/models/types";
 
 type Effectiveness = Record<string, number>;
 

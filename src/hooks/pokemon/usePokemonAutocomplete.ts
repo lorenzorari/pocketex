@@ -1,5 +1,5 @@
-import { getPokemonAutocompleteItems } from '@/services/pokemon';
 import useSWR from "swr";
+import { getPokemonAutocompleteItems } from '@/services/pokemon';
 
 export function usePokemonAutocomplete() {
   const {

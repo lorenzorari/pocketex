@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
 import React, { useEffect, useMemo } from 'react';
 import { Breeding } from '@/features/pokemon-details/components/Breeding';
+import { EvolutionChainPanel } from '@/features/pokemon-details/components/evolution-chain';
 import PokemonDetailHero from '@/features/pokemon-details/components/Hero';
+import { Stats } from '@/features/pokemon-details/components/stats';
 import { Training } from '@/features/pokemon-details/components/Training';
 import { TypeEffectiveness } from '@/features/pokemon-details/components/TypeEffectiveness';
 import { usePokemon } from '@/hooks/pokemon/usePokemon';
 import { usePokemonSpecies } from '@/hooks/pokemon/usePokemonSpecies';
-import { PokemonType } from '@/models/types';
-import { Stats } from '@/features/pokemon-details/components/stats';
-import { EvolutionChainPanel } from '@/features/pokemon-details/components/evolution-chain';
 import { DefaultLayout } from '@/layouts/DefaultLayout';
+import { type PokemonType } from '@/models/types';
 import { PrimaryTypeCtx } from './contexts/usePrimaryType';
 
 interface Params {
@@ -18,11 +18,11 @@ interface Params {
 }
 
 interface Props {
-  params: Promise<Params>
+  params: Promise<Params>;
 }
 
-const DetailsPage = ({params}: Props) => {
-  const {id} =  React.use(params);
+const DetailsPage = ({ params }: Props) => {
+  const { id } = React.use(params);
   const { pokemon } = usePokemon(id);
   const { pokemonSpecies: species, getGenus } = usePokemonSpecies(id);
   const pokemonTypes = useMemo<string[]>(() => pokemon?.types?.map(({ type }) => type.name) || [], [pokemon?.types]);
@@ -34,20 +34,18 @@ const DetailsPage = ({params}: Props) => {
   }, [pokemon]);
 
   const getDescription = () => {
-    const text = species?.flavorTextEntries?.find(({ language }) => language.name === 'en')!.flavorText;
+    const text = species?.flavorTextEntries?.find(({ language }) => language.name === 'en')?.flavorText;
 
     if (!text) return '';
 
-    return (
-      text
-        ?.replace(/u'\f'/, ' ')
-        .replace(/\u00AD/g, '')
-         
-        .replace(/\u000C/g, ' ')
-        .replace(/u' -\n'/, ' - ')
-        .replace(/u'-\n'/, '-')
-        .replace(/(\r\n|\n|\r)/gm, ' ')
-    );
+    return text
+      ?.replace(/u'\f'/, ' ')
+      .replace(/\u00AD/g, '')
+
+      .replace(/\u000C/g, ' ')
+      .replace(/u' -\n'/, ' - ')
+      .replace(/u'-\n'/, '-')
+      .replace(/(\r\n|\n|\r)/gm, ' ');
   };
 
   return (

@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --fix"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.1.1",
@@ -27,10 +27,10 @@
     "react-tsparticles": "1.43.1",
     "swr": "^2.2.5",
     "tailwind-merge": "^2.4.0",
-    "typescript": "^4.1.2",
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.7",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.0.12",
     "@types/axios": "^0.14.0",
@@ -40,14 +40,13 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-router-dom": "^5.1.8",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/parser": "^8.26.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-react": "^7.34.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-unused-imports": "^4.0.0",
     "postcss": "^8.4.38",

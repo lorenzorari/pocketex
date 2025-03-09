@@ -1,4 +1,4 @@
-import { NamedAPIResource } from './../named-api-resource';
+import { type NamedAPIResource } from './../named-api-resource';
 
 export interface SpeciesDexEntry {
   entryNumber?: number;

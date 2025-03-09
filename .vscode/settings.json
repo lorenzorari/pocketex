@@ -3,5 +3,9 @@
   // Prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.enable": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "eslint.useFlatConfig": true,
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.validate": ["vue", "html", "javascript", "typescript", "javascriptreact", "typescriptreact"]
 }

@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, type JSX, useEffect } from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -8,24 +8,22 @@ interface Props {
   loadMore: () => void;
 }
 
-const InfiniteScroll = forwardRef(
-  ({ children, observerCallback, loaderElement }: Props, ref: any) => {
-    const Loader = () => loaderElement;
+const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement }: Props, ref: any) => {
+  const Loader = () => loaderElement;
 
-    useEffect(() => {
-      const observer = new IntersectionObserver(observerCallback);
-      if (ref?.current) observer.observe(ref.current);
-      return () => observer.disconnect();
-    }, [ref, observerCallback]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(observerCallback);
+    if (ref?.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref, observerCallback]);
 
-    return (
-      <>
-        {children}
-        <Loader />
-      </>
-    );
-  },
-);
+  return (
+    <>
+      {children}
+      <Loader />
+    </>
+  );
+});
 
 InfiniteScroll.displayName = 'InfiniteScroll';
 

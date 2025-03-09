@@ -1,4 +1,4 @@
-import { NamedAPIResource } from '@/models/named-api-resource';
+import { type NamedAPIResource } from '@/models/named-api-resource';
 
 export interface PokemonStat {
   stat?: NamedAPIResource;

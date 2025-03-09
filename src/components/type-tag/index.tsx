@@ -1,5 +1,5 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 import { ReactSVG } from 'react-svg';
 import styles from './type-tag.module.scss';
 

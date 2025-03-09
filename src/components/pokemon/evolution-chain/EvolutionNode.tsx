@@ -1,12 +1,12 @@
+import { Root } from '@radix-ui/react-slot';
 import { Image } from '@/components/ui/Image';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
-import { EvolutionDetail } from '@/models/evolution/detail';
-import { NamedAPIResource } from '@/models/named-api-resource';
+import { type EvolutionDetail } from '@/models/evolution/detail';
+import { type NamedAPIResource } from '@/models/named-api-resource';
+import { EvolutionNodeCtx } from './evolution-node.context';
 import { EvolutionConnector } from './EvolutionConnector';
 import { EvolutionTrigger } from './EvolutionTrigger';
-import { EvolutionNodeCtx } from './evolution-node.context';
-import { Root } from '@radix-ui/react-slot';
 
 type Props = NamedAPIResource & { details?: EvolutionDetail[] } & {
   hasParent?: boolean;

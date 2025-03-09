@@ -1,5 +1,5 @@
-import { NamedAPIResource } from './../named-api-resource';
-import { EvolutionDetail } from './detail';
+import { type NamedAPIResource } from './../named-api-resource';
+import { type EvolutionDetail } from './detail';
 
 export interface EvolutionChain {
   id?: number;

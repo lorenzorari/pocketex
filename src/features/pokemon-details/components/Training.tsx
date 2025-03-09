@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { DetailField } from '@/components/details';
 import { Panel } from '@/components/ui/panel';
-import { Pokemon } from '@/models/pokemon';
-import { Species } from '@/models/species';
+import { type Pokemon } from '@/models/pokemon';
+import { type Species } from '@/models/species';
 import { replaceDashesBySpaces } from '@/utils/replace-dash-by-space';
 
 interface Props {

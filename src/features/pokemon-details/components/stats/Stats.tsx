@@ -1,8 +1,8 @@
 import { Button, ButtonVariant } from '@/components/ui/Button';
 import { Panel, PanelField, PanelLabel } from '@/components/ui/panel';
-import { Pokemon } from '@/models/pokemon';
-import { StatField } from './StatField';
 import { useStats } from '@/features/pokemon-details/components/stats/useStats';
+import { type Pokemon } from '@/models/pokemon';
+import { StatField } from './StatField';
 
 interface Props {
   stats: NonNullable<Pokemon['stats']>;

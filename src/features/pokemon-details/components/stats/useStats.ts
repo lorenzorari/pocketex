@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { StatField } from '@/features/pokemon-details/components/stats';
-import { Pokemon } from '@/models/pokemon';
+import { type StatField } from '@/features/pokemon-details/components/stats';
+import { type Tab, useTabs } from '@/hooks/useTabs';
+import { type Pokemon } from '@/models/pokemon';
 import { capitalize } from '@/utils/capitalize';
 import { replaceDashesBySpaces } from '@/utils/replace-dash-by-space';
-import { Tab, useTabs } from '@/hooks/useTabs';
 
 const IV = {
   MIN: 0,

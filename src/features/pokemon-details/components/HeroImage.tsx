@@ -1,4 +1,4 @@
-import { PokemonType } from '@/models/types';
+import { type PokemonType } from '@/models/types';
 
 type Props = {
   pokemonType: PokemonType;

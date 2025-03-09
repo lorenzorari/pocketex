@@ -1,4 +1,4 @@
-import { BaseComponentWithChildren } from '@/models/utils';
+import { type BaseComponentWithChildren } from '@/models/utils';
 import { cn } from '@/utils/classnames';
 
 type Props = BaseComponentWithChildren;

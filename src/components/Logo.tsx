@@ -1,5 +1,5 @@
 import { SVG } from '@/components/SVG';
-import { BaseComponent } from '@/models/utils';
+import { type BaseComponent } from '@/models/utils';
 import { cn } from '@/utils/classnames';
 
 type Props = BaseComponent;

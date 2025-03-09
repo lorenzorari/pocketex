@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import React from 'react';
 import { ReactSVG } from 'react-svg';
-import classNames from 'classnames';
 import styles from './button.module.scss';
 
 interface Props {

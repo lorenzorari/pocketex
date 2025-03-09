@@ -1,6 +1,6 @@
-import { pokeapi } from '@/helpers/http';
-import { PokemonPagination } from '../models/pokemon/pagination';
 import axios from 'axios';
+import { pokeapi } from '@/helpers/http';
+import { type PokemonPagination } from '../models/pokemon/pagination';
 
 const URL_GENERATION = 'https://pokeapi.co/api/v2/generation';
 

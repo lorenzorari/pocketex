@@ -1,8 +1,8 @@
-import { cn } from '@/utils/classnames';
-import { PokemonAutocompleteItem } from '../types';
-import { useState } from 'react';
 import { IconLoader } from '@tabler/icons-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import { cn } from '@/utils/classnames';
+import { type PokemonAutocompleteItem } from '../types';
 
 interface Props {
   suggestions: PokemonAutocompleteItem[];
@@ -10,11 +10,7 @@ interface Props {
   onClickSuggestion?: (suggestion: PokemonAutocompleteItem) => void;
 }
 
-const Suggestions = ({
-  suggestions,
-  suggestionSelected,
-  onClickSuggestion,
-}: Props) => {
+const Suggestions = ({ suggestions, suggestionSelected, onClickSuggestion }: Props) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
@@ -26,7 +22,7 @@ const Suggestions = ({
             'cursor-pointer px-4 py-2 first:border-t hover:bg-gray-100',
             suggestionSelected === i && 'bg-gray-100',
           )}
-          onClick={() => onClickSuggestion!(suggestion)}
+          onClick={() => onClickSuggestion && onClickSuggestion(suggestion)}
         >
           <Link href={`/pokemon/${suggestion.name}`} className="flex gap-2">
             <img
@@ -36,23 +32,17 @@ const Suggestions = ({
               onLoad={() => setIsImageLoaded(true)}
             />
 
-            {!isImageLoaded && (
-              <IconLoader className="animate-spin text-gray-300 [animation-duration:1.5s]" />
-            )}
+            {!isImageLoaded && <IconLoader className="animate-spin text-gray-300 [animation-duration:1.5s]" />}
 
             <div>
               <span className="capitalize">{suggestion.name} </span>
-              <span className="text-[10px] text-gray-400">
-                #{suggestion.id}
-              </span>
+              <span className="text-[10px] text-gray-400">#{suggestion.id}</span>
             </div>
           </Link>
         </li>
       ))}
 
-      {!suggestions.length && (
-        <li className="px-4 py-2 first:border-t">No results</li>
-      )}
+      {!suggestions.length && <li className="px-4 py-2 first:border-t">No results</li>}
     </ul>
   );
 };

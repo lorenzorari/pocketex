@@ -1,8 +1,8 @@
+import useSWR from 'swr';
 import { EvolutionNode } from '@/components/pokemon/evolution-chain';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
-import { Optional } from '@/models/utils';
+import { type Optional } from '@/models/utils';
 import { getEvolutionChain } from '@/services/evolution-chain';
-import useSWR from 'swr';
 
 interface Props {
   evolutionChainUrl: Optional<string>;

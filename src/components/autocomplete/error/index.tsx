@@ -15,7 +15,7 @@ const AutocompleteError = ({ error, className, src }: Props) => {
         <div className={classNames(styles.error, className)}>
           {error}
           <span>
-            <ReactSVG className={styles.icon} src={src!} />
+            <ReactSVG className={styles.icon} src={src ?? ''} />
           </span>
         </div>
       )}

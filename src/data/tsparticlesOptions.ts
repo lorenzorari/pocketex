@@ -1,5 +1,5 @@
+import { type ISourceOptions } from 'tsparticles';
 import { PokemonType } from '@/models/types';
-import { ISourceOptions } from 'tsparticles';
 
 const tsparticlesOptions: ISourceOptions = {
   particles: {
