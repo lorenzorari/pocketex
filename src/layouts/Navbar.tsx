@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
 import { IconBrandGithub } from '@tabler/icons-react';
 import Link from 'next/link';
+import { usePrimaryType } from '@/app/pokemon/[id]/contexts/usePrimaryType';
 import { Logo } from '@/components/Logo';
-import { usePrimaryType } from '@/pages/details/contexts/usePrimaryType';
 import { cn } from '@/utils/classnames';
 
 interface Props {
@@ -21,7 +21,7 @@ export const Navbar = ({ isHome }: Props) => {
       className={cn(
         'sticky top-0 z-20 mx-auto border-b border-b-[#ffffff4d] px-5 py-6 backdrop-blur-lg lg:px-10 xl:px-32 2xl:max-w-[1440px]',
         {
-          'relative animate-fade-in border-none opacity-0 backdrop-blur-none [animation-delay:1.5s]': isHome,
+          'animate-fade-in relative border-none opacity-0 backdrop-blur-none [animation-delay:1.5s]': isHome,
         },
       )}
     >
@@ -30,7 +30,7 @@ export const Navbar = ({ isHome }: Props) => {
           <picture className="size-8" style={{ color: logoColor }}>
             <Logo
               className={cn(
-                'transition-opacity hover:animate-wiggle',
+                'hover:animate-wiggle transition-opacity',
                 isHome ? 'fill-white' : 'fill-current',
                 primaryTypeColor === undefined ? 'opacity-0' : 'opacity-100',
               )}
@@ -45,7 +45,11 @@ export const Navbar = ({ isHome }: Props) => {
             </Link>
           </li>
           <li>
-            <Link target="_blank" href={{ pathname: GITHUB_LINK }} className="text-sm underline-offset-4 hover:underline">
+            <Link
+              target="_blank"
+              href={{ pathname: GITHUB_LINK }}
+              className="text-sm underline-offset-4 hover:underline"
+            >
               <IconBrandGithub
                 className={cn('text-gray-300 transition-colors hover:text-black', {
                   'text-white/60 hover:text-white': isHome,
