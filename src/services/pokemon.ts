@@ -3,13 +3,13 @@ import { POKEMON_QUANTITY } from '@/constants';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';
-import { pokeapi } from '@/helpers/http';
+import { api, pokeapi } from '@/helpers/http';
 import { type Pokemon } from '@/models/pokemon';
 import { type PokemonPagination } from '@/models/pokemon/pagination';
 import { capitalize } from '@/utils/capitalize';
 
 const getPokemon = async (id: string): Promise<Pokemon> => {
-  const pokemonData = await pokeapi.get(`pokemon/${id}`).json<Pokemon>();
+  const pokemonData = await api<Pokemon>(`pokemon/${id}`);
 
   pokemonData.name = capitalize(pokemonData?.name ?? '');
   pokemonData.height = getAnthropometry(pokemonData.height ?? -1);
@@ -18,10 +18,7 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
   return pokemonData;
 };
 
-const getAllPokemons = async (
-  offset?: number,
-  limit?: number,
-): Promise<PokemonPagination> => {
+const getAllPokemons = async (offset?: number, limit?: number): Promise<PokemonPagination> => {
   const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
   const url = `pokemon${params}`;
 

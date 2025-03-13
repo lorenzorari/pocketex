@@ -1,8 +1,10 @@
-import ky from "ky";
+import ky from 'ky';
 import { convertUnderscoreToCamelcase } from '@/utils/convert-underscore-to-camelcase';
 
+const apiBaseUrl = 'https://pokeapi.co/api/v2/';
+
 export const pokeapi = ky.extend({
-  prefixUrl: "https://pokeapi.co/api/v2",
+  prefixUrl: apiBaseUrl,
   hooks: {
     afterResponse: [
       async (_request, _options, response) => {
@@ -14,3 +16,16 @@ export const pokeapi = ky.extend({
     ],
   },
 });
+
+export async function api<T>(url: string, options: RequestInit = {}) {
+  const response = await fetch(`${apiBaseUrl}${url}`, options);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  const camelizedData = convertUnderscoreToCamelcase<T>(data);
+
+  return camelizedData;
+}

@@ -13,12 +13,7 @@ interface Props {
   genus: string;
 }
 
-const PokemonDetailHero = ({
-  pokemon,
-  pokemonTypes,
-  description,
-  genus,
-}: Props) => {
+export const PokemonDetailHero = ({ pokemon, pokemonTypes, description, genus }: Props) => {
   const pokemonNumber = getPokemonNumber(pokemon?.id);
 
   return (
@@ -30,12 +25,8 @@ const PokemonDetailHero = ({
               <PokemonTypeBadge key={type} variant={type} withLabel />
             ))}
           </div>
-          <h1 className="mb-4 mt-3 text-5xl font-bold lg:text-7xl">
-            {pokemon?.name}
-          </h1>
-          <h2 className="text-4xl font-light md:mb-10 lg:text-5xl">
-            {pokemonNumber}
-          </h2>
+          <h1 className="mt-3 mb-4 text-5xl font-bold lg:text-7xl">{pokemon?.name}</h1>
+          <h2 className="text-4xl font-light md:mb-10 lg:text-5xl">{pokemonNumber}</h2>
           <p className="mb-6 hidden md:block">{description}</p>
         </div>
 
@@ -46,8 +37,8 @@ const PokemonDetailHero = ({
         </div>
       </div>
 
-      <div className="relative sm:mx-auto md:mx-0 md:pr-10 lg:pr-16 lg:pt-11">
-        <div className="absolute -right-2 top-0 sm:static sm:inset-auto">
+      <div className="relative sm:mx-auto md:mx-0 md:pr-10 lg:pt-11 lg:pr-16">
+        <div className="absolute top-0 -right-2 sm:static sm:inset-auto">
           <PokemonDetailHeroImage
             pokemonType={pokemonTypes[0]}
             imageSrc={getArtworkUrl(pokemon?.id ?? 0)}
@@ -58,5 +49,3 @@ const PokemonDetailHero = ({
     </section>
   );
 };
-
-export default PokemonDetailHero;
