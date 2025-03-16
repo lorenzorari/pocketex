@@ -1,4 +1,6 @@
-import { type ImgHTMLAttributes, useState } from 'react';
+'use client';
+
+import { type ImgHTMLAttributes, useEffect, useRef, useState } from 'react';
 import { Loader } from '@/components/ui/Loader';
 import { cn } from '@/utils/classnames';
 
@@ -8,6 +10,13 @@ export const Image = (props: Props) => {
   const { className, ...imgProps } = props;
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      setIsLoading(false);
+    }
+  }, []);
 
   function handleLoad() {
     setIsLoading(false);
@@ -21,7 +30,12 @@ export const Image = (props: Props) => {
         </div>
       )}
       <img
-        className={cn({ hidden: isLoading }, className)}
+        ref={imgRef}
+        className={cn(
+          'transition-opacity duration-500',
+          { 'opacity-0': isLoading, 'opacity-100': !isLoading },
+          className,
+        )}
         onLoad={handleLoad}
         {...imgProps}
       />

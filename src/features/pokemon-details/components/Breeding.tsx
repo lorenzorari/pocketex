@@ -28,9 +28,7 @@ export const Breeding = ({ species }: Props) => {
     <Panel title="Breeding">
       <section>
         <DetailField label="Egg Groups">{eggGroups}</DetailField>
-        <DetailField label="Egg Cycles">
-          {species?.hatchCounter} cycles
-        </DetailField>
+        <DetailField label="Egg Cycles">{species?.hatchCounter} cycles</DetailField>
         <DetailField label="Gender Ratio">
           <span className="inline-flex items-center gap-1">
             <IconGenderMale className="size-4 text-blue-400" />
