@@ -61,13 +61,13 @@ const DetailsPage = async ({ params }: Props) => {
           />
           {species && (
             <div className="relative z-10 rounded-t-[40px] bg-white px-5 py-10 shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)] lg:-mt-16 lg:px-10 lg:py-[60px] xl:px-32">
-              <EvolutionChainPanel evolutionChainUrl={species.evolutionChain?.url} />
               <div className="mb-10 grid gap-10 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">
                 <Breeding species={species} />
                 <Training pokemon={pokemon} species={species} />
                 <TypeEffectiveness typeEffectiveness={typeEffectiveness} />
                 {pokemon.stats && <Stats stats={pokemon.stats} />}
               </div>
+              <EvolutionChainPanel evolutionChainUrl={species.evolutionChain?.url} />
             </div>
           )}
         </>
