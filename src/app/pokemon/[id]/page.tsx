@@ -4,10 +4,11 @@ import { PokemonDetailHero } from '@/features/pokemon-details/components/Hero';
 import { Stats } from '@/features/pokemon-details/components/stats';
 import { Training } from '@/features/pokemon-details/components/Training';
 import { TypeEffectiveness } from '@/features/pokemon-details/components/TypeEffectiveness';
+import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { DefaultLayout } from '@/layouts/DefaultLayout';
 import { type PokemonType } from '@/models/types';
 import { getPokemon } from '@/services/pokemon';
-import { getSpecies } from '@/services/species';
+import { getSpecies, getSpeciesPagination } from '@/services/species';
 import { getTypeEffectiveness } from '@/services/types';
 
 interface Params {
@@ -16,6 +17,20 @@ interface Params {
 
 interface Props {
   params: Promise<Params>;
+}
+
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const FIRST_GENERATION_COUNT = 151;
+  const { results } = await getSpeciesPagination(undefined, FIRST_GENERATION_COUNT);
+
+  if (!results) return [];
+
+  const pokemonIds = results.map(({ url }) => getIdFromResourceUrl(url).toString());
+  const pokemonNames = results.map(({ name }) => name);
+
+  return [...pokemonIds, ...pokemonNames].map((id) => ({ id }));
 }
 
 const DetailsPage = async ({ params }: Props) => {
