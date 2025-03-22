@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { DetailField } from '@/components/details';
 import { Panel } from '@/components/ui/panel';
 import { type Pokemon } from '@/models/pokemon';
@@ -11,27 +10,19 @@ interface Props {
 }
 
 export const Training = ({ pokemon, species }: Props) => {
-  const evYields = useMemo(
-    () => pokemon.stats?.filter((stat) => (stat.effort ?? -1) > 0),
-    [pokemon],
-  );
+  const evYields = pokemon.stats?.filter((stat) => (stat.effort ?? -1) > 0);
 
   return (
     <Panel title="Catch & Training">
       <section>
         <DetailField label="Catch Rate">{species?.captureRate}</DetailField>
-        <DetailField label="Base Happiness">
-          {species.baseHappiness}
-        </DetailField>
-        <DetailField label="Growth Rate">
-          {replaceDashesBySpaces(species?.growthRate?.name ?? '')}
-        </DetailField>
+        <DetailField label="Base Happiness">{species.baseHappiness}</DetailField>
+        <DetailField label="Growth Rate">{replaceDashesBySpaces(species?.growthRate?.name ?? '')}</DetailField>
         <DetailField label="EV Yield">
           <ul>
             {evYields?.map((evYield, index) => (
               <li key={index}>
-                {evYield.effort}{' '}
-                {replaceDashesBySpaces(evYield.stat?.name ?? '')}
+                {evYield.effort} {replaceDashesBySpaces(evYield.stat?.name ?? '')}
               </li>
             ))}
           </ul>

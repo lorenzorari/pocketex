@@ -1,43 +1,39 @@
-import useSWR from "swr";
-import { getTypeEffectiveness } from '@/services/types';
+// import useSWR from 'swr';
+// import { getTypeEffectiveness } from '@/services/types';
 
-export enum TypeEffectivenessGroupLabel {
-  Defense = "defense",
-  Attack = "attack",
-}
+// export enum TypeEffectivenessGroupLabel {
+//   Defense = 'defense',
+//   Attack = 'attack',
+// }
 
-export type TypeEffectivenessGroup = {
-  noDamage: string[];
-  halfDamage: string[];
-  doubleDamage: string[];
-  quadrupleDamage: string[];
-};
+// export type TypeEffectivenessGroup = {
+//   noDamage: string[];
+//   halfDamage: string[];
+//   doubleDamage: string[];
+//   quadrupleDamage: string[];
+// };
 
-export function useTypeEffectiveness(types: string[]) {
-  const { data } = useSWR(`type-effectiveness/${types.join("-")}`, () =>
-    getTypeEffectiveness(types),
-  );
+// export function useTypeEffectiveness(types: string[]) {
+//   const { data } = useSWR(`type-effectiveness/${types.join('-')}`, () => getTypeEffectiveness(types));
 
-  function getTypeEffectivenessByGroup(
-    group: TypeEffectivenessGroupLabel,
-  ): TypeEffectivenessGroup {
-    if (!data)
-      return {
-        noDamage: [],
-        halfDamage: [],
-        doubleDamage: [],
-        quadrupleDamage: [],
-      };
+//   function getTypeEffectivenessByGroup(group: TypeEffectivenessGroupLabel): TypeEffectivenessGroup {
+//     if (!data)
+//       return {
+//         noDamage: [],
+//         halfDamage: [],
+//         doubleDamage: [],
+//         quadrupleDamage: [],
+//       };
 
-    const suffix = group === "defense" ? "From" : "To";
+//     const suffix = group === 'defense' ? 'From' : 'To';
 
-    return {
-      noDamage: data[`noDamage${suffix}`],
-      halfDamage: data[`halfDamage${suffix}`],
-      doubleDamage: data[`doubleDamage${suffix}`],
-      quadrupleDamage: data[`quadrupleDamage${suffix}`],
-    };
-  }
+//     return {
+//       noDamage: data[`noDamage${suffix}`],
+//       halfDamage: data[`halfDamage${suffix}`],
+//       doubleDamage: data[`doubleDamage${suffix}`],
+//       quadrupleDamage: data[`quadrupleDamage${suffix}`],
+//     };
+//   }
 
-  return { typeEffectiveness: data, getTypeEffectivenessByGroup };
-}
+//   return { typeEffectiveness: data, getTypeEffectivenessByGroup };
+// }

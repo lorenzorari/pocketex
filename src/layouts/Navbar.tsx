@@ -1,20 +1,17 @@
-'use client';
-
 import { IconBrandGithub } from '@tabler/icons-react';
 import Link from 'next/link';
-import { usePrimaryType } from '@/app/pokemon/[id]/contexts/usePrimaryType';
 import { Logo } from '@/components/Logo';
 import { cn } from '@/utils/classnames';
 
 interface Props {
   isHome?: boolean;
+  logoColorCSS?: string;
 }
 
 const GITHUB_LINK = 'https://github.com/lorenzorari/pocketex';
 
-export const Navbar = ({ isHome }: Props) => {
-  const primaryTypeColor = usePrimaryType();
-  const logoColor = `var(--color-${primaryTypeColor ? `${primaryTypeColor}-1` : 'primary'})`;
+export const Navbar = ({ isHome, logoColorCSS }: Props) => {
+  const logoColor = logoColorCSS ?? `var(--color-primary)`;
 
   return (
     <header
@@ -28,13 +25,7 @@ export const Navbar = ({ isHome }: Props) => {
       <nav className="flex items-center justify-between">
         <Link href="/" className="inline-flex items-center gap-2 text-2xl font-bold">
           <picture className="size-8" style={{ color: logoColor }}>
-            <Logo
-              className={cn(
-                'hover:animate-wiggle transition-opacity',
-                isHome ? 'fill-white' : 'fill-current',
-                primaryTypeColor === undefined ? 'opacity-0' : 'opacity-100',
-              )}
-            />
+            <Logo className={cn('hover:animate-wiggle transition-opacity', isHome ? 'fill-white' : 'fill-current')} />
           </picture>
           <span className="hidden md:inline">{isHome ? null : 'Pocketex'}</span>
         </Link>

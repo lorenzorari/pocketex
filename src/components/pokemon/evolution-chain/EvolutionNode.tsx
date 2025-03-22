@@ -1,3 +1,5 @@
+'use client';
+
 import { Root } from '@radix-ui/react-slot';
 import { Image } from '@/components/ui/Image';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
@@ -20,10 +22,10 @@ export function EvolutionNode({ name, url, details, hasParent = true, isFirstChi
 
   return (
     <Tag>
-      <EvolutionNodeCtx.Provider value={{ details: details || [] }}>
+      <EvolutionNodeCtx value={{ details: details || [] }}>
         <div className={hasParent ? 'relative' : undefined}>
           <a href={`/pokemon/${name}`}>
-            <article className="flex items-center gap-2 rounded-lg bg-evonode-primary p-3 font-bold transition-all hover:bg-gray-200">
+            <article className="bg-evonode-primary flex items-center gap-2 rounded-lg p-3 font-bold transition-all hover:bg-gray-200">
               <picture className="block size-[48px] text-xs">
                 <Image src={imageUrl} alt={name} />
               </picture>
@@ -36,7 +38,7 @@ export function EvolutionNode({ name, url, details, hasParent = true, isFirstChi
             </EvolutionConnector>
           )}
         </div>
-      </EvolutionNodeCtx.Provider>
+      </EvolutionNodeCtx>
     </Tag>
   );
 }

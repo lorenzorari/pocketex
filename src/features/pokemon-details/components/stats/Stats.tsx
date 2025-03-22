@@ -1,3 +1,5 @@
+'use client';
+
 import { Button, ButtonVariant } from '@/components/ui/Button';
 import { Panel, PanelField, PanelLabel } from '@/components/ui/panel';
 import { useStats } from '@/features/pokemon-details/components/stats/useStats';
