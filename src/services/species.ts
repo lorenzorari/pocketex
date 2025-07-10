@@ -45,5 +45,11 @@ export async function getSpeciesPagination(offset: number = 0, limit: number = 2
   const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
   const url = `${BASE_URL}${params}`;
 
-  return await pokeapi.get(url).json<PokemonPagination>();
+  const res = await pokeapi.get(url).json<PokemonPagination>();
+
+  if (res?.next) {
+    res.next = res.next.split('v2')[1];
+  }
+
+  return res;
 }
