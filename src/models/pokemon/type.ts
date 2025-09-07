@@ -1,6 +1,6 @@
+import { type NamedAPIResource } from '../named-api-resource';
+
 export interface PokemonType {
   slot?: number;
-  type?: any;
+  type: NamedAPIResource;
 }
-
-export declare type PokemonTypes = PokemonType[];

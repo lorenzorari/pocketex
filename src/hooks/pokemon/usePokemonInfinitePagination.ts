@@ -2,12 +2,13 @@ import useSWRInfinite from 'swr/infinite';
 import { usePokemonCounter } from '@/app/explore/contexts/usePokemonCounter';
 import { type PokemonByGeneration } from '@/app/explore/page';
 
-export function usePokemonPagination(initialData?: PokemonByGeneration) {
-  const { data, setSize, size, isValidating } = useSWRInfinite(getKey, fetchPagination, {
+export function usePokemonInfinitePagination(initialData?: PokemonByGeneration) {
+  const { data, setSize, size, isValidating, isLoading } = useSWRInfinite(getKey, fetchPagination, {
     fallbackData: initialData
       ? [{ pokemons: initialData.pokemons, next: initialData.next, previous: undefined }]
       : undefined,
     revalidateFirstPage: false,
+    revalidateAll: false,
   });
   const { setPokemonCount } = usePokemonCounter();
 
@@ -38,5 +39,5 @@ export function usePokemonPagination(initialData?: PokemonByGeneration) {
     return { pokemons, next, previous };
   }
 
-  return { pagination: data, setSize, size, isValidating };
+  return { pagination: data, setSize, size, isValidating, isLoading };
 }

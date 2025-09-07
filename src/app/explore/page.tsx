@@ -1,11 +1,10 @@
-import { GenerationFilter } from '@/features/explore/components/filters/GenerationFilter';
-import PokemonList from '@/features/explore/components/pokemon-list';
-import { type Pokemon } from '@/models/pokemon';
+import { ExploreMainContent } from '@/features/explore/components/ExploreMainContent';
 import { getGenerations } from '@/services/generations';
+import { type PokemonCardInfo } from '@/services/pokemon';
 import { cn } from '@/utils/classnames';
 
 export interface PokemonByGeneration {
-  pokemons: Pokemon[];
+  pokemons: PokemonCardInfo[];
   next: string;
   count: number;
   previous?: string;
@@ -28,10 +27,7 @@ const ExplorePage = async () => {
           {res.count}
         </span>
       </div>
-      <div className="mb-10">
-        <GenerationFilter generations={generations} />
-      </div>
-      <PokemonList initialValue={res} />
+      <ExploreMainContent generations={generations} pokemonListInitialValue={res} />
     </section>
   );
 };

@@ -6,7 +6,14 @@ import { getAnthropometry } from '@/helpers/getAnthropometry';
 import { api, pokeapi } from '@/helpers/http';
 import { type Pokemon } from '@/models/pokemon';
 import { type PokemonPagination } from '@/models/pokemon/pagination';
+import { type PokemonType } from '@/models/pokemon/type';
 import { capitalize } from '@/utils/capitalize';
+
+export interface PokemonCardInfo {
+  id: number;
+  name: string;
+  types: PokemonType[];
+}
 
 const getPokemon = async (id: string): Promise<Pokemon> => {
   const pokemonData = await api<Pokemon>(`pokemon/${id}`);
@@ -16,6 +23,18 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
   pokemonData.weight = getAnthropometry(pokemonData.weight ?? -1);
 
   return pokemonData;
+};
+
+const getPokemonCardInfo = async (id: string): Promise<PokemonCardInfo> => {
+  const pokemonData = await api<Pokemon>(`pokemon/${id}`);
+
+  pokemonData.name = capitalize(pokemonData?.name ?? '');
+
+  return {
+    name: pokemonData.name,
+    id: pokemonData.id,
+    types: pokemonData.types ?? [],
+  };
 };
 
 const getAllPokemons = async (offset?: number, limit?: number): Promise<PokemonPagination> => {
@@ -41,4 +60,4 @@ const getPokemonAutocompleteItems = async () => {
   });
 };
 
-export { getPokemon, getAllPokemons, getPokemonAutocompleteItems };
+export { getPokemon, getPokemonCardInfo, getAllPokemons, getPokemonAutocompleteItems };

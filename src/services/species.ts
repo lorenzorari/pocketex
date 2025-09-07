@@ -1,4 +1,4 @@
-import { api, pokeapi } from '@/helpers/http';
+import { api } from '@/helpers/http';
 import { type PokemonPagination } from '@/models/pokemon/pagination';
 import { type Species } from '@/models/species';
 
@@ -45,7 +45,7 @@ export async function getSpeciesPagination(offset: number = 0, limit: number = 2
   const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
   const url = `${BASE_URL}${params}`;
 
-  const res = await pokeapi.get(url).json<PokemonPagination>();
+  const res = await api<PokemonPagination>(url);
 
   if (res?.next) {
     res.next = res.next.split('v2')[1];

@@ -13,7 +13,9 @@ const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement }
 
   useEffect(() => {
     const observer = new IntersectionObserver(observerCallback);
+
     if (ref?.current) observer.observe(ref.current);
+
     return () => observer.disconnect();
   }, [ref, observerCallback]);
 

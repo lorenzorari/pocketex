@@ -6,15 +6,16 @@ import { type PokemonByGeneration } from '@/app/explore/page';
 import InfiniteScroll from '@/components/infinite-scroll';
 import PokemonCard from '@/components/pokemon/card';
 import { Loader } from '@/components/ui/Loader';
-import { usePokemonPagination } from '@/hooks/pokemon/usePokemonPagination';
+import { usePokemonInfinitePagination } from '@/hooks/pokemon/usePokemonInfinitePagination';
 import styles from './pokemon-list.module.scss';
 
 interface Props {
   initialValue?: PokemonByGeneration;
+  generation: string;
 }
 
-const PokemonList = ({ initialValue }: Props) => {
-  const { pagination, size, setSize, isValidating } = usePokemonPagination(initialValue);
+const PokemonList = ({ initialValue, generation }: Props) => {
+  const { pagination, size, setSize, isValidating, isLoading } = usePokemonInfinitePagination(initialValue);
   const [page, setPage] = useState<number>(1);
   const loaderRef = useRef(null);
 
@@ -22,7 +23,7 @@ const PokemonList = ({ initialValue }: Props) => {
     (entries) => {
       const { isIntersecting } = entries[0];
 
-      if (isIntersecting && !isValidating) {
+      if (isIntersecting && !isValidating && !isLoading) {
         loadMore();
       }
     },
@@ -60,21 +61,8 @@ const PokemonList = ({ initialValue }: Props) => {
               </Link>
             )),
           )}
-          {/* {items?.map(
-            (pokemon) =>
-              pokemon && (
-                <Link key={pokemon.id} href={`/pokemon/${(pokemon.name as string).toLowerCase()}`}>
-                  <PokemonCard className={styles.card} pokemon={pokemon} />
-                </Link>
-              ),
-          )} */}
         </div>
       </InfiniteScroll>
-      {/* ) : (
-        <div className={styles['filter-loader']}>
-          <Loading src="/assets/svg/logo.svg" />
-        </div>
-      )} */}
     </>
   );
 };

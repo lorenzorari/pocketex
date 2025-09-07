@@ -2,29 +2,31 @@
 
 import { useState } from 'react';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/select';
+import { type GenerationListItem } from '@/services/generations';
 
 interface Props {
-  generations: string[];
+  generations: GenerationListItem[];
+  onValueChange?: (value: string) => void;
 }
 
-interface SelectOption {
+export interface SelectOption {
   label: string;
   value: string;
 }
 
-const defaultValue: SelectOption = {
+export const defaultValue: SelectOption = {
   label: 'All generations',
   value: 'All',
 };
 
-export function GenerationFilter({ generations }: Props) {
+export function GenerationFilter({ generations, onValueChange }: Props) {
   const [selectedGeneration, setSelectedGeneration] = useState<SelectOption>(defaultValue);
 
   const options: SelectOption[] = [
     defaultValue,
-    ...generations.map((generation) => ({
-      label: generation,
-      value: generation,
+    ...generations.map(({ label, id }) => ({
+      label,
+      value: String(id),
     })),
   ];
 
@@ -32,6 +34,10 @@ export function GenerationFilter({ generations }: Props) {
     const gen = options.find((option) => option.value === value);
 
     setSelectedGeneration(gen || defaultValue);
+
+    if (onValueChange) {
+      onValueChange(value);
+    }
   };
 
   return (

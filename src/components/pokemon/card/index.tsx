@@ -15,7 +15,7 @@ interface Props {
 
 const PokemonCard = ({ pokemon, className, onClick }: Props) => {
   const pokemonTypes = pokemon.types;
-  const pokemonType = pokemonTypes?.[0].type.name;
+  const pokemonType = pokemonTypes?.[0].type.name ?? '';
 
   const style = {
     '--color-type-1': `var(--color-${pokemonType}-1)`,
@@ -24,10 +24,7 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
 
   return (
     <article
-      className={cn(
-        'relative overflow-hidden rounded-[1.3rem] px-[1.6rem] pt-[1.6rem]',
-        className,
-      )}
+      className={cn('relative overflow-hidden rounded-[1.3rem] px-[1.6rem] pt-[1.6rem]', className)}
       style={{ ...style, backgroundColor: 'var(--color-type-1)' }}
       onClick={onClick}
     >
@@ -35,9 +32,7 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
       <PokemonCardId pokemon={pokemon} />
 
       <div className="mb-4 flex gap-1.5">
-        {pokemonTypes?.map(({ type }, i) => (
-          <TypeTag key={i} className="p-[.4rem]" value={type.name} />
-        ))}
+        {pokemonTypes?.map(({ type }, i) => <TypeTag key={i} className="p-[.4rem]" value={type.name} />)}
       </div>
 
       <figure className="mb-4 size-[160px]">
