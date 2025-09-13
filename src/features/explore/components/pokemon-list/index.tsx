@@ -56,7 +56,7 @@ const PokemonList = ({ initialValue, generation }: Props) => {
         <div className={styles['pokemons-container']}>
           {pagination?.map((page) =>
             page.pokemons?.map((pokemon) => (
-              <Link key={pokemon.id} href={`/pokemon/${(pokemon.name as string).toLowerCase()}`}>
+              <Link key={pokemon.id} href={`/pokemon/${pokemon.name?.toLowerCase()}`}>
                 <PokemonCard className={styles.card} pokemon={pokemon} />
               </Link>
             )),

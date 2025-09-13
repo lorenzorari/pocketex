@@ -1,5 +1,5 @@
 import { type NextRequest } from 'next/server';
-import pLimit from 'p-limit';
+import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { type NamedAPIResource } from '@/models/named-api-resource';
 import { getGeneration } from '@/services/generations';
 import { getPokemonCardInfo } from '@/services/pokemon';
@@ -35,9 +35,13 @@ export async function GET(req: NextRequest, { params }: RouteProps) {
 async function loadPokemons(data: NamedAPIResource[] | undefined) {
   if (!data) return [];
 
-  const limit = pLimit(1);
+  const pokemons = await Promise.all(
+    data.map(({ url }) => {
+      const id = getIdFromResourceUrl(url);
 
-  const pokemons = await Promise.all(data.map(({ name }) => limit(() => getPokemonCardInfo(name))));
+      return getPokemonCardInfo(`${id}`);
+    }),
+  );
 
-  return pokemons;
+  return pokemons.filter((p) => !!p);
 }

@@ -36,7 +36,11 @@ export async function generateStaticParams() {
 const DetailsPage = async ({ params }: Props) => {
   const pokemonId = (await params).id;
   const pokemon = await getPokemon(pokemonId);
-  const { species, genus, description } = await getSpecies(pokemonId);
+  const speciesData = await getSpecies(`${pokemon?.id}`);
+
+  if (!speciesData) return null;
+
+  const { species, genus, description } = speciesData;
 
   const pokemonTypes = (pokemon?.types?.map(({ type }) => type.name) || []) as PokemonType[];
   const typeEffectiveness = await getTypeEffectiveness(pokemonTypes);

@@ -10,12 +10,18 @@ type GetSpeciesData = {
 
 const BASE_URL = 'pokemon-species';
 
-export async function getSpecies(pokemonId: string): Promise<GetSpeciesData> {
-  const species = await api<Species>(`${BASE_URL}/${pokemonId}`);
-  const genus = getGenus(species);
-  const description = getDescription(species);
+export async function getSpecies(pokemonId: string): Promise<GetSpeciesData | null> {
+  try {
+    const species = await api<Species>(`${BASE_URL}/${pokemonId}`);
+    const genus = getGenus(species);
+    const description = getDescription(species);
 
-  return { species, genus, description };
+    return { species, genus, description };
+  } catch (error) {
+    console.error(`Error while fetching species ${pokemonId}`, error);
+
+    return null;
+  }
 }
 
 function getGenus(species: Species) {

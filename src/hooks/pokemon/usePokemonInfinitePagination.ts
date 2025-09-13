@@ -8,7 +8,6 @@ export function usePokemonInfinitePagination(initialData?: PokemonByGeneration) 
       ? [{ pokemons: initialData.pokemons, next: initialData.next, previous: undefined }]
       : undefined,
     revalidateFirstPage: false,
-    revalidateAll: false,
   });
   const { setPokemonCount } = usePokemonCounter();
 
