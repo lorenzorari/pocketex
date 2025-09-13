@@ -1,6 +1,4 @@
-import { type Optional } from '@/models/utils';
-
-export function getDocumentTitle(title: Optional<string>) {
+export function getDocumentTitle(title?: string) {
   const defaultTitle = 'Pocketex';
 
   return title ? `${title} | ${defaultTitle}` : defaultTitle;

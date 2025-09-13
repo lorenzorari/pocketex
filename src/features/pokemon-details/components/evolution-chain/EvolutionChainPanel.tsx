@@ -1,9 +1,8 @@
 import { EvolutionChain } from '@/components/pokemon/evolution-chain/EvolutionChain';
 import { Panel } from '@/components/ui/panel';
-import { type Optional } from '@/models/utils';
 
 interface Props {
-  evolutionChainUrl: Optional<string>;
+  evolutionChainUrl?: string;
 }
 
 export function EvolutionChainPanel({ evolutionChainUrl }: Props) {

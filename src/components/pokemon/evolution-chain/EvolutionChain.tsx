@@ -1,10 +1,9 @@
 import { EvolutionNode } from '@/components/pokemon/evolution-chain';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
-import { type Optional } from '@/models/utils';
 import { getEvolutionChain } from '@/services/evolution-chain';
 
 interface Props {
-  evolutionChainUrl: Optional<string>;
+  evolutionChainUrl?: string;
 }
 
 export async function EvolutionChain({ evolutionChainUrl }: Props) {
