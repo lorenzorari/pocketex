@@ -2,14 +2,33 @@ import useSWRInfinite from 'swr/infinite';
 import { usePokemonCounter } from '@/app/explore/contexts/usePokemonCounter';
 import { type PokemonByGeneration } from '@/app/explore/page';
 
-export function usePokemonInfinitePagination(initialData?: PokemonByGeneration) {
+const DEFAULT_GENERATION = '0';
+
+export function usePokemonInfinitePagination(
+  initialData?: PokemonByGeneration,
+  generation: string = DEFAULT_GENERATION,
+) {
   const { data, setSize, size, isValidating, isLoading } = useSWRInfinite(getKey, fetchPagination, {
-    fallbackData: initialData
-      ? [{ pokemons: initialData.pokemons, next: initialData.next, previous: undefined }]
-      : undefined,
+    fallbackData: isDefaultGeneration() && initialData ? [getInitialData()] : undefined,
     revalidateFirstPage: false,
+    revalidateIfStale: true,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
   });
-  const { setPokemonCount } = usePokemonCounter();
+  const { pokemonCount, setPokemonCount } = usePokemonCounter();
+
+  function getInitialData(): PokemonByGeneration {
+    return {
+      pokemons: initialData?.pokemons ?? [],
+      next: initialData?.next ?? null,
+      previous: null,
+      count: initialData?.count ?? 0,
+    };
+  }
+
+  function isDefaultGeneration() {
+    return generation === DEFAULT_GENERATION;
+  }
 
   function getKey(pageIndex: number, previousPageData: PokemonByGeneration) {
     const isFirstPage = pageIndex === 0;
@@ -18,10 +37,9 @@ export function usePokemonInfinitePagination(initialData?: PokemonByGeneration) 
     if (isLastPage) return null;
 
     if (isFirstPage) {
-      return `/pokemon-species?limit=20`;
+      return `/generation/${generation}?limit=20`;
     }
 
-    // add the cursor to the API endpoint
     return previousPageData.next;
   }
 
@@ -31,11 +49,15 @@ export function usePokemonInfinitePagination(initialData?: PokemonByGeneration) 
     const offset = Number(searchParams.get('offset'));
     const limit = Number(searchParams.get('limit'));
 
-    const data = await fetch(`/api/generations/0?offset=${offset}&limit=${limit}`);
-    const { count, pokemons, next, previous } = (await data.json()) as PokemonByGeneration;
-    setPokemonCount(count);
+    if (offset === 0 && isDefaultGeneration()) {
+      return getInitialData();
+    }
 
-    return { pokemons, next, previous };
+    const data = await fetch(`/api/generations/${generation}?offset=${offset}&limit=${limit}`);
+    const { count, pokemons, next, previous } = (await data.json()) as PokemonByGeneration;
+    setPokemonCount({ ...pokemonCount, [generation]: count });
+
+    return { pokemons, next, previous, count };
   }
 
   return { pagination: data, setSize, size, isValidating, isLoading };

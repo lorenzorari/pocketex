@@ -16,7 +16,7 @@ export interface SelectOption {
 
 export const defaultValue: SelectOption = {
   label: 'All generations',
-  value: 'All',
+  value: '0',
 };
 
 export function GenerationFilter({ generations, onValueChange }: Props) {

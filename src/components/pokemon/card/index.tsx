@@ -35,9 +35,9 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
         {pokemonTypes?.map(({ type }, i) => <TypeTag key={i} className="p-[.4rem]" value={type.name} />)}
       </div>
 
-      <figure className="mb-4 size-[160px]">
+      <div className="relative z-10 mb-4 ml-auto size-[160px]">
         <PokemonCardImage pokemon={pokemon} />
-      </figure>
+      </div>
 
       <PokemonBackgroundImage pokemonType={pokemonType} />
     </article>

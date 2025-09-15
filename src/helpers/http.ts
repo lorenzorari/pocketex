@@ -21,7 +21,7 @@ export async function api<T>(url: string, options: RequestInit = {}) {
   const response = await fetch(`${apiBaseUrl}${url}`, options);
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch: ${response.statusText}`);
+    throw new Error(`Failed to fetch: ${response.statusText}`, { cause: response });
   }
 
   const data = await response.json();

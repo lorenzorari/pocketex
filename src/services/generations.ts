@@ -9,12 +9,18 @@ export type GenerationListItem = {
   id: number;
 };
 
-const URL_GENERATION = 'https://pokeapi.co/api/v2/generation';
+const URL_GENERATION = 'generation';
 
-const getGeneration = async (id: number) => {
+const getGeneration = async (id: number): Promise<Generation | null> => {
   const url = `${URL_GENERATION}/${id}`;
 
-  return await api<Generation>(url);
+  try {
+    const generation = await api<Generation>(url);
+    return generation;
+  } catch (error) {
+    console.error(`Error while fetching generation ${id}`, error);
+    return null;
+  }
 };
 
 const getGenerations = async (): Promise<GenerationListItem[]> => {

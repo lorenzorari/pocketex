@@ -3,9 +3,7 @@ import React, { forwardRef, type JSX, useEffect } from 'react';
 interface Props {
   children: React.ReactNode;
   observerCallback: IntersectionObserverCallback;
-  page: number;
   loaderElement: JSX.Element;
-  loadMore: () => void;
 }
 
 const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement }: Props, ref: any) => {
