@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import { usePokemonCounter } from '@/app/explore/contexts/usePokemonCounter';
 import { type PokemonByGeneration } from '@/app/explore/page';
@@ -8,6 +9,8 @@ export function usePokemonInfinitePagination(
   initialData?: PokemonByGeneration,
   generation: string = DEFAULT_GENERATION,
 ) {
+  // const [isEndOfList, setIsEndOfList] = useState<boolean>(false);
+
   const { data, setSize, size, isValidating, isLoading } = useSWRInfinite(getKey, fetchPagination, {
     fallbackData: isDefaultGeneration() && initialData ? [getInitialData()] : undefined,
     revalidateFirstPage: false,
@@ -16,6 +19,11 @@ export function usePokemonInfinitePagination(
     revalidateOnReconnect: false,
   });
   const { pokemonCount, setPokemonCount } = usePokemonCounter();
+  const isEndOfList = useMemo(() => {
+    console.log('isEndOfList', { data, size, isEnd: !data?.[size - 1]?.next });
+
+    return !data?.[size - 1]?.next;
+  }, [data, size]);
 
   function getInitialData(): PokemonByGeneration {
     return {
@@ -60,5 +68,5 @@ export function usePokemonInfinitePagination(
     return { pokemons, next, previous, count };
   }
 
-  return { pagination: data, setSize, size, isValidating, isLoading };
+  return { pagination: data, setSize, size, isValidating, isLoading, isEndOfList };
 }

@@ -74,8 +74,9 @@ export async function GET(req: NextRequest, { params }: RouteProps) {
   return Response.json({
     pokemons,
     count,
-    next: offset + limit < count ? `/pokemon-species/?offset=${offset + limit}&limit=${limit}` : null,
-    previous: offset > 0 ? `/pokemon-species/?offset=${offset - limit}&limit=${limit}` : null,
+    next:
+      offset + limit < count ? `/gen/${generationId}/pokemon-species/?offset=${offset + limit}&limit=${limit}` : null,
+    previous: offset > 0 ? `/gen/${generationId}/pokemon-species/?offset=${offset - limit}&limit=${limit}` : null,
   });
 }
 

@@ -14,7 +14,10 @@ interface Props {
 }
 
 const PokemonList = ({ initialValue, generation }: Props) => {
-  const { pagination, size, setSize, isValidating } = usePokemonInfinitePagination(initialValue, generation);
+  const { pagination, size, setSize, isValidating, isEndOfList } = usePokemonInfinitePagination(
+    initialValue,
+    generation,
+  );
   const loaderRef = useRef(null);
 
   const handleObserver: IntersectionObserverCallback = useCallback(
@@ -23,6 +26,7 @@ const PokemonList = ({ initialValue, generation }: Props) => {
       const loadMore = () => setSize(size + 1);
 
       if (isIntersecting && !isValidating) {
+        console.log('isIntersecting');
         loadMore();
       }
     },
@@ -34,18 +38,14 @@ const PokemonList = ({ initialValue, generation }: Props) => {
       <InfiniteScroll
         observerCallback={handleObserver}
         ref={loaderRef}
+        isEnd={isEndOfList}
         loaderElement={
-          <>
-            {/* TODO Remove when end list */}
-            {/* {props.pokemons.length < props.limit && ( */}
-            <div ref={loaderRef} className="flex justify-center py-8">
-              <Loader />
-            </div>
-            {/* )} */}
-          </>
+          <div ref={loaderRef} className="flex justify-center py-8">
+            <Loader />
+          </div>
         }
       >
-        <div className="grid grid-cols-[repeat(auto-fit,13rem)] justify-center gap-4 lg:justify-start xl:grid-cols-5">
+        <div className="mb-12 grid grid-cols-[repeat(auto-fit,13rem)] justify-center gap-4 lg:justify-start xl:grid-cols-5">
           {pagination?.map((page) =>
             page.pokemons?.map((pokemon) => (
               <Link key={pokemon.id} href={`/pokemon/${pokemon.name?.toLowerCase()}`}>

@@ -4,9 +4,10 @@ interface Props {
   children: React.ReactNode;
   observerCallback: IntersectionObserverCallback;
   loaderElement: JSX.Element;
+  isEnd?: boolean;
 }
 
-const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement }: Props, ref: any) => {
+const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement, isEnd = false }: Props, ref: any) => {
   const Loader = () => loaderElement;
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement }
   return (
     <>
       {children}
-      <Loader />
+      {!isEnd && <Loader />}
     </>
   );
 });

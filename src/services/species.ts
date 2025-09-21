@@ -40,7 +40,6 @@ const getDescription = (species: Species) => {
   return text
     ?.replace(/u'\f'/, ' ')
     .replace(/\u00AD/g, '')
-
     .replace(/\u000C/g, ' ')
     .replace(/u' -\n'/, ' - ')
     .replace(/u'-\n'/, '-')
