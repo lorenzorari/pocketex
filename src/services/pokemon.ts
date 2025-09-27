@@ -4,15 +4,24 @@ import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';
 import { pokeapi, pokeapiOld } from '@/helpers/http';
+import { type NamedAPIResource } from '@/models/named-api-resource';
 import { type Pokemon } from '@/models/pokemon';
 import { type PokemonPagination } from '@/models/pokemon/pagination';
 import { type PokemonType } from '@/models/pokemon/type';
+import { getSpeciesPagination } from '@/services/species';
 import { capitalize } from '@/utils/capitalize';
 
 export interface PokemonCardInfo {
   id: number;
   name: string;
   types: PokemonType[];
+}
+
+export interface PokemonByGeneration {
+  pokemons: PokemonCardInfo[];
+  next: string | null;
+  count: number;
+  previous: string | null;
 }
 
 const getPokemon = async (id: string): Promise<Pokemon | null> => {
@@ -30,7 +39,7 @@ const getPokemon = async (id: string): Promise<Pokemon | null> => {
   }
 };
 
-const getPokemonCardInfo = async (id: string): Promise<PokemonCardInfo | null> => {
+const getPokemonCard = async (id: string): Promise<PokemonCardInfo | null> => {
   const pokemonData = await getPokemon(id);
 
   if (!pokemonData) return null;
@@ -65,4 +74,25 @@ const getPokemonAutocompleteItems = async () => {
   });
 };
 
-export { getPokemon, getPokemonCardInfo, getAllPokemons, getPokemonAutocompleteItems };
+export async function loadPokemonCard(data: NamedAPIResource[] | undefined) {
+  if (!data) return [];
+
+  const pokemons = await Promise.all(
+    data.map(({ url }) => {
+      const id = getIdFromResourceUrl(url);
+
+      return getPokemonCard(`${id}`);
+    }),
+  );
+
+  return pokemons.filter((p) => !!p);
+}
+
+export async function getPokemonCardPagination(offset?: number, limit?: number) {
+  const { results, next, previous, count } = await getSpeciesPagination(offset, limit);
+  const pokemons = await loadPokemonCard(results);
+
+  return { pokemons, next, previous, count } as PokemonByGeneration;
+}
+
+export { getPokemon, getPokemonCard, getAllPokemons, getPokemonAutocompleteItems };

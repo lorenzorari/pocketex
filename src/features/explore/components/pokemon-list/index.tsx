@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import React, { useCallback, useRef } from 'react';
-import { type PokemonByGeneration } from '@/app/explore/page';
 import InfiniteScroll from '@/components/infinite-scroll';
 import PokemonCard from '@/components/pokemon/card';
 import { Loader } from '@/components/ui/Loader';
 import { usePokemonInfinitePagination } from '@/hooks/pokemon/usePokemonInfinitePagination';
+import { type PokemonByGeneration } from '@/services/pokemon';
 
 interface Props {
   initialValue?: PokemonByGeneration;
@@ -47,7 +47,7 @@ const PokemonList = ({ initialValue, generation }: Props) => {
       >
         <div className="mb-12 grid grid-cols-[repeat(auto-fit,13rem)] justify-center gap-4 lg:justify-start xl:grid-cols-5">
           {pagination?.map((page) =>
-            page.pokemons?.map((pokemon) => (
+            page.pokemons.map((pokemon) => (
               <Link key={pokemon.id} href={`/pokemon/${pokemon.name?.toLowerCase()}`}>
                 <PokemonCard className="transition-all will-change-transform hover:scale-105" pokemon={pokemon} />
               </Link>

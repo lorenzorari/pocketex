@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import { usePokemonCounter } from '@/app/explore/contexts/usePokemonCounter';
-import { type PokemonByGeneration } from '@/app/explore/page';
 import { getGenerationPagination } from '@/services/generations';
+import { type PokemonByGeneration } from '@/services/pokemon';
 
 const DEFAULT_GENERATION = '0';
 

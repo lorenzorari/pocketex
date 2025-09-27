@@ -5,19 +5,19 @@ import {
   type PokemonCounter as PokemonCounterType,
   PokemonCounterContext,
 } from '@/app/explore/contexts/usePokemonCounter';
-import { type PokemonByGeneration } from '@/app/explore/page';
 import { PokemonCounter } from '@/features/explore/components/PokemonCounter';
 import { type GenerationListItem } from '@/services/generations';
+import { type PokemonByGeneration } from '@/services/pokemon';
 import { GenerationFilter } from './filters/GenerationFilter';
 import PokemonList from './pokemon-list';
 
 interface Props {
-  generations: GenerationListItem[];
+  generationListItems: GenerationListItem[];
   pokemonListInitialValue: PokemonByGeneration;
   count: number;
 }
 
-export function ExploreMainContent({ generations, pokemonListInitialValue, count }: Props) {
+export function ExploreMainContent({ generationListItems, pokemonListInitialValue, count }: Props) {
   const [pokemonCount, setPokemonCount] = useState<PokemonCounterType>({ 0: count });
   const [selectedGeneration, setSelectedGeneration] = useState<string>('0');
 
@@ -29,7 +29,7 @@ export function ExploreMainContent({ generations, pokemonListInitialValue, count
           <PokemonCounter generation={selectedGeneration} />
         </div>
         <div className="mb-10">
-          <GenerationFilter generations={generations} onValueChange={setSelectedGeneration} />
+          <GenerationFilter generationListItems={generationListItems} onValueChange={setSelectedGeneration} />
         </div>
         <PokemonList initialValue={pokemonListInitialValue} generation={selectedGeneration} />
       </PokemonCounterContext>

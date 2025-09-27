@@ -5,7 +5,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@
 import { type GenerationListItem } from '@/services/generations';
 
 interface Props {
-  generations: GenerationListItem[];
+  generationListItems: GenerationListItem[];
   onValueChange?: (value: string) => void;
 }
 
@@ -19,12 +19,12 @@ export const defaultValue: SelectOption = {
   value: '0',
 };
 
-export function GenerationFilter({ generations, onValueChange }: Props) {
+export function GenerationFilter({ generationListItems, onValueChange }: Props) {
   const [selectedGeneration, setSelectedGeneration] = useState<SelectOption>(defaultValue);
 
   const options: SelectOption[] = [
     defaultValue,
-    ...generations.map(({ label, id }) => ({
+    ...generationListItems.map(({ label, id }) => ({
       label,
       value: String(id),
     })),

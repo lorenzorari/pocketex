@@ -2,8 +2,7 @@ import { type NextRequest } from 'next/server';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { type NamedAPIResource } from '@/models/named-api-resource';
 import { getGeneration } from '@/services/generations';
-import { getPokemonCardInfo } from '@/services/pokemon';
-import { getSpeciesPagination } from '@/services/species';
+import { getPokemonCardPagination, loadPokemonCard } from '@/services/pokemon';
 
 interface Params {
   id: string;
@@ -32,15 +31,12 @@ export async function GET(req: NextRequest, { params }: RouteProps) {
   const isDefaultGeneration = generationId === '0';
 
   if (isDefaultGeneration) {
-    const { results, next, previous, count } = await getSpeciesPagination(offset, limit);
-    const pokemons = await loadPokemons(results);
+    const pagination = await getPokemonCardPagination(offset, limit);
 
-    return Response.json({ pokemons, next, previous, count });
+    return Response.json(pagination);
   }
 
   if (!isGenerationCached) {
-    console.log(`Fetching generation ${generationId}`);
-
     const generationRes = await getGeneration(+generationId);
 
     if (!generationRes) {
@@ -52,46 +48,25 @@ export async function GET(req: NextRequest, { params }: RouteProps) {
       const idB = getIdFromResourceUrl(b.url);
       return idA - idB;
     });
+
     speciesByGenerationCache[+generationId] = {
       results: sortedSpecies,
       count: sortedSpecies.length,
       start: getIdFromResourceUrl(sortedSpecies[0].url),
       end: getIdFromResourceUrl(sortedSpecies[sortedSpecies.length - 1].url),
     };
-    console.log(`Generation ${generationId} cached`);
   }
-
-  console.log(speciesByGenerationCache);
 
   const species = speciesByGenerationCache[+generationId];
   const slicedSpecies = species.results.slice(offset, offset + limit);
-  console.log({ slicedSpecies }, offset, limit);
-  console.log('results', species.results.slice(0, 3));
-
-  const pokemons = await loadPokemons(slicedSpecies);
+  const pokemons = await loadPokemonCard(slicedSpecies);
   const count = species.count;
+  const getSiblingUrl = (offset: number) => `/gen/${generationId}/pokemon-species/?offset=${offset}&limit=${limit}`;
 
   return Response.json({
     pokemons,
     count,
-    next:
-      offset + limit < count ? `/gen/${generationId}/pokemon-species/?offset=${offset + limit}&limit=${limit}` : null,
-    previous: offset > 0 ? `/gen/${generationId}/pokemon-species/?offset=${offset - limit}&limit=${limit}` : null,
+    next: offset + limit < count ? getSiblingUrl(offset + limit) : null,
+    previous: offset > 0 ? getSiblingUrl(offset - limit) : null,
   });
-}
-
-async function loadPokemons(data: NamedAPIResource[] | undefined) {
-  console.log({ data });
-
-  if (!data) return [];
-
-  const pokemons = await Promise.all(
-    data.map(({ url }) => {
-      const id = getIdFromResourceUrl(url);
-
-      return getPokemonCardInfo(`${id}`);
-    }),
-  );
-
-  return pokemons.filter((p) => !!p);
 }

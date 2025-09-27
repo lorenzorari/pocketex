@@ -1,7 +1,7 @@
-import { type PokemonByGeneration } from '@/app/explore/page';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { api, pokeapi } from '@/helpers/http';
 import { type Generation } from '@/models/generation';
+import { type PokemonByGeneration } from '@/services/pokemon';
 import { capitalize } from '@/utils/capitalize';
 import { type PokemonPagination } from '../models/pokemon/pagination';
 
@@ -24,10 +24,10 @@ const getGeneration = async (id: number): Promise<Generation | null> => {
   }
 };
 
-const getGenerations = async (): Promise<GenerationListItem[]> => {
+const getGenerationListItems = async (): Promise<GenerationListItem[]> => {
   const { results } = await pokeapi<PokemonPagination>('generation');
 
-  return results?.map(({ name, url }) => ({ label: formatGenerationName(name), id: getIdFromResourceUrl(url) })) ?? [];
+  return (results || []).map(({ name, url }) => ({ label: formatGenerationName(name), id: getIdFromResourceUrl(url) }));
 };
 
 function formatGenerationName(name: string) {
@@ -47,4 +47,4 @@ async function getGenerationPagination(generation: string, offset: number, limit
   return await api<PokemonByGeneration>(`generations/${generation}?offset=${offset}&limit=${limit}`);
 }
 
-export { getGeneration, getGenerations, getGenerationPagination };
+export { getGeneration, getGenerationListItems, getGenerationPagination };
