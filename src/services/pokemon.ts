@@ -3,7 +3,7 @@ import { POKEMON_QUANTITY } from '@/constants';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';
-import { api, pokeapi } from '@/helpers/http';
+import { pokeapi, pokeapiOld } from '@/helpers/http';
 import { type Pokemon } from '@/models/pokemon';
 import { type PokemonPagination } from '@/models/pokemon/pagination';
 import { type PokemonType } from '@/models/pokemon/type';
@@ -17,7 +17,7 @@ export interface PokemonCardInfo {
 
 const getPokemon = async (id: string): Promise<Pokemon | null> => {
   try {
-    const pokemonData = await api<Pokemon>(`pokemon/${id}`);
+    const pokemonData = await pokeapi<Pokemon>(`pokemon/${id}`);
 
     pokemonData.name = capitalize(pokemonData?.name ?? '');
     pokemonData.height = getAnthropometry(pokemonData.height ?? -1);
@@ -46,7 +46,7 @@ const getAllPokemons = async (offset?: number, limit?: number): Promise<PokemonP
   const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
   const url = `pokemon${params}`;
 
-  return await pokeapi.get(url).json<PokemonPagination>();
+  return await pokeapiOld.get(url).json<PokemonPagination>();
 };
 
 const getPokemonAutocompleteItems = async () => {

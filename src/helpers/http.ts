@@ -3,7 +3,7 @@ import { convertUnderscoreToCamelcase } from '@/utils/convert-underscore-to-came
 
 const apiBaseUrl = 'https://pokeapi.co/api/v2/';
 
-export const pokeapi = ky.extend({
+export const pokeapiOld = ky.extend({
   prefixUrl: apiBaseUrl,
   hooks: {
     afterResponse: [
@@ -17,7 +17,7 @@ export const pokeapi = ky.extend({
   },
 });
 
-export async function api<T>(url: string, options: RequestInit = {}) {
+export async function pokeapi<T>(url: string, options: RequestInit = {}) {
   const response = await fetch(`${apiBaseUrl}${url}`, options);
 
   if (!response.ok) {

@@ -1,4 +1,4 @@
-import { api } from '@/helpers/http';
+import { pokeapi } from '@/helpers/http';
 import { type PokemonPagination } from '@/models/pokemon/pagination';
 import { type Species } from '@/models/species';
 
@@ -12,7 +12,7 @@ const BASE_URL = 'pokemon-species';
 
 export async function getSpecies(pokemonId: string): Promise<GetSpeciesData | null> {
   try {
-    const species = await api<Species>(`${BASE_URL}/${pokemonId}`);
+    const species = await pokeapi<Species>(`${BASE_URL}/${pokemonId}`);
     const genus = getGenus(species);
     const description = getDescription(species);
 
@@ -50,7 +50,7 @@ export async function getSpeciesPagination(offset: number = 0, limit: number = 2
   const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
   const url = `${BASE_URL}${params}`;
 
-  const res = await api<PokemonPagination>(url);
+  const res = await pokeapi<PokemonPagination>(url);
 
   if (res?.next) {
     res.next = res.next.split('v2')[1];

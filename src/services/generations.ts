@@ -1,6 +1,6 @@
 import { type PokemonByGeneration } from '@/app/explore/page';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
-import { api } from '@/helpers/http';
+import { pokeapi } from '@/helpers/http';
 import { type Generation } from '@/models/generation';
 import { capitalize } from '@/utils/capitalize';
 import { type PokemonPagination } from '../models/pokemon/pagination';
@@ -16,7 +16,7 @@ const getGeneration = async (id: number): Promise<Generation | null> => {
   const url = `${URL_GENERATION}/${id}`;
 
   try {
-    const generation = await api<Generation>(url);
+    const generation = await pokeapi<Generation>(url);
     return generation;
   } catch (error) {
     console.error(`Error while fetching generation ${id}`, error);
@@ -25,7 +25,7 @@ const getGeneration = async (id: number): Promise<Generation | null> => {
 };
 
 const getGenerations = async (): Promise<GenerationListItem[]> => {
-  const { results } = await api<PokemonPagination>('generation');
+  const { results } = await pokeapi<PokemonPagination>('generation');
 
   return results?.map(({ name, url }) => ({ label: formatGenerationName(name), id: getIdFromResourceUrl(url) })) ?? [];
 };
