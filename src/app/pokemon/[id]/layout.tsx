@@ -1,5 +1,5 @@
 import { getDocumentTitle } from '@/helpers/getDocumentTitle';
-import { getSpecies } from '@/services/species';
+import { getPokemon } from '@/services/pokemon';
 import { capitalize } from '@/utils/capitalize';
 
 interface Params {
@@ -14,8 +14,8 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
 
-  const { species } = await getSpecies(id);
-  const capitalizedName = species?.name ? capitalize(species.name) : undefined;
+  const pokemon = await getPokemon(id);
+  const capitalizedName = pokemon?.name ? capitalize(pokemon.name) : undefined;
 
   return {
     title: getDocumentTitle(capitalizedName),

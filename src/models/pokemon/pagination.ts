@@ -2,7 +2,7 @@ import { type NamedAPIResources } from './../named-api-resource';
 
 export interface PokemonPagination {
   count?: number;
-  next?: string;
-  previous?: string;
+  next: string | null;
+  previous: string | null;
   results?: NamedAPIResources;
 }

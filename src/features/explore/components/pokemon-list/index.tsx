@@ -1,84 +1,59 @@
-import { useRouter } from 'next/navigation';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+'use client';
+
+import Link from 'next/link';
+import React, { useCallback, useRef } from 'react';
 import InfiniteScroll from '@/components/infinite-scroll';
-import Loading from '@/components/loading';
 import PokemonCard from '@/components/pokemon/card';
 import { Loader } from '@/components/ui/Loader';
-import { usePokemonPagination } from '@/hooks/pokemon/usePokemonPagination';
-import styles from './pokemon-list.module.scss';
+import { usePokemonInfinitePagination } from '@/hooks/pokemon/usePokemonInfinitePagination';
+import { type PokemonByGeneration } from '@/services/pokemon';
 
 interface Props {
-  isFiltering: boolean;
+  initialValue?: PokemonByGeneration;
+  generation: string;
 }
 
-const PokemonList = (props: Props) => {
-  const { pagination, size, setSize, isValidating } = usePokemonPagination();
-  const router = useRouter();
-  const [page, setPage] = useState<number>(1);
+const PokemonList = ({ initialValue, generation }: Props) => {
+  const { pagination, size, setSize, isValidating, isEndOfList } = usePokemonInfinitePagination(
+    initialValue,
+    generation,
+  );
   const loaderRef = useRef(null);
-
-  useEffect(() => {
-    if (props.isFiltering) {
-      setPage(1);
-    }
-  }, [props.isFiltering]);
 
   const handleObserver: IntersectionObserverCallback = useCallback(
     (entries) => {
       const { isIntersecting } = entries[0];
+      const loadMore = () => setSize(size + 1);
 
       if (isIntersecting && !isValidating) {
         loadMore();
       }
     },
-    [isValidating, loadMore],
+    [isValidating, setSize, size],
   );
-
-  const handleClickCard = (id: string) => {
-    router.push(`/pokemon/${id}`);
-  };
-
-  function loadMore() {
-    setSize(size + 1);
-  }
 
   return (
     <>
-      {props.isFiltering === false ? (
-        <InfiniteScroll
-          observerCallback={handleObserver}
-          loadMore={loadMore}
-          page={page}
-          ref={loaderRef}
-          loaderElement={
-            <>
-              {/* TODO Remove when end list */}
-              {/* {props.pokemons.length < props.limit && ( */}
-              <div ref={loaderRef} className="flex justify-center py-8">
-                <Loader />
-              </div>
-              {/* )} */}
-            </>
-          }
-        >
-          <div className={styles['pokemons-container']}>
-            {pagination?.map((page) =>
-              page.pokemons?.map((pokemon) => (
-                <PokemonCard
-                  key={pokemon.id}
-                  className={styles.card}
-                  onClick={() => handleClickCard((pokemon.name as string).toLowerCase())}
-                  pokemon={pokemon}
-                />
-              )),
-            )}
+      <InfiniteScroll
+        observerCallback={handleObserver}
+        ref={loaderRef}
+        isEnd={isEndOfList}
+        loaderElement={
+          <div ref={loaderRef} className="flex justify-center py-8">
+            <Loader />
           </div>
-        </InfiniteScroll>
-      ) : (
-        <div className={styles['filter-loader']}>
-          <Loading src="/assets/svg/logo.svg" />
+        }
+      >
+        <div className="mb-12 grid grid-cols-[repeat(auto-fit,13rem)] justify-center gap-4 lg:justify-start xl:grid-cols-5">
+          {pagination?.map((page) =>
+            page.pokemons.map((pokemon) => (
+              <Link key={pokemon.id} href={`/pokemon/${pokemon.name?.toLowerCase()}`}>
+                <PokemonCard className="transition-all will-change-transform hover:scale-105" pokemon={pokemon} />
+              </Link>
+            )),
+          )}
         </div>
-      )}
+      </InfiniteScroll>
     </>
   );
 };

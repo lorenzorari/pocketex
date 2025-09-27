@@ -1,19 +1,50 @@
-import axios from 'axios';
-import { pokeapi } from '@/helpers/http';
+import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
+import { api, pokeapi } from '@/helpers/http';
+import { type Generation } from '@/models/generation';
+import { type PokemonByGeneration } from '@/services/pokemon';
+import { capitalize } from '@/utils/capitalize';
 import { type PokemonPagination } from '../models/pokemon/pagination';
 
-const URL_GENERATION = 'https://pokeapi.co/api/v2/generation';
-
-const getGeneration = async (id?: number): Promise<PokemonPagination> => {
-  const url = URL_GENERATION + (id ? `/${id}` : '');
-
-  return axios.get(url).then((res) => res.data as PokemonPagination);
+export type GenerationListItem = {
+  label: string;
+  id: number;
 };
 
-const getGenerations = async () => {
-  const { results } = await pokeapi.get('generation').json<PokemonPagination>();
+const URL_GENERATION = 'generation';
 
-  return results;
+const getGeneration = async (id: number): Promise<Generation | null> => {
+  const url = `${URL_GENERATION}/${id}`;
+
+  try {
+    const generation = await pokeapi<Generation>(url);
+    return generation;
+  } catch (error) {
+    console.error(`Error while fetching generation ${id}`, error);
+    return null;
+  }
 };
 
-export { getGeneration, getGenerations };
+const getGenerationListItems = async (): Promise<GenerationListItem[]> => {
+  const { results } = await pokeapi<PokemonPagination>('generation');
+
+  return (results || []).map(({ name, url }) => ({ label: formatGenerationName(name), id: getIdFromResourceUrl(url) }));
+};
+
+function formatGenerationName(name: string) {
+  const template = new RegExp('^generation-.+$');
+
+  if (!template.test(name)) {
+    console.error('Invalid generation name', name);
+    return 'Generation-???';
+  }
+
+  const [label, generationNumber] = name.split('-');
+
+  return `${capitalize(label)} ${generationNumber.toUpperCase()}`;
+}
+
+async function getGenerationPagination(generation: string, offset: number, limit: number) {
+  return await api<PokemonByGeneration>(`generations/${generation}?offset=${offset}&limit=${limit}`);
+}
+
+export { getGeneration, getGenerationListItems, getGenerationPagination };

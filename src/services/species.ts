@@ -1,4 +1,4 @@
-import { api, pokeapi } from '@/helpers/http';
+import { pokeapi } from '@/helpers/http';
 import { type PokemonPagination } from '@/models/pokemon/pagination';
 import { type Species } from '@/models/species';
 
@@ -10,12 +10,18 @@ type GetSpeciesData = {
 
 const BASE_URL = 'pokemon-species';
 
-export async function getSpecies(pokemonId: string): Promise<GetSpeciesData> {
-  const species = await api<Species>(`${BASE_URL}/${pokemonId}`);
-  const genus = getGenus(species);
-  const description = getDescription(species);
+export async function getSpecies(pokemonId: string): Promise<GetSpeciesData | null> {
+  try {
+    const species = await pokeapi<Species>(`${BASE_URL}/${pokemonId}`);
+    const genus = getGenus(species);
+    const description = getDescription(species);
 
-  return { species, genus, description };
+    return { species, genus, description };
+  } catch (error) {
+    console.error(`Error while fetching species ${pokemonId}`, error);
+
+    return null;
+  }
 }
 
 function getGenus(species: Species) {
@@ -34,7 +40,6 @@ const getDescription = (species: Species) => {
   return text
     ?.replace(/u'\f'/, ' ')
     .replace(/\u00AD/g, '')
-
     .replace(/\u000C/g, ' ')
     .replace(/u' -\n'/, ' - ')
     .replace(/u'-\n'/, '-')
@@ -45,5 +50,11 @@ export async function getSpeciesPagination(offset: number = 0, limit: number = 2
   const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
   const url = `${BASE_URL}${params}`;
 
-  return await pokeapi.get(url).json<PokemonPagination>();
+  const res = await pokeapi<PokemonPagination>(url);
+
+  if (res?.next) {
+    res.next = res.next.split('v2')[1];
+  }
+
+  return res;
 }

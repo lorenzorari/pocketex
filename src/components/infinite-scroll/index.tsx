@@ -3,24 +3,25 @@ import React, { forwardRef, type JSX, useEffect } from 'react';
 interface Props {
   children: React.ReactNode;
   observerCallback: IntersectionObserverCallback;
-  page: number;
   loaderElement: JSX.Element;
-  loadMore: () => void;
+  isEnd?: boolean;
 }
 
-const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement }: Props, ref: any) => {
+const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement, isEnd = false }: Props, ref: any) => {
   const Loader = () => loaderElement;
 
   useEffect(() => {
     const observer = new IntersectionObserver(observerCallback);
+
     if (ref?.current) observer.observe(ref.current);
+
     return () => observer.disconnect();
   }, [ref, observerCallback]);
 
   return (
     <>
       {children}
-      <Loader />
+      {!isEnd && <Loader />}
     </>
   );
 });
