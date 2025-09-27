@@ -25,7 +25,7 @@ export function ExploreMainContent({ generations, pokemonListInitialValue, count
     <>
       <PokemonCounterContext value={{ pokemonCount, setPokemonCount }}>
         <div className="mb-4 flex items-center gap-2">
-          <h2 className="text-4xl font-bold">Pokémon</h2>
+          <h2 className="text-4xl font-bold">Pokémon species</h2>
           <PokemonCounter generation={selectedGeneration} />
         </div>
         <div className="mb-10">

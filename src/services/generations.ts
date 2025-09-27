@@ -1,3 +1,4 @@
+import { type PokemonByGeneration } from '@/app/explore/page';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { api } from '@/helpers/http';
 import { type Generation } from '@/models/generation';
@@ -42,4 +43,9 @@ function formatGenerationName(name: string) {
   return `${capitalize(label)} ${generationNumber.toUpperCase()}`;
 }
 
-export { getGeneration, getGenerations };
+async function getGenerationPagination(generation: string, offset: number, limit: number) {
+  const data = await fetch(`/api/generations/${generation}?offset=${offset}&limit=${limit}`);
+  return (await data.json()) as PokemonByGeneration;
+}
+
+export { getGeneration, getGenerations, getGenerationPagination };

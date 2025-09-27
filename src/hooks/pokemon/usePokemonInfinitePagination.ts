@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import { usePokemonCounter } from '@/app/explore/contexts/usePokemonCounter';
 import { type PokemonByGeneration } from '@/app/explore/page';
+import { getGenerationPagination } from '@/services/generations';
 
 const DEFAULT_GENERATION = '0';
 
@@ -9,8 +10,6 @@ export function usePokemonInfinitePagination(
   initialData?: PokemonByGeneration,
   generation: string = DEFAULT_GENERATION,
 ) {
-  // const [isEndOfList, setIsEndOfList] = useState<boolean>(false);
-
   const { data, setSize, size, isValidating, isLoading } = useSWRInfinite(getKey, fetchPagination, {
     fallbackData: isDefaultGeneration() && initialData ? [getInitialData()] : undefined,
     revalidateFirstPage: false,
@@ -61,8 +60,7 @@ export function usePokemonInfinitePagination(
       return getInitialData();
     }
 
-    const data = await fetch(`/api/generations/${generation}?offset=${offset}&limit=${limit}`);
-    const { count, pokemons, next, previous } = (await data.json()) as PokemonByGeneration;
+    const { pokemons, next, previous, count } = await getGenerationPagination(generation, offset, limit);
     setPokemonCount({ ...pokemonCount, [generation]: count });
 
     return { pokemons, next, previous, count };
