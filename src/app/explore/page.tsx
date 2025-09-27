@@ -14,9 +14,6 @@ export interface PokemonByGeneration {
 
 const ExplorePage = async () => {
   const generations = await getGenerations();
-  // const data = await fetch(`${process.env.domain}/api/generations/0`, { cache: 'no-store' });
-  // const res = (await data.json()) as PokemonByGeneration;
-
   const res = await getAllGenerations();
 
   async function loadPokemons(data: NamedAPIResource[] | undefined) {
