@@ -26,7 +26,6 @@ const PokemonList = ({ initialValue, generation }: Props) => {
       const loadMore = () => setSize(size + 1);
 
       if (isIntersecting && !isValidating) {
-        console.log('isIntersecting');
         loadMore();
       }
     },

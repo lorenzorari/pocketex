@@ -19,8 +19,6 @@ export function usePokemonInfinitePagination(
   });
   const { pokemonCount, setPokemonCount } = usePokemonCounter();
   const isEndOfList = useMemo(() => {
-    console.log('isEndOfList', { data, size, isEnd: !data?.[size - 1]?.next });
-
     return !data?.[size - 1]?.next;
   }, [data, size]);
 
