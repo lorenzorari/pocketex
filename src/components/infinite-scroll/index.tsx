@@ -1,15 +1,14 @@
-import React, { forwardRef, type JSX, useEffect } from 'react';
+import React, { type RefObject, useEffect } from 'react';
+import { Loader } from '@/components/ui/Loader';
 
 interface Props {
   children: React.ReactNode;
   observerCallback: IntersectionObserverCallback;
-  loaderElement: JSX.Element;
-  isEnd?: boolean;
+  isLoading?: boolean;
+  ref: RefObject<HTMLDivElement | null>;
 }
 
-const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement, isEnd = false }: Props, ref: any) => {
-  const Loader = () => loaderElement;
-
+const InfiniteScroll = ({ children, observerCallback, isLoading = false, ref }: Props) => {
   useEffect(() => {
     const observer = new IntersectionObserver(observerCallback);
 
@@ -21,10 +20,14 @@ const InfiniteScroll = forwardRef(({ children, observerCallback, loaderElement, 
   return (
     <>
       {children}
-      {!isEnd && <Loader />}
+      {isLoading && (
+        <div ref={ref} className="mb-8 flex justify-center">
+          <Loader />
+        </div>
+      )}
     </>
   );
-});
+};
 
 InfiniteScroll.displayName = 'InfiniteScroll';
 

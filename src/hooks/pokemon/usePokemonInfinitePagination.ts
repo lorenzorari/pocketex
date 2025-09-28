@@ -18,9 +18,8 @@ export function usePokemonInfinitePagination(
     revalidateOnReconnect: false,
   });
   const { pokemonCount, setPokemonCount } = usePokemonCounter();
-  const isEndOfList = useMemo(() => {
-    return !data?.[size - 1]?.next;
-  }, [data, size]);
+
+  const isEndOfList = useMemo(() => (!data ? false : data[data.length - 1]?.next === null), [data]);
 
   function getInitialData(): PokemonByGeneration {
     return {

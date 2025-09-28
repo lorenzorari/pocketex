@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React, { useCallback, useRef } from 'react';
 import InfiniteScroll from '@/components/infinite-scroll';
 import PokemonCard from '@/components/pokemon/card';
-import { Loader } from '@/components/ui/Loader';
 import { usePokemonInfinitePagination } from '@/hooks/pokemon/usePokemonInfinitePagination';
 import { type PokemonByGeneration } from '@/services/pokemon';
 
@@ -18,7 +17,7 @@ const PokemonList = ({ initialValue, generation }: Props) => {
     initialValue,
     generation,
   );
-  const loaderRef = useRef(null);
+  const loaderRef = useRef<HTMLDivElement>(null);
 
   const handleObserver: IntersectionObserverCallback = useCallback(
     (entries) => {
@@ -34,16 +33,7 @@ const PokemonList = ({ initialValue, generation }: Props) => {
 
   return (
     <>
-      <InfiniteScroll
-        observerCallback={handleObserver}
-        ref={loaderRef}
-        isEnd={isEndOfList}
-        loaderElement={
-          <div ref={loaderRef} className="flex justify-center py-8">
-            <Loader />
-          </div>
-        }
-      >
+      <InfiniteScroll observerCallback={handleObserver} ref={loaderRef} isLoading={!isEndOfList}>
         <div className="mb-12 grid grid-cols-[repeat(auto-fit,13rem)] justify-center gap-4 lg:justify-start xl:grid-cols-5">
           {pagination?.map((page) =>
             page.pokemons.map((pokemon) => (
