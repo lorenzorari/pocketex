@@ -5,6 +5,7 @@ import { getGenerationPagination } from '@/services/generations';
 import { type PokemonByGeneration } from '@/services/pokemon';
 
 const DEFAULT_GENERATION = '0';
+const DEFAULT_LIMIT = 20;
 
 export function usePokemonInfinitePagination(
   initialData?: PokemonByGeneration,
@@ -41,7 +42,7 @@ export function usePokemonInfinitePagination(
     if (isLastPage) return null;
 
     if (isFirstPage) {
-      return `/generation/${generation}?limit=20`;
+      return `/generation/${generation}?limit=${DEFAULT_LIMIT}`;
     }
 
     return previousPageData.next;
@@ -63,5 +64,5 @@ export function usePokemonInfinitePagination(
     return { pokemons, next, previous, count };
   }
 
-  return { pagination: data, setSize, size, isValidating, isLoading, isEndOfList };
+  return { pagination: data, setSize, size, isValidating, isLoading, isEndOfList, DEFAULT_LIMIT };
 }

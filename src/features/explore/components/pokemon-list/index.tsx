@@ -4,8 +4,10 @@ import Link from 'next/link';
 import React, { useCallback, useRef } from 'react';
 import InfiniteScroll from '@/components/infinite-scroll';
 import PokemonCard from '@/components/pokemon/card';
+import { Skeleton } from '@/components/ui/Skeleton';
 import { usePokemonInfinitePagination } from '@/hooks/pokemon/usePokemonInfinitePagination';
 import { type PokemonByGeneration } from '@/services/pokemon';
+import { fillArray } from '@/utils/array';
 
 interface Props {
   initialValue?: PokemonByGeneration;
@@ -13,7 +15,7 @@ interface Props {
 }
 
 const PokemonList = ({ initialValue, generation }: Props) => {
-  const { pagination, size, setSize, isValidating, isEndOfList } = usePokemonInfinitePagination(
+  const { pagination, size, setSize, isValidating, isEndOfList, DEFAULT_LIMIT } = usePokemonInfinitePagination(
     initialValue,
     generation,
   );
@@ -35,6 +37,9 @@ const PokemonList = ({ initialValue, generation }: Props) => {
     <>
       <InfiniteScroll observerCallback={handleObserver} ref={loaderRef} isLoading={!isEndOfList}>
         <div className="mb-12 grid grid-cols-[repeat(auto-fit,13rem)] justify-center gap-4 lg:justify-start xl:grid-cols-5">
+          {!pagination?.[0].pokemons?.length &&
+            fillArray(DEFAULT_LIMIT).map((v) => <Skeleton key={v} className={'h-[319.98px] rounded-[1.3rem]'} />)}
+
           {pagination?.map((page) =>
             page.pokemons.map((pokemon) => (
               <Link key={pokemon.id} href={`/pokemon/${pokemon.name?.toLowerCase()}`}>
