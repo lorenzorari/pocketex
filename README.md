@@ -10,9 +10,9 @@
 # Roadmap
 
 ✅ Homepage\
-⌛️ Explore\
+✅ Explore\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Display all Pokémon\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Filter by generation\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Filter by generation\
 ⌛️ Pokemon details\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Breeding\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Training\
@@ -21,6 +21,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Evolution chain\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Forms\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Go to previous/next Pokémon\
+⌛️ Search\
 ⌛️ Dark mode\
 ⌛️ Languages
 
