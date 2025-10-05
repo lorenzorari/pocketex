@@ -2,16 +2,16 @@
 
 import { Button, ButtonVariant } from '@/components/ui/Button';
 import { Panel, PanelField, PanelLabel } from '@/components/ui/panel';
-import { useStats } from '@/features/pokemon-details/components/stats/useStats';
+import { useStats } from '@/features/pokemon-details/components/panels/stats/useStats';
 import { type Pokemon } from '@/models/pokemon';
 import { StatField } from './StatField';
 
 interface Props {
-  stats: NonNullable<Pokemon['stats']>;
+  stats: Pokemon['stats'];
 }
 
-export function Stats({ stats }: Props) {
-  const { statFields, statTabs, activeTab, calculateStatSum } = useStats(stats);
+export function StatsPanel({ stats }: Props) {
+  const { statFields, statTabs, activeTab, calculateStatSum } = useStats(stats ?? []);
 
   return (
     <Panel title="Stats" className="xl:col-span-2">

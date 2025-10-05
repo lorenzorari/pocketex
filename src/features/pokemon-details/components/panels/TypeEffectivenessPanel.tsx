@@ -16,7 +16,7 @@ interface Props {
   typeEffectiveness: TypeEffectivenessData;
 }
 
-export const TypeEffectiveness = ({ typeEffectiveness }: Props) => {
+export const TypeEffectivenessPanel = ({ typeEffectiveness }: Props) => {
   const [activeTrigger, setActiveTrigger] = useState<TypeEffectivenessGroupLabel>(TypeEffectivenessGroupLabel.Attack);
   const [activeContent, setActiveContent] = useState<TypeEffectivenessGroup>(
     typeEffectiveness[TypeEffectivenessGroupLabel.Attack],

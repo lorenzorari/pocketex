@@ -9,7 +9,7 @@ interface Props {
   species: Species;
 }
 
-export const Training = ({ pokemon, species }: Props) => {
+export const TrainingPanel = ({ pokemon, species }: Props) => {
   const evYields = pokemon.stats?.filter((stat) => (stat.effort ?? -1) > 0);
 
   return (

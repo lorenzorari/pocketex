@@ -8,7 +8,7 @@ interface Props {
   species: Species;
 }
 
-export const Breeding = ({ species }: Props) => {
+export const BreedingPanel = ({ species }: Props) => {
   const eggGroups = useMemo(() => {
     if (!species.eggGroups?.length) return 'No egg groups';
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { type StatField } from '@/features/pokemon-details/components/stats';
+import { type StatField } from '@/features/pokemon-details/components/panels/stats/StatField';
 import { type Tab, useTabs } from '@/hooks/useTabs';
 import { type Pokemon } from '@/models/pokemon';
 import { capitalize } from '@/utils/capitalize';
@@ -59,9 +59,7 @@ export function useStats(stats: NonNullable<Pokemon['stats']>) {
     const bonus = isHP ? level + 10 : 5;
     const natureValue = isHP ? 1 : nature;
 
-    return Math.floor(
-      (((2 * base + iv + ev / 4) * level) / 100 + bonus) * natureValue,
-    );
+    return Math.floor((((2 * base + iv + ev / 4) * level) / 100 + bonus) * natureValue);
   }
 
   function calculateMinStats(isHP: boolean, base: number, level: number) {
@@ -82,10 +80,7 @@ export function useStats(stats: NonNullable<Pokemon['stats']>) {
 
       return {
         label: stat.stat?.name ?? '',
-        range: [
-          calculateMinStats(isHP, stat.baseStat ?? 0, level),
-          calculateMaxStats(isHP, stat.baseStat ?? 0, level),
-        ],
+        range: [calculateMinStats(isHP, stat.baseStat ?? 0, level), calculateMaxStats(isHP, stat.baseStat ?? 0, level)],
         rangeLimit: 800,
       } as StatField;
     });

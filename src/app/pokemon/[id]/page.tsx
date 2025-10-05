@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
-import { Breeding } from '@/features/pokemon-details/components/Breeding';
-import { ContinuePanel } from '@/features/pokemon-details/components/ContinuePanel';
 import { EvolutionChainPanel } from '@/features/pokemon-details/components/evolution-chain';
 import { PokemonDetailHero } from '@/features/pokemon-details/components/Hero';
-import { Stats } from '@/features/pokemon-details/components/stats';
-import { Training } from '@/features/pokemon-details/components/Training';
-import { TypeEffectiveness } from '@/features/pokemon-details/components/TypeEffectiveness';
+import { BreedingPanel } from '@/features/pokemon-details/components/panels/BreedingPanel';
+import { ContinuePanel } from '@/features/pokemon-details/components/panels/ContinuePanel';
+import { StatsPanel } from '@/features/pokemon-details/components/panels/stats';
+import { TrainingPanel } from '@/features/pokemon-details/components/panels/TrainingPanel';
+import { TypeEffectivenessPanel } from '@/features/pokemon-details/components/panels/TypeEffectivenessPanel';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { DefaultLayout } from '@/layouts/DefaultLayout';
 import { type PokemonType } from '@/models/types';
@@ -63,10 +63,10 @@ const DetailsPage = async ({ params }: Props) => {
               <div className="px-5 lg:px-10 xl:px-32">
                 <EvolutionChainPanel evolutionChainUrl={species.evolutionChain?.url} />
                 <div className="grid gap-10 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">
-                  <Breeding species={species} />
-                  <Training pokemon={pokemon} species={species} />
-                  <TypeEffectiveness typeEffectiveness={typeEffectiveness} />
-                  {pokemon.stats && <Stats stats={pokemon.stats} />}
+                  <BreedingPanel species={species} />
+                  <TrainingPanel pokemon={pokemon} species={species} />
+                  <TypeEffectivenessPanel typeEffectiveness={typeEffectiveness} />
+                  <StatsPanel stats={pokemon.stats} />
                 </div>
                 <hr className="my-10" />
                 <ContinuePanel prevPokemon={prevPokemon} nextPokemon={nextPokemon} />
