@@ -1,26 +1,21 @@
-import classNames from 'classnames';
-import React from 'react';
-import { ReactSVG } from 'react-svg';
-import styles from './type-tag.module.scss';
+import { SVG } from '@/components/SVG';
 
 interface Props {
   value: string;
   className?: string;
 }
 
-const TypeTag = ({ value, className }: Props) => {
+const TypeTag = ({ value }: Props) => {
   const src = `/assets/svg/pokemon-types/${value}.svg`;
-
   const tagStyle = {
     '--color-type-1': `var(--color-${value}-1)`,
+    color: 'var(--color-type-1)',
   } as React.CSSProperties;
 
   return (
-    <ReactSVG
-      style={tagStyle}
-      className={classNames(styles.type, className)}
-      src={src}
-    />
+    <div className="flex size-[2.4rem] items-center justify-center rounded-full bg-white">
+      <SVG style={tagStyle} className="block size-full p-[.4rem]" src={src} />
+    </div>
   );
 };
 

@@ -74,7 +74,7 @@ const getPokemonAutocompleteItems = async () => {
   });
 };
 
-export async function loadPokemonCard(data: NamedAPIResource[] | undefined) {
+export async function loadPokemonCards(data: NamedAPIResource[] | undefined) {
   if (!data) return [];
 
   const pokemons = await Promise.all(
@@ -90,7 +90,7 @@ export async function loadPokemonCard(data: NamedAPIResource[] | undefined) {
 
 export async function getPokemonCardPagination(offset?: number, limit?: number) {
   const { results, next, previous, count } = await getSpeciesPagination(offset, limit);
-  const pokemons = await loadPokemonCard(results);
+  const pokemons = await loadPokemonCards(results);
 
   return { pokemons, next, previous, count } as PokemonByGeneration;
 }

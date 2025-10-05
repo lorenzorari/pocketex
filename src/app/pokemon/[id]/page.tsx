@@ -1,4 +1,6 @@
+import { notFound } from 'next/navigation';
 import { Breeding } from '@/features/pokemon-details/components/Breeding';
+import { ContinuePanel } from '@/features/pokemon-details/components/ContinuePanel';
 import { EvolutionChainPanel } from '@/features/pokemon-details/components/evolution-chain';
 import { PokemonDetailHero } from '@/features/pokemon-details/components/Hero';
 import { Stats } from '@/features/pokemon-details/components/stats';
@@ -7,7 +9,7 @@ import { TypeEffectiveness } from '@/features/pokemon-details/components/TypeEff
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { DefaultLayout } from '@/layouts/DefaultLayout';
 import { type PokemonType } from '@/models/types';
-import { getPokemon } from '@/services/pokemon';
+import { getPokemon, getPokemonCard } from '@/services/pokemon';
 import { getSpecies, getSpeciesPagination } from '@/services/species';
 import { getTypeEffectiveness } from '@/services/types';
 
@@ -38,7 +40,12 @@ const DetailsPage = async ({ params }: Props) => {
   const pokemon = await getPokemon(pokemonId);
   const speciesData = await getSpecies(`${pokemon?.id}`);
 
-  if (!speciesData) return null;
+  if (!pokemon || !speciesData) return notFound();
+
+  const [prevPokemon, nextPokemon] = await Promise.all([
+    pokemon.id > 1 ? getPokemonCard(`${pokemon.id - 1}`) : null,
+    getPokemonCard(`${pokemon.id + 1}`),
+  ]);
 
   const { species, genus, description } = speciesData;
 
@@ -52,14 +59,18 @@ const DetailsPage = async ({ params }: Props) => {
         <>
           <PokemonDetailHero genus={genus} pokemon={pokemon} pokemonTypes={pokemonTypes} description={description} />
           {species && (
-            <div className="relative z-10 rounded-t-[40px] bg-white px-5 py-10 shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)] lg:-mt-16 lg:px-10 lg:py-[60px] xl:px-32">
-              <div className="mb-10 grid gap-10 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">
-                <Breeding species={species} />
-                <Training pokemon={pokemon} species={species} />
-                <TypeEffectiveness typeEffectiveness={typeEffectiveness} />
-                {pokemon.stats && <Stats stats={pokemon.stats} />}
+            <div className="relative z-10 rounded-t-[40px] bg-white py-10 shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)] lg:-mt-16 lg:py-[60px]">
+              <div className="px-5 lg:px-10 xl:px-32">
+                <EvolutionChainPanel evolutionChainUrl={species.evolutionChain?.url} />
+                <div className="grid gap-10 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">
+                  <Breeding species={species} />
+                  <Training pokemon={pokemon} species={species} />
+                  <TypeEffectiveness typeEffectiveness={typeEffectiveness} />
+                  {pokemon.stats && <Stats stats={pokemon.stats} />}
+                </div>
+                <hr className="my-10" />
+                <ContinuePanel prevPokemon={prevPokemon} nextPokemon={nextPokemon} />
               </div>
-              <EvolutionChainPanel evolutionChainUrl={species.evolutionChain?.url} />
             </div>
           )}
         </>

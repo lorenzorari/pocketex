@@ -2,7 +2,7 @@ import { type NextRequest } from 'next/server';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { type NamedAPIResource } from '@/models/named-api-resource';
 import { getGeneration } from '@/services/generations';
-import { getPokemonCardPagination, loadPokemonCard } from '@/services/pokemon';
+import { getPokemonCardPagination, loadPokemonCards } from '@/services/pokemon';
 
 interface Params {
   id: string;
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest, { params }: RouteProps) {
 
   const species = speciesByGenerationCache[+generationId];
   const slicedSpecies = species.results.slice(offset, offset + limit);
-  const pokemons = await loadPokemonCard(slicedSpecies);
+  const pokemons = await loadPokemonCards(slicedSpecies);
   const count = species.count;
   const getSiblingUrl = (offset: number) => `/gen/${generationId}/pokemon-species/?offset=${offset}&limit=${limit}`;
 
