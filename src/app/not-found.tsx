@@ -1,25 +1,15 @@
-'use client'
-
-import { useRouter } from 'next/navigation';
-import Button from '@/components/button';
-import styles from './not-found.module.scss';
+import Link from 'next/link';
 
 const NotFoundPage = () => {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push('/');
-  };
-
   return (
-    <main className={styles.main}>
-      <div className={styles.content}>
-        <h1>404</h1>
-        <p>This page could not be found</p>
-        <Button className={styles.btn} onClick={handleClick}>
+    <main className="h-screen bg-black text-white">
+      <section className="text-center">
+        <h1 className="text-[30rem]">404</h1>
+        <p className="mb-10 text-2xl">This page could not be found</p>
+        <Link className="rounded-full bg-white px-[14px] py-2 font-bold text-black transition-colors" href="/">
           Back home
-        </Button>
-      </div>
+        </Link>
+      </section>
     </main>
   );
 };

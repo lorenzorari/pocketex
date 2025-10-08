@@ -3,7 +3,7 @@ import { POKEMON_QUANTITY } from '@/constants';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';
-import { pokeapi, pokeapiOld } from '@/helpers/http';
+import { pokeapi } from '@/helpers/http';
 import { type NamedAPIResource } from '@/models/named-api-resource';
 import { type Pokemon } from '@/models/pokemon';
 import { type PokemonPagination } from '@/models/pokemon/pagination';
@@ -55,7 +55,7 @@ const getAllPokemons = async (offset?: number, limit?: number): Promise<PokemonP
   const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
   const url = `pokemon${params}`;
 
-  return await pokeapiOld.get(url).json<PokemonPagination>();
+  return await pokeapi<PokemonPagination>(url);
 };
 
 const getPokemonAutocompleteItems = async () => {

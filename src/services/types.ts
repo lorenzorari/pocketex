@@ -1,4 +1,4 @@
-import { pokeapiOld } from '@/helpers/http';
+import { pokeapi } from '@/helpers/http';
 import { type Type } from '@/models/types';
 
 export enum TypeEffectivenessGroupLabel {
@@ -36,7 +36,7 @@ interface FullTypeEffectiveness {
 }
 
 async function getType(typeIdOrName: string) {
-  return pokeapiOld.get(`type/${typeIdOrName}`).json<Type>();
+  return pokeapi<Type>(`type/${typeIdOrName}`);
 }
 
 export async function getTypeEffectiveness(types: string[]): Promise<TypeEffectiveness> {
