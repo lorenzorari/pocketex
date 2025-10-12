@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { type RefObject, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import { POKEMON_QUANTITY } from '@/constants';
-import { usePokemonAutocomplete } from '@/hooks/pokemon/usePokemonAutocomplete';
+import { usePokemonAutocomplete } from '@/components/search/hooks/useSearch';
 import { isStringEmpty } from '@/utils/string';
 import AutocompleteError from './error';
 import Suggestions from './suggestions';
