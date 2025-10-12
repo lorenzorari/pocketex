@@ -1,5 +1,4 @@
 import { type PokemonAutocompleteItem } from '@/components/autocomplete/types';
-import { POKEMON_QUANTITY } from '@/constants';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';
@@ -59,7 +58,7 @@ const getAllPokemons = async (offset?: number, limit?: number): Promise<PokemonP
 };
 
 const getPokemonAutocompleteItems = async () => {
-  const { results } = await getAllPokemons(undefined, POKEMON_QUANTITY);
+  const { results } = await getAllPokemons(undefined, 9999);
 
   if (!results) return [];
 
