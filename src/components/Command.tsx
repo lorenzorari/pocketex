@@ -8,7 +8,7 @@ const Command = ({ className, ...props }: ComponentProps<typeof CommandPrimitive
 );
 
 const CommandHeader = ({ className, ...props }: BaseComponentWithChildren) => (
-  <div className={cn('flex items-center gap-2 border-b border-b-gray-600 px-5', className)} {...props} />
+  <div className={cn('border-b border-b-gray-600 px-5', className)} {...props} />
 );
 
 const CommandInput = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Input>) => (

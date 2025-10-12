@@ -4,8 +4,8 @@ import { IconSearch } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import React, { type RefObject, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
+import { useSearch } from '@/components/search/hooks/useSearch';
 import { POKEMON_QUANTITY } from '@/constants';
-import { usePokemonAutocomplete } from '@/components/search/hooks/useSearch';
 import { isStringEmpty } from '@/utils/string';
 import AutocompleteError from './error';
 import Suggestions from './suggestions';
@@ -19,7 +19,7 @@ interface Props {
 
 const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
   const router = useRouter();
-  const { pokemonAutocompleteItems } = usePokemonAutocomplete();
+  const { allPokemons } = useSearch();
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState<PokemonAutocompleteItem[]>([]);
   const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
@@ -72,7 +72,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
 
     if (error) setError('');
 
-    const filteredData = (pokemonAutocompleteItems || []).filter(({ name, id }) => {
+    const filteredData = (allPokemons || []).filter(({ name, id }) => {
       const nameLowercased = name.toLowerCase();
       const valueLowercased = value.toLowerCase();
 
