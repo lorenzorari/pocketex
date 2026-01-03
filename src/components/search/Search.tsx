@@ -29,9 +29,7 @@ export default function Search() {
       <CommandList>
         {isFetchingPokemon && query && <CommandLoading />}
         {showNoResults && <CommandEmpty>No results found</CommandEmpty>}
-
         {!query && recentSearches.length === 0 && <CommandEmpty>No recent searches</CommandEmpty>}
-
         {showRecentSearches && (
           <RecentSearchGroup
             onDeleteAll={removeAllRecentSearches}
@@ -40,7 +38,6 @@ export default function Search() {
             onSelect={handleSelect}
           />
         )}
-
         {showPokemonGroup && <PokemonGroup pokemons={filteredPokemons} groupTitle="Pokémon" onSelect={handleSelect} />}
       </CommandList>
     </Command>

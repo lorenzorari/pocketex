@@ -1,10 +1,15 @@
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { Command as CommandPrimitive } from 'cmdk';
 import { type ComponentProps } from 'react';
 import { type BaseComponentWithChildren } from '@/models/utils';
 import { cn } from '@/utils/classnames';
 
 const Command = ({ className, ...props }: ComponentProps<typeof CommandPrimitive>) => (
-  <CommandPrimitive className={cn('rounded-[calc(6px+8px)] bg-gray-800', className)} {...props} />
+  <CommandPrimitive
+    className={cn('h-full bg-gray-800 md:h-auto md:max-h-[90%] md:rounded-[calc(6px+8px)]', className)}
+    {...props}
+  />
 );
 
 const CommandHeader = ({ className, ...props }: BaseComponentWithChildren) => (
@@ -13,7 +18,7 @@ const CommandHeader = ({ className, ...props }: BaseComponentWithChildren) => (
 
 const CommandInput = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Input>) => (
   <CommandPrimitive.Input
-    className={cn('w-full rounded-md py-3 outline-none placeholder:text-gray-400', className)}
+    className={cn('w-full rounded-md py-3 text-white outline-none placeholder:text-gray-400', className)}
     {...props}
   />
 );
@@ -59,6 +64,38 @@ const CommandLoading = ({ className, ...props }: ComponentProps<typeof CommandPr
   return <CommandPrimitive.Loading className={cn('px-3 py-2', className)} {...props} />;
 };
 
+const CommandDialog = ({
+  title = 'Command Palette',
+  description = 'Search for a command to run...',
+  children,
+  className,
+  ...props
+}: Omit<React.ComponentProps<typeof Dialog>, 'children'> & {
+  title?: string;
+  description?: string;
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <Dialog {...props}>
+      <VisuallyHidden asChild>
+        <div>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </div>
+      </VisuallyHidden>
+      <DialogContent
+        className={cn(
+          'absolute inset-y-0 w-full max-w-3xl md:top-[10%] md:left-1/2 md:h-fit md:-translate-x-1/2',
+          className,
+        )}
+      >
+        {children}
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 export {
   Command,
   CommandHeader,
@@ -69,4 +106,5 @@ export {
   CommandItem,
   CommandLoading,
   CommandSubItem,
+  CommandDialog,
 };

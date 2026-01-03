@@ -1,8 +1,8 @@
 'use client';
 
-import { IconSearch } from '@tabler/icons-react';
 import React, { useState } from 'react';
 import Particles from 'react-tsparticles';
+import { SearchTrigger } from '@/components/hero-banner/SearchTrigger';
 import tsparticlesOptions from '@/data/tsparticlesOptions';
 
 interface Props {
@@ -31,16 +31,8 @@ const HeroBanner = (props: Props) => {
               {props.heading}
             </h1>
           </div>
-          {/* <Autocomplete placeholder="Search a pokemon by name or number..." /> */}
           <div className="flex gap-2">
-            <button
-              className="flex grow items-center gap-2 rounded-full bg-white px-5 py-2 text-left text-gray-400"
-              type="button"
-            >
-              <IconSearch className="size-4 text-gray-400" />
-              Search a Pokémon
-              {/* <kbd className="ml-auto font-sans text-xs">⌘K</kbd> */}
-            </button>
+            <SearchTrigger />
             {/* <button className="group flex size-[40px] items-center justify-center rounded-full bg-white text-gray-400 transition-all hover:text-black">
               <IconPokeball className="group-hover:animate-wiggle" />
             </button> */}
