@@ -4,6 +4,9 @@ import useSWR from 'swr';
 import { useLocalStorage } from 'usehooks-ts';
 import { getAllPokemons, type PokemonSearchItem } from '@/services/pokemon';
 
+const POKEMON_QUANTITY_LIMIT = 10;
+const RECENT_SEARCHES_LIMIT = 8;
+
 export function useSearch() {
   const router = useRouter();
   const { data: allPokemons, isLoading: isFetchingPokemon } = useSWR(`pokemon-autocomplete`, getAllPokemons, {
@@ -16,7 +19,7 @@ export function useSearch() {
   const [query, setQuery] = useState<string>('');
 
   const filteredPokemons = useMemo(() => {
-    if (!query) return allPokemons.slice(0, 10);
+    if (!query) return allPokemons.slice(0, POKEMON_QUANTITY_LIMIT);
 
     const q = query.toLowerCase();
     const filteredItems = allPokemons.filter(({ name, id }) => {
@@ -26,7 +29,7 @@ export function useSearch() {
       return id.toString().includes(q);
     });
 
-    return filteredItems.slice(0, 10);
+    return filteredItems.slice(0, POKEMON_QUANTITY_LIMIT);
   }, [allPokemons, query]);
 
   const showRecentSearches = useMemo(() => !query && recentSearches.length > 0, [query, recentSearches]);
@@ -39,7 +42,8 @@ export function useSearch() {
   }
 
   function handleRecentSearches(suggestion: PokemonSearchItem) {
-    const newRecentSearches = recentSearches.length === 5 ? recentSearches.slice(0, 4) : recentSearches;
+    const isLimitReached = recentSearches.length === RECENT_SEARCHES_LIMIT;
+    const newRecentSearches = isLimitReached ? recentSearches.slice(0, RECENT_SEARCHES_LIMIT - 1) : recentSearches;
     const alreadyExists = newRecentSearches.findIndex((recentSearch) => recentSearch.id === suggestion.id);
 
     if (alreadyExists > -1) {
@@ -48,6 +52,10 @@ export function useSearch() {
 
     newRecentSearches.unshift(suggestion);
     setRecentSearches(newRecentSearches);
+  }
+
+  function removeAllRecentSearches() {
+    setRecentSearches([]);
   }
 
   return {
@@ -61,5 +69,6 @@ export function useSearch() {
     showRecentSearches,
     showPokemonGroup,
     showNoResults,
+    removeAllRecentSearches,
   };
 }

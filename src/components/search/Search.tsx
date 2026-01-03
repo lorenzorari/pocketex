@@ -4,6 +4,7 @@ import { IconSearch } from '@tabler/icons-react';
 import { Command, CommandEmpty, CommandHeader, CommandInput, CommandList, CommandLoading } from '@/components/Command';
 import { useSearch } from '@/components/search/hooks/useSearch';
 import { PokemonGroup } from '@/components/search/PokemonGroup';
+import { RecentSearchGroup } from '@/components/search/RecentSearchGroup';
 
 export default function Search() {
   const {
@@ -16,6 +17,7 @@ export default function Search() {
     showRecentSearches,
     showPokemonGroup,
     showNoResults,
+    removeAllRecentSearches,
   } = useSearch();
 
   return (
@@ -31,12 +33,15 @@ export default function Search() {
         {!query && recentSearches.length === 0 && <CommandEmpty>No recent searches</CommandEmpty>}
 
         {showRecentSearches && (
-          <PokemonGroup pokemons={recentSearches} groupTitle="Recent searches" handleSelect={handleSelect} />
+          <RecentSearchGroup
+            onDeleteAll={removeAllRecentSearches}
+            pokemons={recentSearches}
+            groupTitle="Recent searches"
+            onSelect={handleSelect}
+          />
         )}
 
-        {showPokemonGroup && (
-          <PokemonGroup pokemons={filteredPokemons} groupTitle="Pokémon" handleSelect={handleSelect} />
-        )}
+        {showPokemonGroup && <PokemonGroup pokemons={filteredPokemons} groupTitle="Pokémon" onSelect={handleSelect} />}
       </CommandList>
     </Command>
   );

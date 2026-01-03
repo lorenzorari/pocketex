@@ -37,7 +37,20 @@ const CommandGroup = ({ className, ...props }: ComponentProps<typeof CommandPrim
 );
 
 const CommandItem = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Item>) => (
-  <CommandPrimitive.Item className={cn('rounded-md data-[selected=true]:bg-gray-700', className)} {...props} />
+  <CommandPrimitive.Item
+    className={cn('cursor-pointer rounded-md px-3 py-2 select-none data-[selected=true]:bg-gray-700', className)}
+    {...props}
+  />
+);
+
+const CommandSubItem = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Item>) => (
+  <CommandItem
+    className={cn(
+      'relative ml-11 before:absolute before:-left-5 before:w-[1px] before:bg-gray-500 not-first:before:inset-y-0 first:before:top-1 first:before:bottom-0 last:before:bottom-1 data-[selected=true]:text-white',
+      className,
+    )}
+    {...props}
+  />
 );
 
 const CommandLoading = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Loading>) => {
@@ -46,4 +59,14 @@ const CommandLoading = ({ className, ...props }: ComponentProps<typeof CommandPr
   return <CommandPrimitive.Loading className={cn('px-3 py-2', className)} {...props} />;
 };
 
-export { Command, CommandHeader, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandLoading };
+export {
+  Command,
+  CommandHeader,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandLoading,
+  CommandSubItem,
+};
