@@ -16,7 +16,7 @@ export function RecentSearchGroup({ pokemons, groupTitle, onSelect, onDeleteAll 
       {pokemons.map((pokemon) => (
         <PokemonCmdItem key={pokemon.id} pokemon={pokemon} onSelect={() => onSelect(pokemon)} />
       ))}
-      <div className="text-gray-400">
+      <div>
         <CommandSubItem onSelect={onDeleteAll}>Delete all recent searches</CommandSubItem>
       </div>
     </CommandGroup>
