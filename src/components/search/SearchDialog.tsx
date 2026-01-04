@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useEventListener } from 'usehooks-ts';
+import { useEventListener, useScrollLock } from 'usehooks-ts';
 import ClientOnlyPortal from '@/components/ClientOnlyPortal';
 import { CommandDialog } from '@/components/Command';
 import Search from '@/components/search/Search';
@@ -14,12 +14,28 @@ interface Props {
 export default function SearchDialog({ children }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { lock, unlock, isLocked } = useScrollLock({ autoLock: false });
+
   useEventListener('keydown', (e) => {
     if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
-      setIsOpen((open) => !open);
+      const newIsOpen = !isOpen;
+
+      if (newIsOpen) lock();
+      else unlock();
+
+      setIsOpen(newIsOpen);
     }
   });
+
+  function handleOpenChange(value: boolean) {
+    const newIsOpen = !value;
+
+    if (newIsOpen) lock();
+    else unlock();
+
+    setIsOpen(newIsOpen);
+  }
 
   return (
     <>
@@ -31,7 +47,7 @@ export default function SearchDialog({ children }: Props) {
             'z-50 opacity-100': isOpen,
           })}
         >
-          <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
+          <CommandDialog open={isOpen} onOpenChange={handleOpenChange}>
             <Search />
           </CommandDialog>
         </div>

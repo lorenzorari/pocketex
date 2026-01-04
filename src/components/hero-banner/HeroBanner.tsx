@@ -32,7 +32,7 @@ const HeroBanner = (props: Props) => {
             </h1>
           </div>
           <div className="flex gap-2">
-            <SearchTrigger />
+            <SearchTrigger className="animate-fade-in opacity-0 [animation-delay:1s]" />
             {/* <button className="group flex size-[40px] items-center justify-center rounded-full bg-white text-gray-400 transition-all hover:text-black">
               <IconPokeball className="group-hover:animate-wiggle" />
             </button> */}
