@@ -1,5 +1,4 @@
-import { type PokemonAutocompleteItem } from '@/components/autocomplete/types';
-import { POKEMON_QUANTITY } from '@/constants';
+import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';
@@ -51,15 +50,8 @@ const getPokemonCard = async (id: string): Promise<PokemonCardInfo | null> => {
   };
 };
 
-const getAllPokemons = async (offset?: number, limit?: number): Promise<PokemonPagination> => {
-  const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
-  const url = `pokemon${params}`;
-
-  return await pokeapi<PokemonPagination>(url);
-};
-
-const getPokemonAutocompleteItems = async () => {
-  const { results } = await getAllPokemons(undefined, POKEMON_QUANTITY);
+const getAllPokemons = async () => {
+  const { results } = await pokeapi<PokemonPagination>(`pokemon?limit=9999`);
 
   if (!results) return [];
 
@@ -70,7 +62,7 @@ const getPokemonAutocompleteItems = async () => {
       id,
       name,
       imageUrl: getArtworkUrl(id),
-    } as PokemonAutocompleteItem;
+    } as PokemonSearchItem;
   });
 };
 
@@ -95,4 +87,4 @@ export async function getPokemonCardPagination(offset?: number, limit?: number) 
   return { pokemons, next, previous, count } as PokemonByGeneration;
 }
 
-export { getPokemon, getPokemonCard, getAllPokemons, getPokemonAutocompleteItems };
+export { getPokemon, getPokemonCard, getAllPokemons };

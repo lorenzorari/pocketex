@@ -20,8 +20,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Base stats\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Evolution chain\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Forms\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Go to previous/next Pokémon\
-⌛️ Search\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Go to previous/next Pokémon\
+✅ Search\
 ⌛️ Dark mode\
 ⌛️ Languages
 

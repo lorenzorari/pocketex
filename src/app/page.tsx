@@ -7,5 +7,4 @@ export default function HomePage() {
       <HeroBanner heading="Pocketex" />
     </HomeLayout>
   );
-};
-
+}
