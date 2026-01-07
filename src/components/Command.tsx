@@ -7,7 +7,7 @@ import { cn } from '@/utils/classnames';
 
 const Command = ({ className, ...props }: ComponentProps<typeof CommandPrimitive>) => (
   <CommandPrimitive
-    className={cn('h-full bg-white md:h-auto md:max-h-[90%] md:rounded-[calc(6px+8px)]', className)}
+    className={cn('flex w-full flex-col overflow-hidden rounded-[calc(6px+8px)] bg-white', className)}
     {...props}
   />
 );
@@ -24,7 +24,7 @@ const CommandInput = ({ className, ...props }: ComponentProps<typeof CommandPrim
 );
 
 const CommandList = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.List>) => (
-  <CommandPrimitive.List className={cn('p-2', className)} {...props} />
+  <CommandPrimitive.List className={cn('overflow-auto p-2', className)} {...props} />
 );
 
 const CommandEmpty = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Empty>) => (
@@ -89,7 +89,7 @@ const CommandDialog = ({
       </VisuallyHidden>
       <DialogContent
         className={cn(
-          'absolute inset-y-0 w-full max-w-3xl md:top-[10%] md:left-1/2 md:h-fit md:-translate-x-1/2',
+          'absolute inset-x-4 top-4 flex max-h-[90%] overflow-hidden md:top-[10%] md:mx-auto md:max-h-[80%] md:w-full md:max-w-2xl',
           className,
         )}
       >
