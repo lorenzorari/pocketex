@@ -2,7 +2,8 @@ import { useRouter } from 'next/navigation';
 import { useState, useMemo } from 'react';
 import useSWR from 'swr';
 import { useLocalStorage } from 'usehooks-ts';
-import { getAllPokemons, type PokemonSearchItem } from '@/services/pokemon';
+import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
+import { getAllPokemons } from '@/services/pokemon';
 
 const POKEMON_QUANTITY_LIMIT = 10;
 const RECENT_SEARCHES_LIMIT = 8;
