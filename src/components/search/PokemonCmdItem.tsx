@@ -1,10 +1,10 @@
-import { type PokemonAutocompleteItem } from '@/components/autocomplete/types';
 import { CommandItem } from '@/components/Command';
+import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
 import { Image } from '@/components/ui/Image';
 import { getPokemonNumber } from '@/helpers/getPokemonNumber';
 
 interface Props {
-  pokemon: PokemonAutocompleteItem;
+  pokemon: PokemonSearchItem;
   onSelect: () => void;
 }
 

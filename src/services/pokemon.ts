@@ -1,3 +1,4 @@
+import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';
@@ -20,12 +21,6 @@ export interface PokemonByGeneration {
   next: string | null;
   count: number;
   previous: string | null;
-}
-
-export interface PokemonSearchItem {
-  id: number;
-  name: string;
-  imageUrl: string;
 }
 
 const getPokemon = async (id: string): Promise<Pokemon | null> => {

@@ -1,12 +1,12 @@
-import { type PokemonAutocompleteItem } from '@/components/autocomplete/types';
 import { CommandGroup } from '@/components/Command';
+import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
 import { PokemonCmdItem } from '@/components/search/PokemonCmdItem';
 import { type BaseComponent } from '@/models/utils';
 
 interface Props {
-  pokemons: PokemonAutocompleteItem[];
+  pokemons: PokemonSearchItem[];
   groupTitle: string;
-  onSelect: (pokemon: PokemonAutocompleteItem) => void;
+  onSelect: (pokemon: PokemonSearchItem) => void;
 }
 
 export function PokemonGroup({ pokemons, groupTitle, onSelect }: BaseComponent<Props>) {
