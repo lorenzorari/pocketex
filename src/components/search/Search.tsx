@@ -23,7 +23,7 @@ export default function Search() {
     isNavigationPending,
   } = useSearch();
 
-  if (!isNavigationPending)
+  if (isNavigationPending)
     return (
       <ClientOnlyPortal selector="#search-dialog-overlay">
         <SearchLoader />
