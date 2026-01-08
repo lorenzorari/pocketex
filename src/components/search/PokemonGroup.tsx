@@ -5,13 +5,12 @@ import { type BaseComponent } from '@/models/utils';
 
 interface Props {
   pokemons: PokemonSearchItem[];
-  groupTitle: string;
   onSelect: (pokemon: PokemonSearchItem) => void;
 }
 
-export function PokemonGroup({ pokemons, groupTitle, onSelect }: BaseComponent<Props>) {
+export function PokemonGroup({ pokemons, onSelect }: BaseComponent<Props>) {
   return (
-    <CommandGroup heading={groupTitle}>
+    <CommandGroup heading="Pokémon">
       {pokemons.map((pokemon) => (
         <PokemonCmdItem key={pokemon.id} pokemon={pokemon} onSelect={() => onSelect(pokemon)} />
       ))}

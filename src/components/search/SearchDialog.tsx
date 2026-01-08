@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useEventListener, useScrollLock } from 'usehooks-ts';
-import ClientOnlyPortal from '@/components/ClientOnlyPortal';
+import { ClientOnlyPortal } from '@/components/ClientOnlyPortal';
 import { CommandDialog } from '@/components/Command';
 import { Overlay } from '@/components/dialog/Overlay';
 import Search from '@/components/search/Search';
@@ -36,7 +36,7 @@ export default function SearchDialog({ children }: Props) {
       {children({ isOpen, setIsOpen })}
 
       <ClientOnlyPortal selector="body">
-        <Overlay className={cn('opacity-0', { 'z-50 opacity-100': isOpen })}>
+        <Overlay id="search-dialog-overlay" className={cn('opacity-0', { 'z-50 opacity-100': isOpen })}>
           <CommandDialog open={isOpen} onOpenChange={handleOpenChange}>
             <Search />
           </CommandDialog>

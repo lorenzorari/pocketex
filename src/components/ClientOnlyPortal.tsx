@@ -6,7 +6,7 @@ interface Props {
   selector: string;
 }
 
-export default function ClientOnlyPortal({ children, selector }: Props) {
+export function ClientOnlyPortal({ children, selector }: Props) {
   const ref = useRef<Element>(null);
   const [mounted, setMounted] = useState(false);
 

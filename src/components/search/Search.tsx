@@ -1,10 +1,12 @@
 'use client';
 
 import { IconSearch } from '@tabler/icons-react';
+import { ClientOnlyPortal } from '@/components/ClientOnlyPortal';
 import { Command, CommandEmpty, CommandHeader, CommandInput, CommandList, CommandLoading } from '@/components/Command';
 import { useSearch } from '@/components/search/hooks/useSearch';
 import { PokemonGroup } from '@/components/search/PokemonGroup';
 import { RecentSearchGroup } from '@/components/search/RecentSearchGroup';
+import { SearchLoader } from '@/components/search/SearchLoader';
 
 export default function Search() {
   const {
@@ -18,7 +20,15 @@ export default function Search() {
     showPokemonGroup,
     showNoResults,
     removeAllRecentSearches,
+    isNavigationPending,
   } = useSearch();
+
+  if (!isNavigationPending)
+    return (
+      <ClientOnlyPortal selector="#search-dialog-overlay">
+        <SearchLoader />
+      </ClientOnlyPortal>
+    );
 
   return (
     <Command label="Search" shouldFilter={false}>
@@ -31,14 +41,9 @@ export default function Search() {
         {showNoResults && <CommandEmpty>No results found</CommandEmpty>}
         {!query && recentSearches.length === 0 && <CommandEmpty>No recent searches</CommandEmpty>}
         {showRecentSearches && (
-          <RecentSearchGroup
-            onDeleteAll={removeAllRecentSearches}
-            pokemons={recentSearches}
-            groupTitle="Recent searches"
-            onSelect={handleSelect}
-          />
+          <RecentSearchGroup onDeleteAll={removeAllRecentSearches} pokemons={recentSearches} onSelect={handleSelect} />
         )}
-        {showPokemonGroup && <PokemonGroup pokemons={filteredPokemons} groupTitle="Pokémon" onSelect={handleSelect} />}
+        {showPokemonGroup && <PokemonGroup pokemons={filteredPokemons} onSelect={handleSelect} />}
       </CommandList>
     </Command>
   );
