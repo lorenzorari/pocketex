@@ -1,3 +1,0 @@
-const POKEMON_QUANTITY = 898;
-
-export { POKEMON_QUANTITY };

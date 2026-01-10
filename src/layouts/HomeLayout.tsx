@@ -1,14 +1,11 @@
-import { Navbar } from "./Navbar";
+import { type WithChildren } from '@/models/utils';
+import { Navbar } from './Navbar';
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export function HomeLayout({ children }: Props) {
+export function HomeLayout({ children }: WithChildren) {
   return (
-    <>
+    <body className="bg-primary">
       <Navbar isHome />
       <main className="mx-auto -mt-[80px]">{children}</main>
-    </>
+    </body>
   );
 }

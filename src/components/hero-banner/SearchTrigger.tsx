@@ -5,11 +5,12 @@ import { cn } from '@/utils/classnames';
 
 interface Props {
   isIcon?: boolean;
+  withTransparentOverlay?: boolean;
 }
 
-export function SearchTrigger({ isIcon = false, className }: BaseComponent<Props>) {
+export function SearchTrigger({ isIcon = false, className, withTransparentOverlay = false }: BaseComponent<Props>) {
   return (
-    <SearchDialog>
+    <SearchDialog withTransparentOverlay={withTransparentOverlay}>
       {({ setIsOpen }) => (
         <button
           className={cn(
