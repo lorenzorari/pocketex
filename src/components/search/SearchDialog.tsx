@@ -10,7 +10,7 @@ import { cn } from '@/utils/classnames';
 
 interface Props {
   withTransparentOverlay?: boolean;
-  children(props: { isOpen: boolean; setIsOpen: (isOpen: boolean) => void }): React.ReactNode;
+  children(props: { isOpen: boolean; onOpenChange: (isOpen: boolean) => void }): React.ReactNode;
 }
 
 export default function SearchDialog({ children, withTransparentOverlay = false }: Props) {
@@ -34,7 +34,7 @@ export default function SearchDialog({ children, withTransparentOverlay = false 
 
   return (
     <>
-      {children({ isOpen, setIsOpen })}
+      {children({ isOpen, onOpenChange: handleOpenChange })}
 
       <ClientOnlyPortal selector="body">
         <Overlay
