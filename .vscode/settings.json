@@ -7,5 +7,6 @@
   "eslint.useFlatConfig": true,
   "eslint.enable": true,
   "eslint.alwaysShowStatus": true,
-  "eslint.validate": ["vue", "html", "javascript", "typescript", "javascriptreact", "typescriptreact"]
+  "eslint.validate": ["vue", "html", "javascript", "typescript", "javascriptreact", "typescriptreact"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
