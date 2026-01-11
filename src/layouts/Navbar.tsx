@@ -21,7 +21,7 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
       className={cn(
         'sticky top-0 z-20 mx-auto bg-white px-5 py-6 md:border-b md:border-b-[#ffffff4d] md:bg-white/65 md:backdrop-blur-xl lg:px-10 xl:px-32 2xl:max-w-[1440px]',
         {
-          'animate-fade-in relative border-none bg-transparent opacity-0 backdrop-blur-none [animation-delay:1.5s] md:bg-transparent':
+          'animate-fade-in relative border-none bg-transparent opacity-0 backdrop-blur-none [animation-delay:1.5s] md:bg-transparent md:backdrop-blur-none':
             isHome,
         },
       )}
