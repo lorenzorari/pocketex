@@ -3,9 +3,11 @@ layer(base);
 
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   button:not(:disabled),
-  [role="button"]:not(:disabled) {
+  [role='button']:not(:disabled) {
     cursor: pointer;
   }
 }
@@ -13,6 +15,11 @@ layer(base);
 @theme {
   --color-primary: var(--color-primary);
   --color-black: var(--color-black);
+  --color-foreground: #3f3f3f;
+  --color-background: white;
+
+  --color-muted-foreground: var(--color-gray-400);
+  --color-muted-background: var(--color-gray-200);
 
   --color-bug-1: var(--color-bug-1);
   --color-bug-2: var(--color-bug-2);
@@ -159,11 +166,19 @@ html {
       / ([maximum viewport width] - [minimum viewport width]))
   */
   /* font-size: calc(8px + (16 - 8) * ((100vw - 320px) / (1536 - 320))); */
-  font-family: "Urbanist", sans-serif;
+  font-family: 'Urbanist', sans-serif;
+
+  &.dark {
+    --color-background: var(--color-black);
+    --color-foreground: var(--color-white);
+    --color-muted-foreground: var(--color-gray-100);
+    --color-muted-background: hsl(0 0% 32% / 1);
+  }
 }
 
 body {
-  color: var(--color-black);
+  color: var(--color-foreground);
+  background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

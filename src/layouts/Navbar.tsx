@@ -19,7 +19,7 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
   return (
     <header
       className={cn(
-        'sticky top-0 z-20 mx-auto bg-white px-5 py-6 md:border-b md:border-b-[#ffffff4d] md:bg-white/65 md:backdrop-blur-xl lg:px-10 xl:px-32 2xl:max-w-[1440px]',
+        'bg-background md:bg-background/65 sticky top-0 z-20 mx-auto px-5 py-6 md:border-b md:border-b-[#ffffff4d] md:backdrop-blur-xl lg:px-10 xl:px-32 2xl:max-w-[1440px] dark:md:border-b-transparent',
         {
           'animate-fade-in relative border-none bg-transparent opacity-0 backdrop-blur-none [animation-delay:1.5s] md:bg-transparent md:backdrop-blur-none':
             isHome,
@@ -43,7 +43,7 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
             <Link
               href="/explore"
               className={cn(
-                'text-sm text-gray-400 underline-offset-4 transition-all hover:text-black hover:underline',
+                'hover:text-foreground text-muted-foreground text-sm underline-offset-4 transition-all hover:underline',
                 {
                   'text-white/88 hover:text-white': isHome,
                 },
@@ -56,7 +56,7 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
             <Link target="_blank" href={{ pathname: GITHUB_LINK }}>
               <IconBrandGithub
                 stroke={1.2}
-                className={cn('text-gray-400 transition-all hover:text-black', {
+                className={cn('hover:text-foreground text-muted-foreground transition-all', {
                   'text-white/88 hover:text-white': isHome,
                 })}
               />
