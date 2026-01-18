@@ -59,7 +59,7 @@ const DetailsPage = async ({ params }: Props) => {
         <>
           <PokemonDetailHero genus={genus} pokemon={pokemon} pokemonTypes={pokemonTypes} description={description} />
           {species && (
-            <div className="relative z-10 rounded-t-[40px] bg-white py-10 shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)] lg:-mt-16 lg:py-[60px]">
+            <div className="bg-background relative z-10 rounded-t-[40px] py-10 shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)] lg:-mt-16 lg:py-[60px]">
               <div className="px-5 lg:px-10 xl:px-32">
                 <EvolutionChainPanel evolutionChainUrl={species.evolutionChain?.url} />
                 <div className="grid gap-10 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">

@@ -20,7 +20,7 @@ export function SiblingLink({ href, title, subtitle, imgSrc, direction = 'left',
     <Link
       href={href}
       className={cn(
-        'group flex items-center gap-2 rounded-lg px-4 py-2 transition-all hover:bg-gray-200 sm:justify-between',
+        'group dark:hover:bg-muted-background flex items-center gap-2 rounded-lg px-4 py-2 transition-all hover:bg-gray-200 sm:justify-between',
         { 'justify-end': isRight },
         className,
       )}
