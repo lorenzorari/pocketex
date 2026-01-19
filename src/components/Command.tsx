@@ -7,18 +7,21 @@ import { cn } from '@/utils/classnames';
 
 const Command = ({ className, ...props }: ComponentProps<typeof CommandPrimitive>) => (
   <CommandPrimitive
-    className={cn('flex w-full flex-col overflow-hidden rounded-[calc(6px+8px)] bg-white', className)}
+    className={cn(
+      'bg-background dark:border-muted-background flex w-full flex-col overflow-hidden rounded-[calc(6px+8px)] dark:border',
+      className,
+    )}
     {...props}
   />
 );
 
 const CommandHeader = ({ className, ...props }: BaseComponentWithChildren) => (
-  <div className={cn('border-b border-b-gray-200 px-5', className)} {...props} />
+  <div className={cn('border-b-muted-background border-b px-5', className)} {...props} />
 );
 
 const CommandInput = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Input>) => (
   <CommandPrimitive.Input
-    className={cn('w-full rounded-md py-3 outline-none placeholder:text-gray-400', className)}
+    className={cn('placeholder:text-muted-foreground w-full rounded-md py-3 outline-none', className)}
     {...props}
   />
 );
@@ -34,7 +37,7 @@ const CommandEmpty = ({ className, ...props }: ComponentProps<typeof CommandPrim
 const CommandGroup = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Group>) => (
   <CommandPrimitive.Group
     className={cn(
-      'not-last:mb-4 [&>[cmdk-group-heading]]:mb-1 [&>[cmdk-group-heading]]:px-3 [&>[cmdk-group-heading]]:text-sm [&>[cmdk-group-heading]]:text-gray-400',
+      '[&>[cmdk-group-heading]]:text-muted-foreground not-last:mb-4 [&>[cmdk-group-heading]]:mb-1 [&>[cmdk-group-heading]]:px-3 [&>[cmdk-group-heading]]:text-sm',
       className,
     )}
     {...props}
@@ -44,7 +47,7 @@ const CommandGroup = ({ className, ...props }: ComponentProps<typeof CommandPrim
 const CommandItem = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Item>) => (
   <CommandPrimitive.Item
     className={cn(
-      'cursor-pointer rounded-md px-3 py-2 text-gray-400 select-none data-[selected=true]:bg-gray-200/75 data-[selected=true]:text-black',
+      'text-muted-foreground data-[selected=true]:bg-muted-background data-[selected=true]:text-foreground cursor-pointer rounded-md px-3 py-2 select-none',
       className,
     )}
     {...props}
@@ -54,7 +57,7 @@ const CommandItem = ({ className, ...props }: ComponentProps<typeof CommandPrimi
 const CommandSubItem = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Item>) => (
   <CommandItem
     className={cn(
-      'relative ml-11 before:absolute before:-left-5 before:w-[1px] before:bg-gray-200 not-first:before:inset-y-0 first:before:top-1 first:before:bottom-0 last:before:bottom-1',
+      'before:bg-muted-background relative ml-11 before:absolute before:-left-5 before:w-[1px] not-first:before:inset-y-0 first:before:top-1 first:before:bottom-0 last:before:bottom-1',
       className,
     )}
     {...props}
