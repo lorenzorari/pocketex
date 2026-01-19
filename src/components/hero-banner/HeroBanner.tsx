@@ -17,11 +17,11 @@ const HeroBanner = (props: Props) => {
   };
 
   return (
-    <section className="bg-primary relative h-screen">
+    <section className="bg-primary relative h-screen dark:bg-black">
       <Particles
         className="animate-scale-up absolute inset-0 opacity-0 [animation-delay:2s]"
         init={initParticles as any}
-        options={tsparticlesOptions}
+        options={tsparticlesOptions(true)}
       />
 
       <div className="flex h-full items-center justify-center">

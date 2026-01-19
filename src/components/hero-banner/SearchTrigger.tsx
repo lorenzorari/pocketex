@@ -14,9 +14,9 @@ export function SearchTrigger({ isIcon = false, className, withTransparentOverla
       {({ onOpenChange }) => (
         <button
           className={cn(
-            'flex grow items-center gap-2 rounded-full bg-white px-5 py-2 text-left text-gray-400',
+            'dark:bg-muted-background text-muted-foreground flex grow items-center gap-2 rounded-full bg-white px-5 py-2 text-left',
             {
-              'group hover:text-foreground dark:text-muted-foreground bg-transparent p-0 transition md:border md:border-gray-200 md:px-3 md:py-1.5 md:hover:border-gray-400 dark:md:border-gray-500':
+              'group hover:text-foreground dark:text-muted-foreground bg-transparent p-0 transition md:border md:border-gray-200 md:px-3 md:py-1.5 md:hover:border-gray-400 dark:bg-transparent dark:md:border-gray-500':
                 isIcon,
             },
             className,
