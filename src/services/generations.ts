@@ -3,7 +3,7 @@ import { api, pokeapi } from '@/helpers/http';
 import { type Generation } from '@/models/generation';
 import { type PokemonByGeneration } from '@/services/pokemon';
 import { capitalize } from '@/utils/capitalize';
-import { type PokemonPagination } from '../models/pokemon/pagination';
+import { type PaginationResult } from '../models/pokemon/pagination';
 
 export type GenerationListItem = {
   label: string;
@@ -25,7 +25,7 @@ const getGeneration = async (id: number): Promise<Generation | null> => {
 };
 
 const getGenerationListItems = async (): Promise<GenerationListItem[]> => {
-  const { results } = await pokeapi<PokemonPagination>('generation');
+  const { results } = await pokeapi<PaginationResult>('generation');
 
   return (results || []).map(({ name, url }) => ({ label: formatGenerationName(name), id: getIdFromResourceUrl(url) }));
 };

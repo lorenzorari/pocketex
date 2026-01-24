@@ -1,6 +1,5 @@
 import { getDocumentTitle } from '@/helpers/getDocumentTitle';
 import { getPokemon } from '@/services/pokemon';
-import { capitalize } from '@/utils/capitalize';
 
 interface Params {
   id: string;
@@ -15,7 +14,7 @@ export async function generateMetadata({ params }: Props) {
   const { id } = await params;
 
   const pokemon = await getPokemon(id);
-  const capitalizedName = pokemon?.name ? capitalize(pokemon.name) : undefined;
+  const capitalizedName = pokemon?.formattedName ?? undefined;
 
   return {
     title: getDocumentTitle(capitalizedName),

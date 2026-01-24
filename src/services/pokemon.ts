@@ -1,18 +1,16 @@
-import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
-import { getArtworkUrl } from '@/helpers/get-artwork-url';
+import { getFormattedPokemonName } from '@/helpers/get-formatted-pokemon-name';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';
 import { pokeapi } from '@/helpers/http';
 import { type NamedAPIResource } from '@/models/named-api-resource';
 import { type Pokemon } from '@/models/pokemon';
-import { type PokemonPagination } from '@/models/pokemon/pagination';
 import { type PokemonType } from '@/models/pokemon/type';
 import { getSpeciesPagination } from '@/services/species';
-import { capitalize } from '@/utils/capitalize';
 
 export interface PokemonCardInfo {
   id: number;
   name: string;
+  url: string;
   types: PokemonType[];
 }
 
@@ -27,7 +25,7 @@ const getPokemon = async (id: string): Promise<Pokemon | null> => {
   try {
     const pokemonData = await pokeapi<Pokemon>(`pokemon/${id}`);
 
-    pokemonData.name = capitalize(pokemonData?.name ?? '');
+    pokemonData.formattedName = getFormattedPokemonName(pokemonData.name);
     pokemonData.height = getAnthropometry(pokemonData.height ?? -1);
     pokemonData.weight = getAnthropometry(pokemonData.weight ?? -1);
 
@@ -44,26 +42,11 @@ const getPokemonCard = async (id: string): Promise<PokemonCardInfo | null> => {
   if (!pokemonData) return null;
 
   return {
-    name: pokemonData.name ?? '???',
     id: pokemonData.id,
+    name: pokemonData.formattedName ?? '???',
+    url: `/pokemon/${pokemonData.name}`,
     types: pokemonData.types ?? [],
   };
-};
-
-const getAllPokemons = async () => {
-  const { results } = await pokeapi<PokemonPagination>(`pokemon?limit=9999`);
-
-  if (!results) return [];
-
-  return results.map(({ name, url }) => {
-    const id = getIdFromResourceUrl(url);
-
-    return {
-      id,
-      name,
-      imageUrl: getArtworkUrl(id),
-    } as PokemonSearchItem;
-  });
 };
 
 export async function loadPokemonCards(data: NamedAPIResource[] | undefined) {
@@ -87,4 +70,4 @@ export async function getPokemonCardPagination(offset?: number, limit?: number) 
   return { pokemons, next, previous, count } as PokemonByGeneration;
 }
 
-export { getPokemon, getPokemonCard, getAllPokemons };
+export { getPokemon, getPokemonCard };

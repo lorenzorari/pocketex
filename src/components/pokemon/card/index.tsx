@@ -3,12 +3,12 @@ import PokemonBackgroundImage from '@/components/pokemon/card/background-image';
 import PokemonCardId from '@/components/pokemon/card/id';
 import PokemonCardTitle from '@/components/pokemon/card/title';
 import TypeTag from '@/components/type-tag';
-import { type Pokemon } from '@/models/pokemon';
+import { type PokemonCardInfo } from '@/services/pokemon';
 import { cn } from '@/utils/classnames';
 import PokemonCardImage from './image';
 
 interface Props {
-  pokemon: Pokemon;
+  pokemon: PokemonCardInfo;
   className?: string;
   onClick?: () => void;
 }

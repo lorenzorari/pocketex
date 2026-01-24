@@ -1,6 +1,6 @@
 import { type NamedAPIResources } from './../named-api-resource';
 
-export interface PokemonPagination {
+export interface PaginationResult {
   count?: number;
   next: string | null;
   previous: string | null;

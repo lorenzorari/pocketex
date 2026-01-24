@@ -3,10 +3,10 @@
 import { IconSearch } from '@tabler/icons-react';
 import { ClientOnlyPortal } from '@/components/ClientOnlyPortal';
 import { Command, CommandEmpty, CommandHeader, CommandInput, CommandList, CommandLoading } from '@/components/Command';
-import { useSearch } from '@/components/search/hooks/useSearch';
-import { PokemonGroup } from '@/components/search/PokemonGroup';
-import { RecentSearchGroup } from '@/components/search/RecentSearchGroup';
-import { SearchLoader } from '@/components/search/SearchLoader';
+import { useSearch } from '@/features/search/hooks/useSearch';
+import { PokemonGroup } from '@/features/search/PokemonGroup';
+import { RecentSearchGroup } from '@/features/search/RecentSearchGroup';
+import { SearchLoader } from '@/features/search/SearchLoader';
 
 export default function Search() {
   const {
