@@ -1,4 +1,4 @@
-import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
+import { type PokemonSearchItem } from '@/features/search/models/PokemonSearchItem';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { getAnthropometry } from '@/helpers/getAnthropometry';

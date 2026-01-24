@@ -1,6 +1,6 @@
 import { CommandGroup } from '@/components/Command';
-import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
-import { PokemonCmdItem } from '@/components/search/PokemonCmdItem';
+import { type PokemonSearchItem } from '@/features/search/models/PokemonSearchItem';
+import { PokemonCmdItem } from '@/features/search/PokemonCmdItem';
 import { type BaseComponent } from '@/models/utils';
 
 interface Props {

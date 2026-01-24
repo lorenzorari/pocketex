@@ -1,6 +1,6 @@
 import { CommandItem } from '@/components/Command';
-import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
 import { Image } from '@/components/ui/Image';
+import { type PokemonSearchItem } from '@/features/search/models/PokemonSearchItem';
 import { getPokemonNumber } from '@/helpers/getPokemonNumber';
 
 interface Props {
