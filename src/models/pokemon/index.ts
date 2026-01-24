@@ -9,6 +9,7 @@ import { type PokemonType } from './type';
 export interface Pokemon {
   id: number;
   name: string;
+  formattedName?: string;
   baseExperience?: number;
   height?: number;
   isDefault?: boolean;

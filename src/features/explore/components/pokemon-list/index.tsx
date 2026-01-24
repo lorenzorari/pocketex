@@ -42,7 +42,7 @@ const PokemonList = ({ initialValue, generation }: Props) => {
 
           {pagination?.map((page) =>
             page.pokemons.map((pokemon) => (
-              <Link key={pokemon.id} href={`/pokemon/${pokemon.name?.toLowerCase()}`}>
+              <Link key={pokemon.id} href={pokemon.url}>
                 <PokemonCard className="transition-all will-change-transform hover:scale-105" pokemon={pokemon} />
               </Link>
             )),

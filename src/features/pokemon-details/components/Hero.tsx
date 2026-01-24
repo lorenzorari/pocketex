@@ -25,7 +25,7 @@ export const PokemonDetailHero = ({ pokemon, pokemonTypes, description, genus }:
               <PokemonTypeBadge key={type} variant={type} withLabel />
             ))}
           </div>
-          <h1 className="mt-3 mb-4 text-5xl font-bold lg:text-7xl">{pokemon?.name}</h1>
+          <h1 className="mt-3 mb-4 text-5xl font-bold lg:text-7xl">{pokemon?.formattedName}</h1>
           <h2 className="text-4xl font-light md:mb-10 lg:text-5xl">{pokemonNumber}</h2>
           <p className="mb-6 hidden md:block">{description}</p>
         </div>

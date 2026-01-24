@@ -3,6 +3,7 @@
 import { Root } from '@radix-ui/react-slot';
 import { Image } from '@/components/ui/Image';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
+import { getFormattedPokemonName } from '@/helpers/get-formatted-pokemon-name';
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { type EvolutionDetail } from '@/models/evolution/detail';
 import { type NamedAPIResource } from '@/models/named-api-resource';
@@ -29,7 +30,7 @@ export function EvolutionNode({ name, url, details, hasParent = true, isFirstChi
               <picture className="block size-[48px] text-xs">
                 <Image src={imageUrl} alt={name} />
               </picture>
-              <h3 className="capitalize md:text-lg">{name}</h3>
+              <h3 className="md:text-lg">{getFormattedPokemonName(name)}</h3>
             </article>
           </a>
           {hasParent && (

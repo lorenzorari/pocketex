@@ -1,5 +1,5 @@
 import { pokeapi } from '@/helpers/http';
-import { type PokemonPagination } from '@/models/pokemon/pagination';
+import { type PaginationResult } from '@/models/pokemon/pagination';
 import { type Species } from '@/models/species';
 
 type GetSpeciesData = {
@@ -46,11 +46,11 @@ const getDescription = (species: Species) => {
     .replace(/(\r\n|\n|\r)/gm, ' ');
 };
 
-export async function getSpeciesPagination(offset: number = 0, limit: number = 20) {
+export async function getSpeciesPagination(offset: number = 0, limit: number = 20): Promise<PaginationResult> {
   const params = offset || limit ? `?offset=${offset}&limit=${limit}` : '';
   const url = `${BASE_URL}${params}`;
 
-  const res = await pokeapi<PokemonPagination>(url);
+  const res = await pokeapi<PaginationResult>(url);
 
   if (res?.next) {
     res.next = res.next.split('v2')[1];
