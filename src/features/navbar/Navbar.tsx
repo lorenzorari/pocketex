@@ -4,6 +4,7 @@ import { IconBrandGithub } from '@tabler/icons-react';
 import Link from 'next/link';
 import { SearchTrigger } from '@/components/hero-banner/SearchTrigger';
 import { Logo } from '@/components/Logo';
+import { ThemeSwitcher } from '@/features/navbar/ThemeSwitcher';
 import { cn } from '@/utils/classnames';
 
 interface Props {
@@ -28,11 +29,12 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
     >
       <nav className="flex items-center justify-between">
         <Link href="/" className="inline-flex items-center gap-2 text-2xl font-bold">
-          <picture className="size-8" style={{ color: logoColor }}>
+          <div className="size-8" style={{ color: logoColor }}>
             <Logo className={cn('hover:animate-wiggle transition-opacity', isHome ? 'fill-white' : 'fill-current')} />
-          </picture>
+          </div>
           <span className="hidden md:inline">{isHome ? null : 'Pocketex'}</span>
         </Link>
+
         <ul className={cn('flex items-center gap-4', { 'text-white': isHome })}>
           {!isHome && (
             <li>
@@ -52,14 +54,22 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
               Explore
             </Link>
           </li>
+          <div className="bg-muted-background h-6 w-[1px]" />
           <li>
-            <Link target="_blank" href={{ pathname: GITHUB_LINK }}>
-              <IconBrandGithub
-                stroke={1.2}
-                className={cn('hover:text-foreground text-muted-foreground transition-all', {
+            <ThemeSwitcher />
+          </li>
+          <li>
+            <Link
+              target="_blank"
+              href={{ pathname: GITHUB_LINK }}
+              className={cn(
+                'hover:bg-muted-background hover:text-foreground text-muted-foreground inline-flex rounded-md p-1 align-middle transition-all',
+                {
                   'text-white/88 hover:text-white': isHome,
-                })}
-              />
+                },
+              )}
+            >
+              <IconBrandGithub stroke={1.2} />
             </Link>
           </li>
         </ul>
