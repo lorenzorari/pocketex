@@ -3,6 +3,11 @@
 import { IconDeviceLaptop, IconSun, IconMoon, IconPointFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { cn } from '@/utils/classnames';
+
+interface Props {
+  isHome?: boolean;
+}
 
 const ICON_STROKE = 1.2;
 const THEMES = ['system', 'light', 'dark'];
@@ -12,7 +17,7 @@ const THEME_ICONS = {
   dark: IconMoon,
 };
 
-export function ThemeSwitcher() {
+export function ThemeSwitcher({ isHome }: Props) {
   const [isMounted, setIsMounted] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -40,12 +45,16 @@ export function ThemeSwitcher() {
 
     if (isHover && isSystem) Icon = IconDeviceLaptop;
 
-    return <Icon className={!isHover && isSystem ? 'animate-fade-in' : ''} stroke={ICON_STROKE} />;
+    return <Icon className={cn('size-5', !isHover && isSystem ? 'animate-fade-in' : '')} stroke={ICON_STROKE} />;
   }
 
   return (
     <button
-      className="hover:bg-muted-background hover:text-foreground text-muted-foreground rounded-md p-1 align-middle transition-all"
+      className={cn(
+        'p-1.5 align-middle transition-all',
+        { 'text-white/88 hover:text-white': isHome },
+        { 'hover:text-foreground text-muted-foreground': !isHome },
+      )}
       onClick={handleClick}
       onMouseOver={() => setIsHover(true)}
       onMouseLeave={() => setTimeout(() => setIsHover(false), 500)}

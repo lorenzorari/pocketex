@@ -36,7 +36,7 @@ export function StatField({ label, range, rangeLimit = 255 }: Props) {
         {replaceDashesBySpaces(label)}
       </PanelLabel>
       <div className="flex items-center">
-        <span className="dark:bg-muted-background relative block h-[10px] w-full overflow-hidden rounded-full bg-gray-200">
+        <span className="bg-muted-background relative block h-[10px] w-full overflow-hidden rounded-full">
           {range.map((baseStat, index) => (
             <span
               key={index}

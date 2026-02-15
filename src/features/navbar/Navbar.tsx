@@ -4,6 +4,7 @@ import { IconBrandGithub } from '@tabler/icons-react';
 import Link from 'next/link';
 import { SearchTrigger } from '@/components/hero-banner/SearchTrigger';
 import { Logo } from '@/components/Logo';
+import { Button } from '@/components/ui/Button';
 import { ThemeSwitcher } from '@/features/navbar/ThemeSwitcher';
 import { cn } from '@/utils/classnames';
 
@@ -20,7 +21,7 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
   return (
     <header
       className={cn(
-        'bg-background md:bg-background/65 sticky top-0 z-20 mx-auto px-5 py-6 md:border-b md:border-b-[#ffffff4d] md:backdrop-blur-xl lg:px-10 xl:px-32 2xl:max-w-[1440px] dark:md:border-b-transparent',
+        'bg-background md:bg-background/95 sticky top-0 z-20 mx-auto px-5 py-5 md:border-b md:border-b-[#ffffff4d] md:backdrop-blur-xl lg:px-10 xl:px-32 2xl:max-w-[1440px] dark:md:border-b-transparent',
         {
           'animate-fade-in relative border-none bg-transparent opacity-0 backdrop-blur-none [animation-delay:1.5s] md:bg-transparent md:backdrop-blur-none':
             isHome,
@@ -35,7 +36,7 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
           <span className="hidden md:inline">{isHome ? null : 'Pocketex'}</span>
         </Link>
 
-        <ul className={cn('flex items-center gap-4', { 'text-white': isHome })}>
+        <ul className={cn('flex items-center gap-3', { 'text-white': isHome })}>
           {!isHome && (
             <li>
               <SearchTrigger isIcon />
@@ -54,23 +55,20 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
               Explore
             </Link>
           </li>
-          <div className="bg-muted-background h-6 w-[1px]" />
+          <div className={cn('bg-border h-6 w-[1px]', { 'bg-background/20 dark:bg-border': isHome })} />
           <li>
-            <ThemeSwitcher />
+            <ThemeSwitcher isHome />
           </li>
           <li>
-            <Link
-              target="_blank"
+            <Button
+              className={cn('align-middle', { 'text-white/88 hover:text-white': isHome })}
+              variant="menu"
+              size="icon"
               href={{ pathname: GITHUB_LINK }}
-              className={cn(
-                'hover:bg-muted-background hover:text-foreground text-muted-foreground inline-flex rounded-md p-1 align-middle transition-all',
-                {
-                  'text-white/88 hover:text-white': isHome,
-                },
-              )}
+              target="_blank"
             >
-              <IconBrandGithub stroke={1.2} />
-            </Link>
+              <IconBrandGithub className="size-5" stroke={1.2} />
+            </Button>
           </li>
         </ul>
       </nav>

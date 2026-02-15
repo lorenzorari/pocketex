@@ -25,7 +25,7 @@ export function EvolutionNode({ name, url, details, hasParent = true, isFirstChi
       <EvolutionNodeCtx value={{ details: details || [] }}>
         <div className={hasParent ? 'relative' : undefined}>
           <a href={`/pokemon/${name}`}>
-            <article className="bg-evonode-primary dark:bg-muted-background dark:hover:bg-muted-background/75 flex items-center gap-2 rounded-lg p-3 font-bold transition-all hover:bg-gray-200">
+            <article className="bg-muted-background hover:bg-foreground/10 flex items-center gap-2 rounded-lg p-3 font-bold transition-all">
               <picture className="block size-[48px] text-xs">
                 <Image src={imageUrl} alt={name} />
               </picture>

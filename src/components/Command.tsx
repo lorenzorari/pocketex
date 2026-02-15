@@ -8,7 +8,7 @@ import { cn } from '@/utils/classnames';
 const Command = ({ className, ...props }: ComponentProps<typeof CommandPrimitive>) => (
   <CommandPrimitive
     className={cn(
-      'bg-background dark:border-muted-background flex w-full flex-col overflow-hidden rounded-[calc(6px+8px)] dark:border',
+      'bg-background border-border flex w-full flex-col overflow-hidden rounded-[calc(6px+8px)] border',
       className,
     )}
     {...props}
@@ -16,7 +16,7 @@ const Command = ({ className, ...props }: ComponentProps<typeof CommandPrimitive
 );
 
 const CommandHeader = ({ className, ...props }: BaseComponentWithChildren) => (
-  <div className={cn('border-b-muted-background border-b px-5', className)} {...props} />
+  <div className={cn('border-b-border border-b px-5', className)} {...props} />
 );
 
 const CommandInput = ({ className, ...props }: ComponentProps<typeof CommandPrimitive.Input>) => (

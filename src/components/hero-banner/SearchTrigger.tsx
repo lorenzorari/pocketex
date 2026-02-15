@@ -14,9 +14,12 @@ export function SearchTrigger({ isIcon = false, className, withTransparentOverla
       {({ onOpenChange }) => (
         <button
           className={cn(
-            'dark:bg-muted-background text-muted-foreground flex grow items-center gap-2 rounded-full bg-white px-5 py-2 text-left',
+            'flex grow items-center gap-2 rounded-full',
             {
-              'group hover:text-foreground dark:text-muted-foreground bg-transparent p-0 transition md:border md:border-gray-200 md:px-3 md:py-1.5 md:hover:border-gray-400 dark:bg-transparent dark:md:border-gray-500':
+              'dark:bg-muted-background text-muted-foreground bg-white px-5 py-2 text-left': !isIcon,
+            },
+            {
+              'group hover:text-foreground text-muted-foreground md:hover:border-foreground md:border-border rounded-md p-1.5 transition md:rounded-full md:border md:px-3 md:py-1.5':
                 isIcon,
             },
             className,
@@ -24,7 +27,10 @@ export function SearchTrigger({ isIcon = false, className, withTransparentOverla
           type="button"
           onClick={() => onOpenChange(true)}
         >
-          <IconSearch className="text-muted-foreground size-4 transition group-hover:text-inherit" />
+          <IconSearch
+            stroke={1.2}
+            className={cn('group transition', { 'size-4': !isIcon }, { 'size-5 md:size-4': isIcon })}
+          />
           {!isIcon && <span>Search a Pokémon</span>}
           <kbd className="hidden md:ml-auto md:block md:font-sans md:text-xs">⌘K</kbd>
         </button>

@@ -12,7 +12,7 @@ export function Overlay({ children, className, id, isTransparent = false }: Prop
       id={id}
       className={cn(
         'fixed inset-0 -z-10 bg-black/25 backdrop-blur-xl transition-opacity duration-200',
-        { 'bg-transparent md:bg-black/25 dark:bg-stone-800/50': isTransparent },
+        { 'bg-transparent md:bg-black/25': isTransparent },
         className,
       )}
     >

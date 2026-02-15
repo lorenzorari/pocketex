@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { COLOR_WHITE } from '@/constants';
-import './globals.css';
-import '@/styles/variables.css';
+import '@/app/globals.css';
 
 export const metadata: Metadata = {
   title: 'Pocketex',

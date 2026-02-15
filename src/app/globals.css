@@ -12,82 +12,93 @@ layer(base);
   }
 }
 
-@theme {
-  --color-primary: var(--color-primary);
-  --color-black: var(--color-black);
-  --color-foreground: #3f3f3f;
-  --color-background: white;
+@theme static {
+  --color-black: oklch(26.862% 0.00003 271.152);
+  --color-foreground: var(--color-black);
+  --color-background: oklch(100% 0.00011 271.152);
+  --color-primary: #dc0a2d;
 
-  --color-muted-foreground: var(--color-gray-400);
-  --color-muted-background: var(--color-gray-200);
+  --color-background-home: var(--color-primary);
+  --color-muted-foreground: oklch(60.862% 0.00005 271.152);
+  --color-muted-background: oklch(96% 0.00011 271.152);
 
-  --color-bug-1: var(--color-bug-1);
-  --color-bug-2: var(--color-bug-2);
+  --color-border: oklch(92% 0.00011 271.152);
 
-  --color-dark-1: var(--color-dark-1);
-  --color-dark-2: var(--color-dark-2);
+  /* Types */
+  --color-bug-1: #a8b820;
+  --color-bug-2: #d8e373;
 
-  --color-dragon-1: var(--color-dragon-1);
-  --color-dragon-2: var(--color-dragon-2);
+  --color-dark-1: hsl(236, 7%, 39%);
+  --color-dark-2: hsl(236, 7%, 50%);
 
-  --color-electric-1: var(--color-electric-1);
-  --color-electric-2: var(--color-electric-2);
+  --color-dragon-1: #7038f8;
+  --color-dragon-2: #ba9ffb;
 
-  --color-fairy-1: var(--color-fairy-1);
-  --color-fairy-2: var(--color-fairy-2);
+  --color-electric-1: #f8d030;
+  --color-electric-2: #ffeda6;
 
-  --color-fighting-1: var(--color-fighting-1);
-  --color-fighting-2: var(--color-fighting-2);
+  --color-fairy-1: #f0b6bc;
+  --color-fairy-2: #ffdfe2;
 
-  --color-fire-1: var(--color-fire-1);
-  --color-fire-2: var(--color-fire-2);
+  --color-fighting-1: #c03028;
+  --color-fighting-2: #f97e77;
 
-  --color-flying-1: var(--color-flying-1);
-  --color-flying-2: var(--color-flying-2);
+  --color-fire-1: #f28826;
+  --color-fire-2: #f1c38a;
 
-  --color-ghost-1: var(--color-ghost-1);
-  --color-ghost-2: var(--color-ghost-2);
+  --color-flying-1: #a890f0;
+  --color-flying-2: #d8cbfd;
 
-  --color-grass-1: var(--color-grass-1);
-  --color-grass-2: var(--color-grass-2);
+  --color-ghost-1: #705898;
+  --color-ghost-2: #b19dd3;
 
-  --color-ground-1: var(--color-ground-1);
-  --color-ground-2: var(--color-ground-2);
+  --color-grass-1: hsla(137, 52%, 65%, 1);
+  --color-grass-2: hsla(137, 52%, 76%, 1);
 
-  --color-ice-1: var(--color-ice-1);
-  --color-ice-2: var(--color-ice-2);
+  --color-ground-1: #e0c068;
+  --color-ground-2: #f5db92;
 
-  --color-normal-1: var(--color-normal-1);
-  --color-normal-2: var(--color-normal-2);
+  --color-ice-1: #98d8d8;
+  --color-ice-2: #dcfdfd;
 
-  --color-poison-1: var(--color-poison-1);
-  --color-poison-2: var(--color-poison-2);
+  --color-normal-1: #a8a878;
+  --color-normal-2: #cecea8;
 
-  --color-psychic-1: var(--color-psychic-1);
-  --color-psychic-2: var(--color-psychic-2);
+  --color-poison-1: #a040a0;
+  --color-poison-2: #d786d7;
 
-  --color-rock-1: var(--color-rock-1);
-  --color-rock-2: var(--color-rock-2);
+  --color-psychic-1: #f85888;
+  --color-psychic-2: #f6afc4;
 
-  --color-steel-1: var(--color-steel-1);
-  --color-steel-2: var(--color-steel-2);
+  --color-rock-1: #b8a038;
+  --color-rock-2: #dcc871;
 
-  --color-water-1: var(--color-water-1);
-  --color-water-2: var(--color-water-2);
+  --color-steel-1: #b8b8d0;
+  --color-steel-2: #dfdfe9;
 
-  --color-evonode-primary: #f3f4f6;
+  --color-water-1: #6890f0;
+  --color-water-2: #bbcfff;
 
-  --spacing-evochain-col: var(--gap-evochain-col);
-  --spacing-evochain-col-mobile: var(--gap-evochain-col-mobile);
-  --spacing-evochain-row: var(--gap-evochain-row);
-  --spacing-evoconnector-thickness: var(--evoconnector-thickness);
+  /* Stats */
+  --color-stat-bad: hsl(360, 70%, 65%);
+  --color-stat-medium: hsl(40, 70%, 65%);
+  --color-stat-great: hsl(205, 70%, 65%);
+  --color-stat-good: hsl(137, 70%, 65%);
 
+  /* Evolution node */
+  --spacing-evochain-col: 6rem;
+  --spacing-evochain-col-mobile: 3.5rem;
+  --spacing-evochain-row: 1.25rem;
+  --spacing-evoconnector-thickness: 3px;
+
+  /* Animations */
   --animate-levitate: levitate 4s ease-in-out infinite;
   --animate-scale-up: scaleUp 0.5s forwards;
   --animate-slide-from-top: slideFromTop 0.5s forwards;
   --animate-fade-in: fadeIn 0.5s forwards;
   --animate-wiggle: wiggle 0.3s ease-in-out forwards;
 
+  /* Breakpoints */
   --breakpoint-3xl: 1792px;
 
   @keyframes levitate {
@@ -171,8 +182,10 @@ html {
   &.dark {
     --color-background: var(--color-black);
     --color-foreground: var(--color-white);
-    --color-muted-foreground: var(--color-gray-100);
-    --color-muted-background: hsl(0 0% 32% / 1);
+    --color-muted-foreground: oklch(85% 0.00011 271.152);
+    --color-muted-background: oklch(32.862% 0.00003 271.152);
+    --color-border: oklch(36.862% 0.00003 271.152);
+    --color-background-home: var(--color-background);
   }
 }
 
@@ -181,6 +194,10 @@ body {
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  &.home {
+    background-color: var(--color-background-home);
+  }
 }
 
 img {

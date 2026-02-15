@@ -1,10 +1,12 @@
 'use client';
 
+import { IconMoon } from '@tabler/icons-react';
 import { useState } from 'react';
 import {
   type PokemonCounter as PokemonCounterType,
   PokemonCounterContext,
 } from '@/app/explore/contexts/usePokemonCounter';
+import { Button } from '@/components/ui/Button';
 import { PokemonCounter } from '@/features/explore/components/PokemonCounter';
 import { type GenerationListItem } from '@/services/generations';
 import { type PokemonByGeneration } from '@/services/pokemon';
@@ -24,6 +26,14 @@ export function ExploreMainContent({ generationListItems, pokemonListInitialValu
   return (
     <>
       <PokemonCounterContext value={{ pokemonCount, setPokemonCount }}>
+        <div className="flex gap-1">
+          <Button>hey</Button>
+          <Button variant="outline">hey</Button>
+          <Button className="" size="icon">
+            <IconMoon />
+          </Button>
+        </div>
+
         <div className="mb-4 flex items-center gap-2">
           <h2 className="text-4xl font-bold">Pokémon</h2>
           <PokemonCounter generation={selectedGeneration} />
