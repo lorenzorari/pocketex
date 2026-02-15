@@ -30,18 +30,13 @@ export function StatField({ label, range, rangeLimit = 255 }: Props) {
 
   return (
     <PanelField
-      className={cn(
-        'grid gap-3',
-        range.length > 1
-          ? 'grid-cols-[120px_1fr_70px]'
-          : 'grid-cols-[120px_1fr_34px]',
-      )}
+      className={cn('grid gap-3', range.length > 1 ? 'grid-cols-[120px_1fr_70px]' : 'grid-cols-[120px_1fr_34px]')}
     >
       <PanelLabel className={cn(label === 'hp' ? 'uppercase' : 'capitalize')}>
         {replaceDashesBySpaces(label)}
       </PanelLabel>
       <div className="flex items-center">
-        <span className="relative block h-[10px] w-full overflow-hidden rounded-full bg-gray-200">
+        <span className="bg-muted-background relative block h-[10px] w-full overflow-hidden rounded-full">
           {range.map((baseStat, index) => (
             <span
               key={index}

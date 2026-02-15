@@ -16,8 +16,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      // "border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm focus:outline-hidden focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
-      'flex text-gray-500 transition-colors hover:text-black focus-visible:outline-offset-4 focus-visible:outline-black',
+      'text-muted-foreground flex transition-colors hover:text-black focus-visible:outline-offset-4 focus-visible:outline-black dark:hover:text-white',
       className,
     )}
     {...props}
@@ -66,10 +65,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        'shadow- z-50 rounded-md border border-gray-100 bg-white p-1',
-        // "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md",
-        // position === "popper" &&
-        //   "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+        'border-border z-50 rounded-xl border bg-white/90 p-1 backdrop-blur-xl dark:bg-stone-800/90',
         className,
       )}
       position={position}
@@ -107,7 +103,8 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       // "focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-default select-none items-center rounded-xs py-1.5 pl-8 pr-2 text-sm outline-hidden data-disabled:pointer-events-none data-disabled:opacity-50",
-      'flex items-center justify-between gap-2 rounded-[4px] px-2 py-[2px] select-none hover:bg-black hover:text-white focus-visible:bg-black focus-visible:text-white focus-visible:outline-hidden',
+      'flex items-center justify-between gap-2 rounded-[8px] px-2 py-[2px] select-none hover:bg-black hover:text-white focus-visible:bg-black focus-visible:text-white focus-visible:outline-hidden',
+      'dark:text-muted-foreground dark:hover:bg-stone-600/75 dark:hover:text-white',
       className,
     )}
     {...props}

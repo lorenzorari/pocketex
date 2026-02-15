@@ -35,7 +35,7 @@ export const TrainingPanel = ({ pokemon, species }: Props) => {
                 {isHidden && (
                   <span
                     title="Hidden ability"
-                    className="rounded-full bg-gray-200 px-2 py-[2px] text-xs font-bold text-gray-500"
+                    className="bg-muted-background text-muted-foreground rounded-full px-2 py-[2px] text-xs font-bold"
                   >
                     Hidden
                   </span>

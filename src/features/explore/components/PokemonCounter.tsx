@@ -14,7 +14,7 @@ export function PokemonCounter({ count, generation }: Props) {
 
   return (
     <span
-      className={cn('rounded-full bg-gray-200/70 px-2 text-sm text-gray-500 opacity-0', {
+      className={cn('bg-muted-background text-muted-foreground rounded-full px-2 text-sm opacity-0', {
         'opacity-100 transition-opacity': (currentCount || 0) > 0,
       })}
     >

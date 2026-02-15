@@ -8,7 +8,7 @@ export function EvolutionTrigger() {
   if (!trigger) return null;
 
   return (
-    <div className="bg-evonode-primary z-10 rounded-md px-2 py-1 font-bold text-gray-500">
+    <div className="bg-muted-background text-muted-foreground z-10 rounded-md px-2 py-1 font-bold">
       <span className="hidden md:inline">Level </span>
       {trigger}
     </div>

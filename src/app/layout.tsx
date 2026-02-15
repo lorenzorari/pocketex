@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import './globals.css';
-import '@/styles/variables.css';
 import { COLOR_WHITE } from '@/constants';
+import '@/app/globals.css';
 
 export const metadata: Metadata = {
   title: 'Pocketex',
@@ -18,5 +17,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <html lang="en">{children}</html>;
+  return (
+    <html className="dark" lang="en" suppressHydrationWarning>
+      {children}
+    </html>
+  );
 }

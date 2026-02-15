@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { DetailField } from '@/components/details';
 import PokemonTypeBadge from '@/components/PokemonTypeBadge';
-import { Button, ButtonVariant } from '@/components/ui/Button';
+import { Button } from '@/components/ui/Button';
 import { Panel } from '@/components/ui/panel';
 import { type PokemonType } from '@/models/types';
 import {
@@ -31,13 +31,13 @@ export const TypeEffectivenessPanel = ({ typeEffectiveness }: Props) => {
     <Panel title="Type Effectiveness">
       <div className="mb-4 flex gap-2">
         <Button
-          variant={activeTrigger === TypeEffectivenessGroupLabel.Attack ? ButtonVariant.Dark : ButtonVariant.Outline}
+          variant={activeTrigger === TypeEffectivenessGroupLabel.Attack ? 'dark' : 'outline'}
           onClick={() => setTab(TypeEffectivenessGroupLabel.Attack)}
         >
           Attack
         </Button>
         <Button
-          variant={activeTrigger === TypeEffectivenessGroupLabel.Defense ? ButtonVariant.Dark : ButtonVariant.Outline}
+          variant={activeTrigger === TypeEffectivenessGroupLabel.Defense ? 'dark' : 'outline'}
           onClick={() => setTab(TypeEffectivenessGroupLabel.Defense)}
         >
           Defense

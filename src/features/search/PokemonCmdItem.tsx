@@ -11,10 +11,15 @@ interface Props {
 export function PokemonCmdItem({ pokemon, onSelect }: Props) {
   return (
     <CommandItem onSelect={onSelect} className="flex gap-2">
-      <Image src={pokemon.imageUrl} alt={pokemon.formattedName} className="w-6" loadingClassName="text-gray-300" />
+      <Image
+        src={pokemon.imageUrl}
+        alt={pokemon.formattedName}
+        className="w-6"
+        loadingClassName="text-muted-foreground"
+      />
       <div>
         <span>{pokemon.formattedName} </span>
-        <span className="text-[10px] text-gray-400">{getPokemonNumber(pokemon.id)}</span>
+        <span className="text-muted-foreground text-[10px]">{getPokemonNumber(pokemon.id)}</span>
       </div>
     </CommandItem>
   );

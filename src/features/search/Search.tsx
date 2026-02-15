@@ -33,7 +33,7 @@ export default function Search() {
   return (
     <Command label="Search" shouldFilter={false}>
       <CommandHeader className="flex items-center gap-2">
-        <IconSearch className="size-4 text-gray-400" />
+        <IconSearch className="text-muted-foreground size-4" />
         <CommandInput placeholder="Search a Pokémon by name or id..." value={query} onValueChange={setQuery} />
       </CommandHeader>
       <CommandList>

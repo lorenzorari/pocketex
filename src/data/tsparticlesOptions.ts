@@ -1,7 +1,7 @@
 import { type ISourceOptions } from 'tsparticles';
 import { PokemonType } from '@/models/types';
 
-const tsparticlesOptions: ISourceOptions = {
+const tsparticlesOptions = (isDark: boolean = false): ISourceOptions => ({
   particles: {
     number: {
       value: 10,
@@ -21,7 +21,7 @@ const tsparticlesOptions: ISourceOptions = {
         height: 100,
         replaceColor: true,
         particles: {
-          color: { value: '#fff' },
+          color: { value: isDark ? '#E35D73' : '#fff' },
         },
       })),
     },
@@ -81,6 +81,6 @@ const tsparticlesOptions: ISourceOptions = {
     },
   },
   retina_detect: true,
-};
+});
 
 export default tsparticlesOptions;
