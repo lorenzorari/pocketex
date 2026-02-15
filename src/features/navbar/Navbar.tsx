@@ -28,7 +28,7 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
         },
       )}
     >
-      <nav className="flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <Link href="/" className="inline-flex items-center gap-2 text-2xl font-bold">
           <div className="size-8" style={{ color: logoColor }}>
             <Logo className={cn('hover:animate-wiggle transition-opacity', isHome ? 'fill-white' : 'fill-current')} />
@@ -36,42 +36,32 @@ export const Navbar = ({ isHome, logoColorCSS }: Props) => {
           <span className="hidden md:inline">{isHome ? null : 'Pocketex'}</span>
         </Link>
 
-        <ul className={cn('flex items-center gap-3', { 'text-white': isHome })}>
-          {!isHome && (
-            <li>
-              <SearchTrigger isIcon />
-            </li>
-          )}
-          <li>
-            <Link
+        <div className={cn('flex items-center gap-3', { 'text-white': isHome })}>
+          {!isHome && <SearchTrigger isIcon />}
+          <nav>
+            <Button
               href="/explore"
-              className={cn(
-                'hover:text-foreground text-muted-foreground text-sm underline-offset-4 transition-all hover:underline',
-                {
-                  'text-white/88 hover:text-white': isHome,
-                },
-              )}
+              variant="menu"
+              className={cn('p-0 text-sm underline-offset-4 hover:underline', {
+                'text-white/88 hover:text-white': isHome,
+              })}
             >
               Explore
-            </Link>
-          </li>
-          <div className={cn('bg-border h-6 w-[1px]', { 'bg-background/20 dark:bg-border': isHome })} />
-          <li>
-            <ThemeSwitcher isHome />
-          </li>
-          <li>
-            <Button
-              className={cn('align-middle', { 'text-white/88 hover:text-white': isHome })}
-              variant="menu"
-              size="icon"
-              href={{ pathname: GITHUB_LINK }}
-              target="_blank"
-            >
-              <IconBrandGithub className="size-5" stroke={1.2} />
             </Button>
-          </li>
-        </ul>
-      </nav>
+          </nav>
+          <div className={cn('bg-border h-6 w-[1px]', { 'bg-background/20 dark:bg-border': isHome })} />
+          <ThemeSwitcher className={cn({ 'text-white/88 hover:text-white': isHome })} />
+          <Button
+            className={cn('align-middle', { 'text-white/88 hover:text-white': isHome })}
+            variant="menu"
+            size="icon"
+            href={{ pathname: GITHUB_LINK }}
+            target="_blank"
+          >
+            <IconBrandGithub className="size-5" stroke={1.2} />
+          </Button>
+        </div>
+      </div>
     </header>
   );
 };

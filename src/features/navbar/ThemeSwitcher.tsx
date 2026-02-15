@@ -3,11 +3,9 @@
 import { IconDeviceLaptop, IconSun, IconMoon, IconPointFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import { type BaseComponent } from '@/models/utils';
 import { cn } from '@/utils/classnames';
-
-interface Props {
-  isHome?: boolean;
-}
 
 const ICON_STROKE = 1.2;
 const THEMES = ['system', 'light', 'dark'];
@@ -17,7 +15,7 @@ const THEME_ICONS = {
   dark: IconMoon,
 };
 
-export function ThemeSwitcher({ isHome }: Props) {
+export function ThemeSwitcher({ className }: BaseComponent) {
   const [isMounted, setIsMounted] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -49,17 +47,15 @@ export function ThemeSwitcher({ isHome }: Props) {
   }
 
   return (
-    <button
-      className={cn(
-        'p-1.5 align-middle transition-all',
-        { 'text-white/88 hover:text-white': isHome },
-        { 'hover:text-foreground text-muted-foreground': !isHome },
-      )}
+    <Button
+      className={cn('align-middle', className)}
+      variant="menu"
+      size="icon"
       onClick={handleClick}
       onMouseOver={() => setIsHover(true)}
       onMouseLeave={() => setTimeout(() => setIsHover(false), 500)}
     >
       <ThemeIcon isHover={isHover} />
-    </button>
+    </Button>
   );
 }

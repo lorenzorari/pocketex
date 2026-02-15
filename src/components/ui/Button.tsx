@@ -25,7 +25,7 @@ type Props = CustomButtonProps & {
 const VARIANTS = {
   [ButtonVariant.Dark]: 'bg-foreground text-background border-2 border-transparent',
   [ButtonVariant.Outline]: 'border-2 border-foreground hover:bg-foreground hover:text-background',
-  [ButtonVariant.Menu]: 'hover:text-foreground text-muted-foreground inline-flex transition-all',
+  [ButtonVariant.Menu]: 'hover:text-foreground text-muted-foreground transition-all font-normal',
 };
 
 const SIZES = {
