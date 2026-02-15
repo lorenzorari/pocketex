@@ -5,7 +5,7 @@ import { useEventListener, useScrollLock } from 'usehooks-ts';
 import { ClientOnlyPortal } from '@/components/ClientOnlyPortal';
 import { CommandDialog } from '@/components/Command';
 import { Overlay } from '@/components/dialog/Overlay';
-import Search from '@/components/search/Search';
+import Search from '@/features/search/Search';
 import { cn } from '@/utils/classnames';
 
 interface Props {

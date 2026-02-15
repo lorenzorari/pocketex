@@ -2,8 +2,8 @@ import { useRouter } from 'next/navigation';
 import { useState, useMemo, useTransition } from 'react';
 import useSWR from 'swr';
 import { useLocalStorage } from 'usehooks-ts';
-import { type PokemonSearchItem } from '@/components/search/models/PokemonSearchItem';
-import { getAllPokemons } from '@/services/pokemon';
+import { type PokemonSearchItem } from '@/features/search/models/PokemonSearchItem';
+import { getPokemonSearchItems } from '@/features/search/services';
 
 const POKEMON_QUANTITY_LIMIT = 10;
 const RECENT_SEARCHES_LIMIT = 8;
@@ -11,7 +11,7 @@ const RECENT_SEARCHES_LIMIT = 8;
 export function useSearch() {
   const router = useRouter();
   const [isNavigationPending, startTransition] = useTransition();
-  const { data: allPokemons, isLoading: isFetchingPokemon } = useSWR(`pokemon-autocomplete`, getAllPokemons, {
+  const { data: allPokemons, isLoading: isFetchingPokemon } = useSWR(`pokemon-autocomplete`, getPokemonSearchItems, {
     fallbackData: [],
   });
   const [recentSearches, setRecentSearches] = useLocalStorage<PokemonSearchItem[]>('recentSearches', [], {
@@ -41,7 +41,7 @@ export function useSearch() {
   function handleSelect(suggestion: PokemonSearchItem) {
     startTransition(() => {
       handleRecentSearches(suggestion);
-      router.push(`/pokemon/${suggestion.name}`);
+      router.push(suggestion.url);
     });
   }
 

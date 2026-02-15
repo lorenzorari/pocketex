@@ -1,5 +1,5 @@
 import { IconSearch } from '@tabler/icons-react';
-import SearchDialog from '@/components/search/SearchDialog';
+import SearchDialog from '@/features/search/SearchDialog';
 import { type BaseComponent } from '@/models/utils';
 import { cn } from '@/utils/classnames';
 
