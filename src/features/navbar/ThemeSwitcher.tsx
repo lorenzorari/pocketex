@@ -25,7 +25,7 @@ export function ThemeSwitcher({ className }: BaseComponent) {
   if (!isMounted)
     return (
       <div className="p-1">
-        <IconPointFilled className="text-muted-foreground/50 animate-pulse" />
+        <IconPointFilled className="text-muted-foreground/50 size-5 animate-pulse" />
       </div>
     );
 
