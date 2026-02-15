@@ -22,7 +22,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Forms\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Go to previous/next Pokémon\
 ✅ Search\
-⌛️ Dark mode\
+✅ Dark mode\
 ⌛️ Languages
 
 # Credits
