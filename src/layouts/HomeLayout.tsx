@@ -4,7 +4,7 @@ import { type WithChildren } from '@/models/utils';
 
 export function HomeLayout({ children }: WithChildren) {
   return (
-    <body className="home">
+    <body className="bg-primary dark:bg-background">
       <ThemeProvider attribute="class">
         <Navbar isHome />
         <main className="mx-auto -mt-[72px]">{children}</main>

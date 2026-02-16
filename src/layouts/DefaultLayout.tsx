@@ -8,7 +8,7 @@ interface Props {
 
 export function DefaultLayout({ children, logoColorCSS }: Props) {
   return (
-    <body>
+    <body className="bg-background">
       <ThemeProvider attribute="class">
         <Navbar logoColorCSS={logoColorCSS} />
         <main className="mx-auto 2xl:max-w-[1440px]">{children}</main>
