@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html className="bg-green-500 dark:bg-pink-500" lang="en" suppressHydrationWarning>
       {children}
     </html>
   );
