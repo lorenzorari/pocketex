@@ -1,13 +1,12 @@
 import { ThemeProvider } from 'next-themes';
-import { Navbar } from '@/features/navbar/Navbar';
 import { type WithChildren } from '@/models/utils';
 
 export function HomeLayout({ children }: WithChildren) {
   return (
     <body className="bg-primary dark:bg-background">
       <ThemeProvider attribute="class">
-        <Navbar isHome />
-        <main className="mx-auto -mt-[72px]">{children}</main>
+        {/* <Navbar isHome /> */}
+        <main className="mx-auto">{children}</main>
       </ThemeProvider>
     </body>
   );
