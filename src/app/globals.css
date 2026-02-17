@@ -185,7 +185,7 @@ html {
     --color-muted-foreground: oklch(85% 0.00011 271.152);
     --color-muted-background: oklch(32.862% 0.00003 271.152);
     --color-border: oklch(36.862% 0.00003 271.152);
-    /* --color-background-home: var(--color-background); */
+    --color-background-home: var(--color-background);
   }
 }
 
