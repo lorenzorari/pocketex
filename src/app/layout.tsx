@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import { COLOR_WHITE } from '@/constants';
 import '@/app/globals.css';
+import { COLOR_BLACK, COLOR_WHITE } from '@/constants';
 
 export const metadata: Metadata = {
   title: 'Pocketex',
@@ -9,7 +9,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: COLOR_WHITE,
+  themeColor: [
+    {
+      media: '(prefers-color-scheme: light)',
+      color: COLOR_WHITE,
+    },
+    {
+      media: '(prefers-color-scheme: dark)',
+      color: COLOR_BLACK,
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -18,8 +27,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="dark" lang="en" suppressHydrationWarning>
-      {children}
-    </html>
+    <>
+      <html lang="en" suppressHydrationWarning>
+        {children}
+      </html>
+    </>
   );
 }

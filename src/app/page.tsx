@@ -1,10 +1,19 @@
 import { type Viewport } from 'next';
 import { HeroBanner } from '@/components/hero-banner';
-import { COLOR_PRIMARY } from '@/constants';
+import { COLOR_BLACK, COLOR_PRIMARY } from '@/constants';
 import { HomeLayout } from '@/layouts/HomeLayout';
 
 export const viewport: Viewport = {
-  themeColor: COLOR_PRIMARY,
+  themeColor: [
+    {
+      media: '(prefers-color-scheme: light)',
+      color: COLOR_PRIMARY,
+    },
+    {
+      media: '(prefers-color-scheme: dark)',
+      color: COLOR_BLACK,
+    },
+  ],
 };
 
 export default function HomePage() {
