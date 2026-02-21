@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import { ThemeProvider } from 'next-themes';
 import { COLOR_BLACK, COLOR_WHITE } from '@/constants';
 import { Navbar } from '@/features/navbar/Navbar';
@@ -14,7 +15,7 @@ export function DefaultLayout({ children, logoColorCSS }: Props) {
         <Navbar logoColorCSS={logoColorCSS} />
         <main className="mx-auto 2xl:max-w-[1440px]">{children}</main>
       </ThemeProvider>
-      <script>
+      <Script id="theme-color">
         {`
           (function() {
             const mode = localStorage.getItem('theme') || 'system'
@@ -27,7 +28,7 @@ export function DefaultLayout({ children, logoColorCSS }: Props) {
               document.head.appendChild(meta)
             }
           })()`}
-      </script>
+      </Script>
     </body>
   );
 }

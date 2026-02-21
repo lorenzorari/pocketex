@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import { ThemeProvider } from 'next-themes';
 import { COLOR_BLACK, COLOR_PRIMARY } from '@/constants';
 import { Navbar } from '@/features/navbar/Navbar';
@@ -10,7 +11,7 @@ export function HomeLayout({ children }: WithChildren) {
         <Navbar isHome />
         <main className="mx-auto -mt-[72px]">{children}</main>
       </ThemeProvider>
-      <script>
+      <Script id="theme-color">
         {`
           (function() {
             const mode = localStorage.getItem('theme') || 'system'
@@ -23,7 +24,7 @@ export function HomeLayout({ children }: WithChildren) {
               document.head.appendChild(meta)
             }
           })()`}
-      </script>
+      </Script>
     </body>
   );
 }
