@@ -4,6 +4,7 @@ import { IconDeviceLaptop, IconSun, IconMoon, IconPointFilled } from '@tabler/ic
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { COLOR_BLACK, COLOR_WHITE } from '@/constants';
 import { type BaseComponent } from '@/models/utils';
 import { cn } from '@/utils/classnames';
 
@@ -35,6 +36,32 @@ export function ThemeSwitcher({ className }: BaseComponent) {
     const currentIndex = THEMES.indexOf(theme);
     const nextIndex = (currentIndex + 1) % THEMES.length;
     setTheme(THEMES[nextIndex]);
+    setMetaThemeColor(THEMES[nextIndex]);
+  }
+
+  function setMetaThemeColor(targetTheme: string) {
+    document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.remove());
+
+    if (targetTheme === 'system') {
+      const metaLight = document.createElement('meta');
+      metaLight.name = 'theme-color';
+      metaLight.media = '(prefers-color-scheme: light)';
+      metaLight.content = COLOR_WHITE;
+      document.head.appendChild(metaLight);
+
+      const metaDark = document.createElement('meta');
+      metaDark.name = 'theme-color';
+      metaDark.media = '(prefers-color-scheme: dark)';
+      metaDark.content = COLOR_BLACK;
+      document.head.appendChild(metaDark);
+
+      return;
+    }
+
+    const meta = document.createElement('meta');
+    meta.name = 'theme-color';
+    meta.content = targetTheme === 'light' ? COLOR_WHITE : COLOR_BLACK;
+    document.head.appendChild(meta);
   }
 
   function ThemeIcon({ isHover = false }) {
