@@ -1,5 +1,4 @@
-import type { Metadata, Viewport } from 'next';
-import { COLOR_WHITE } from '@/constants';
+import type { Metadata } from 'next';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
@@ -8,18 +7,16 @@ export const metadata: Metadata = {
   icons: '/assets/svg/logo.svg',
 };
 
-export const viewport: Viewport = {
-  themeColor: COLOR_WHITE,
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html className="dark" lang="en" suppressHydrationWarning>
-      {children}
-    </html>
+    <>
+      <html lang="en" suppressHydrationWarning>
+        {children}
+      </html>
+    </>
   );
 }

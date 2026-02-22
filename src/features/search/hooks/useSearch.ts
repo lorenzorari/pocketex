@@ -26,7 +26,6 @@ export function useSearch() {
     const q = query.toLowerCase();
     const filteredItems = allPokemons.filter(({ name, id }) => {
       if (isNaN(+q)) return name.toLowerCase().includes(q);
-      console.log(id, q);
 
       return id.toString().includes(q);
     });
