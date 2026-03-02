@@ -9,8 +9,8 @@ import { TypeEffectivenessPanel } from '@/features/pokemon-details/components/pa
 import { getIdFromResourceUrl } from '@/helpers/get-id-from-resource-url';
 import { DefaultLayout } from '@/layouts/DefaultLayout';
 import { type PokemonType } from '@/models/types';
-import { getPokemon, getPokemonCard } from '@/services/pokemon';
-import { getSpecies, getSpeciesPagination } from '@/services/species';
+import { getPokemon } from '@/services/pokemon';
+import { getSiblingSpecies, getSpecies, getSpeciesPagination } from '@/services/species';
 import { getTypeEffectiveness } from '@/services/types';
 
 interface Params {
@@ -37,14 +37,14 @@ export async function generateStaticParams() {
 
 const DetailsPage = async ({ params }: Props) => {
   const pokemonId = (await params).id;
-  const pokemon = await getPokemon(pokemonId);
-  const speciesData = await getSpecies(`${pokemon?.id}`);
+  const speciesData = await getSpecies(pokemonId);
+  const pokemon = await getPokemon(`${speciesData?.species.id}`);
 
   if (!pokemon || !speciesData) return notFound();
 
   const [prevPokemon, nextPokemon] = await Promise.all([
-    pokemon.id > 1 ? getPokemonCard(`${pokemon.id - 1}`) : null,
-    getPokemonCard(`${pokemon.id + 1}`),
+    pokemon.id > 1 ? getSiblingSpecies(`${pokemon.id - 1}`) : null,
+    getSiblingSpecies(`${pokemon.id + 1}`),
   ]);
 
   const { species, genus, description } = speciesData;
@@ -68,8 +68,8 @@ const DetailsPage = async ({ params }: Props) => {
                   <TypeEffectivenessPanel typeEffectiveness={typeEffectiveness} />
                   <StatsPanel stats={pokemon.stats} />
                 </div>
-                <hr className="my-10" />
-                <ContinuePanel prevPokemon={prevPokemon} nextPokemon={nextPokemon} />
+                <hr className="border-border my-10" />
+                <ContinuePanel prevSpecies={prevPokemon} nextSpecies={nextPokemon} />
               </div>
             </div>
           )}

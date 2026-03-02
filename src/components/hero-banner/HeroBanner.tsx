@@ -1,26 +1,43 @@
 'use client';
 
-import React, { useState } from 'react';
-import Particles from 'react-tsparticles';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import Particles, { type ParticlesProps } from 'react-tsparticles';
+import useSWR from 'swr';
+import { RandomPokemonButton } from '@/components/hero-banner/RandomPokemonButton';
 import { SearchTrigger } from '@/components/hero-banner/SearchTrigger';
 import tsparticlesOptions from '@/data/tsparticlesOptions';
+import { getPokemonSearchItems } from '@/features/search/services';
 
 interface Props {
   heading: string;
 }
 
 const HeroBanner = (props: Props) => {
-  const [areParticlesLoading, setAreParticlesLoading] = useState<boolean>(true);
+  const router = useRouter();
+  const { data: allPokemons } = useSWR(`pokemon-autocomplete`, getPokemonSearchItems, {
+    fallbackData: [],
+  });
 
-  const initParticles = (tsParticles: any) => {
-    tsParticles.load('tsparticles', tsparticlesOptions).then(() => setAreParticlesLoading(false));
+  const initParticles: ParticlesProps['init'] = async (tsParticles) => {
+    tsParticles.load('tsparticles', tsparticlesOptions());
   };
+
+  function getRandomPokemon() {
+    const randomIndex = Math.floor(Math.random() * allPokemons.length);
+    return allPokemons[randomIndex];
+  }
+
+  function goToRandomPokemon() {
+    const randomPokemon = getRandomPokemon();
+    router.push(`/pokemon/${randomPokemon.name}`);
+  }
 
   return (
     <section className="bg-primary relative h-screen dark:bg-black">
       <Particles
         className="animate-scale-up absolute inset-0 opacity-0 [animation-delay:2s]"
-        init={initParticles as any}
+        init={initParticles}
         options={tsparticlesOptions(true)}
       />
 
@@ -33,9 +50,7 @@ const HeroBanner = (props: Props) => {
           </div>
           <div className="flex gap-2">
             <SearchTrigger className="animate-fade-in opacity-0 [animation-delay:1s]" withTransparentOverlay />
-            {/* <button className="group flex size-[40px] items-center justify-center rounded-full bg-white text-gray-400 transition-all hover:text-black">
-              <IconPokeball className="group-hover:animate-wiggle" />
-            </button> */}
+            <RandomPokemonButton onClick={goToRandomPokemon} />
           </div>
         </div>
       </div>
