@@ -1,10 +1,10 @@
 'use client';
 
+import { IconPokeball } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import Particles, { type ParticlesProps } from 'react-tsparticles';
 import useSWR from 'swr';
-import { RandomPokemonButton } from '@/components/hero-banner/RandomPokemonButton';
 import { SearchTrigger } from '@/components/hero-banner/SearchTrigger';
 import tsparticlesOptions from '@/data/tsparticlesOptions';
 import { getPokemonSearchItems } from '@/features/search/services';
@@ -50,7 +50,11 @@ const HeroBanner = (props: Props) => {
           </div>
           <div className="flex gap-2">
             <SearchTrigger className="animate-fade-in opacity-0 [animation-delay:1s]" withTransparentOverlay />
-            <RandomPokemonButton onClick={goToRandomPokemon} />
+            {/* <RandomPokemonButton onClick={goToRandomPokemon} /> */}
+            <button className="group animate-fade-in dark:bg-muted-background text-muted-foreground hover:text-foreground flex items-center gap-2 rounded-full bg-white px-4 opacity-0 transition-all [animation-delay:1s]">
+              Random
+              <IconPokeball className="group-hover:animate-wiggle" />
+            </button>
           </div>
         </div>
       </div>
