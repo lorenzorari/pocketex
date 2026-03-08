@@ -1,37 +1,19 @@
 'use client';
 
-import { IconPokeball } from '@tabler/icons-react';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import Particles, { type ParticlesProps } from 'react-tsparticles';
-import useSWR from 'swr';
+import { RandomPokemonButton } from '@/components/hero-banner/RandomPokemonButton';
 import { SearchTrigger } from '@/components/hero-banner/SearchTrigger';
 import tsparticlesOptions from '@/data/tsparticlesOptions';
-import { getPokemonSearchItems } from '@/features/search/services';
 
 interface Props {
   heading: string;
 }
 
 const HeroBanner = (props: Props) => {
-  const router = useRouter();
-  const { data: allPokemons } = useSWR(`pokemon-autocomplete`, getPokemonSearchItems, {
-    fallbackData: [],
-  });
-
   const initParticles: ParticlesProps['init'] = async (tsParticles) => {
     tsParticles.load('tsparticles', tsparticlesOptions());
   };
-
-  function getRandomPokemon() {
-    const randomIndex = Math.floor(Math.random() * allPokemons.length);
-    return allPokemons[randomIndex];
-  }
-
-  function goToRandomPokemon() {
-    const randomPokemon = getRandomPokemon();
-    router.push(`/pokemon/${randomPokemon.name}`);
-  }
 
   return (
     <section className="bg-primary relative h-screen dark:bg-black">
@@ -48,13 +30,9 @@ const HeroBanner = (props: Props) => {
               {props.heading}
             </h1>
           </div>
-          <div className="flex gap-2">
+          <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
             <SearchTrigger className="animate-fade-in opacity-0 [animation-delay:1s]" withTransparentOverlay />
-            {/* <RandomPokemonButton onClick={goToRandomPokemon} /> */}
-            <button className="group animate-fade-in dark:bg-muted-background text-muted-foreground hover:text-foreground flex items-center gap-2 rounded-full bg-white px-4 opacity-0 transition-all [animation-delay:1s]">
-              Random
-              <IconPokeball className="group-hover:animate-wiggle" />
-            </button>
+            <RandomPokemonButton />
           </div>
         </div>
       </div>

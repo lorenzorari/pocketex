@@ -6,6 +6,7 @@ export enum ButtonVariant {
   Dark = 'dark',
   Outline = 'outline',
   Menu = 'menu',
+  None = 'none',
 }
 
 enum Size {
@@ -26,6 +27,7 @@ const VARIANTS = {
   [ButtonVariant.Dark]: 'bg-foreground text-background border-2 border-transparent',
   [ButtonVariant.Outline]: 'border-2 border-foreground hover:bg-foreground hover:text-background',
   [ButtonVariant.Menu]: 'hover:text-foreground text-muted-foreground transition-all font-normal',
+  [ButtonVariant.None]: '',
 };
 
 const SIZES = {
@@ -39,7 +41,7 @@ function isAnchor(props: CustomButtonProps): props is AnchorProps {
 
 export function Button(props: Props) {
   const { variant = ButtonVariant.Dark, size = Size.MD, className: cls, ...restProps } = props;
-  const baseClass = 'rounded-full font-bold transition-colors';
+  const baseClass = 'rounded-full font-bold transition-all';
   const variantClass = VARIANTS[variant];
   const sizeClass = SIZES[size];
   const mixedClasses = [baseClass, variantClass, sizeClass, cls];

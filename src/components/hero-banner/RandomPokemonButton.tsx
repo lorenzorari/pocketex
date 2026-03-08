@@ -1,29 +1,33 @@
-import * as Tooltip from '@radix-ui/react-tooltip';
 import { IconPokeball } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
+import useSWR from 'swr';
+import { Button } from '@/components/ui/Button';
+import { getPokemonSearchItems } from '@/features/search/services';
 
-interface Props {
-  onClick?: () => void;
-}
+export function RandomPokemonButton() {
+  const router = useRouter();
+  const { data: allPokemons } = useSWR(`pokemon-autocomplete`, getPokemonSearchItems, {
+    fallbackData: [],
+  });
 
-export function RandomPokemonButton({ onClick }: Props) {
+  function getRandomPokemon() {
+    const randomIndex = Math.floor(Math.random() * allPokemons.length);
+    return allPokemons[randomIndex];
+  }
+
+  function goToRandomPokemon() {
+    const randomPokemon = getRandomPokemon();
+    router.push(`/pokemon/${randomPokemon.name}`);
+  }
+
   return (
-    <Tooltip.Provider>
-      <Tooltip.Root>
-        <Tooltip.Trigger asChild>
-          <button
-            onClick={onClick}
-            className="group animate-fade-in dark:bg-muted-background text-muted-foreground hover:text-foreground flex size-[40px] items-center justify-center rounded-full bg-white opacity-0 transition-all [animation-delay:1s]"
-          >
-            <IconPokeball className="group-hover:animate-wiggle" />
-          </button>
-        </Tooltip.Trigger>
-        <Tooltip.Portal>
-          <Tooltip.Content className="bg-background border-border z-50 rounded-xl border p-2" sideOffset={5}>
-            Random Pokémon
-            <Tooltip.Arrow className="fill-border" />
-          </Tooltip.Content>
-        </Tooltip.Portal>
-      </Tooltip.Root>
-    </Tooltip.Provider>
+    <Button
+      onClick={goToRandomPokemon}
+      variant="none"
+      className="group animate-fade-in sm:dark:text-muted-foreground bg-primary dark:bg-background flex items-center justify-center gap-2 border-2 border-white px-4 py-1.5 text-white opacity-0 [animation-delay:1s] hover:border-white hover:text-white sm:border-transparent sm:bg-transparent sm:dark:bg-transparent"
+    >
+      Random
+      <IconPokeball className="group-hover:animate-wiggle" />
+    </Button>
   );
 }
