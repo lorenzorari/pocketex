@@ -21,7 +21,7 @@ const tsparticlesOptions = (isDark: boolean = false): ISourceOptions => ({
         height: 100,
         replaceColor: true,
         particles: {
-          color: { value: isDark ? '#E35D73' : '#fff' },
+          color: { value: isDark ? '#E35D73' : '#F5C5CD' },
         },
       })),
     },

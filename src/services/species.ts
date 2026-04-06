@@ -1,3 +1,4 @@
+import { getFormattedPokemonName } from '@/helpers/get-formatted-pokemon-name';
 import { pokeapi } from '@/helpers/http';
 import { type PaginationResult } from '@/models/pokemon/pagination';
 import { type Species } from '@/models/species';
@@ -15,6 +16,8 @@ export async function getSpecies(pokemonId: string): Promise<GetSpeciesData | nu
     const species = await pokeapi<Species>(`${BASE_URL}/${pokemonId}`);
     const genus = getGenus(species);
     const description = getDescription(species);
+
+    species.formattedName = getFormattedPokemonName(species.name ?? '???');
 
     return { species, genus, description };
   } catch (error) {
@@ -58,3 +61,15 @@ export async function getSpeciesPagination(offset: number = 0, limit: number = 2
 
   return res;
 }
+
+export const getSiblingSpecies = async (id: string) => {
+  const speciesData = await getSpecies(id);
+
+  if (!speciesData) return null;
+
+  return {
+    id: speciesData.species.id,
+    name: speciesData.species.formattedName ?? '???',
+    url: `/pokemon/${speciesData.species.name}`,
+  };
+};

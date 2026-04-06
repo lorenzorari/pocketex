@@ -1,5 +1,6 @@
+import { getFormattedPokemonName } from '@/helpers/get-formatted-pokemon-name';
 import { getDocumentTitle } from '@/helpers/getDocumentTitle';
-import { getPokemon } from '@/services/pokemon';
+import { getSpecies } from '@/services/species';
 
 interface Params {
   id: string;
@@ -13,8 +14,9 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
 
-  const pokemon = await getPokemon(id);
-  const capitalizedName = pokemon?.formattedName ?? undefined;
+  // Use species to avoid errors with pokemon form names
+  const pokemon = await getSpecies(id);
+  const capitalizedName = pokemon?.species.name ? getFormattedPokemonName(pokemon?.species.name) : undefined;
 
   return {
     title: getDocumentTitle(capitalizedName),

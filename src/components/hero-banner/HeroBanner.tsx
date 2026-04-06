@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useTheme } from 'next-themes';
+import React from 'react';
 import Particles from 'react-tsparticles';
+import { RandomPokemonButton } from '@/components/hero-banner/RandomPokemonButton';
 import { SearchTrigger } from '@/components/hero-banner/SearchTrigger';
 import tsparticlesOptions from '@/data/tsparticlesOptions';
 
@@ -10,18 +12,13 @@ interface Props {
 }
 
 const HeroBanner = (props: Props) => {
-  const [areParticlesLoading, setAreParticlesLoading] = useState<boolean>(true);
-
-  const initParticles = (tsParticles: any) => {
-    tsParticles.load('tsparticles', tsparticlesOptions).then(() => setAreParticlesLoading(false));
-  };
+  const { resolvedTheme } = useTheme();
 
   return (
     <section className="bg-primary relative h-screen dark:bg-black">
       <Particles
         className="animate-scale-up absolute inset-0 opacity-0 [animation-delay:2s]"
-        init={initParticles as any}
-        options={tsparticlesOptions(true)}
+        options={tsparticlesOptions(resolvedTheme === 'dark')}
       />
 
       <div className="flex h-full items-center justify-center">
@@ -31,11 +28,9 @@ const HeroBanner = (props: Props) => {
               {props.heading}
             </h1>
           </div>
-          <div className="flex gap-2">
+          <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
             <SearchTrigger className="animate-fade-in opacity-0 [animation-delay:1s]" withTransparentOverlay />
-            {/* <button className="group flex size-[40px] items-center justify-center rounded-full bg-white text-gray-400 transition-all hover:text-black">
-              <IconPokeball className="group-hover:animate-wiggle" />
-            </button> */}
+            <RandomPokemonButton />
           </div>
         </div>
       </div>

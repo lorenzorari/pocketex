@@ -2,28 +2,28 @@ import { type ComponentProps } from 'react';
 import { SiblingLink } from '@/features/pokemon-details/components/SiblingLink';
 import { getArtworkUrl } from '@/helpers/get-artwork-url';
 import { getPokemonNumber } from '@/helpers/getPokemonNumber';
-import { type Pokemon } from '@/models/pokemon';
+import { type Species } from '@/models/species';
 
 interface Props {
-  prevPokemon: Pokemon | null;
-  nextPokemon: Pokemon | null;
+  prevSpecies: Species | null;
+  nextSpecies: Species | null;
 }
 
 type SiblingLinkType = ComponentProps<typeof SiblingLink> | null;
 
-export function ContinuePanel({ prevPokemon, nextPokemon }: Props) {
+export function ContinuePanel({ prevSpecies, nextSpecies }: Props) {
   const siblingLinks: SiblingLinkType[] = [
-    prevPokemon && {
-      href: `/pokemon/${prevPokemon.name}`,
-      title: prevPokemon.name,
-      subtitle: getPokemonNumber(prevPokemon.id),
-      imgSrc: getArtworkUrl(prevPokemon.id),
+    prevSpecies && {
+      href: `/pokemon/${prevSpecies.name}`,
+      title: prevSpecies.name ?? '???',
+      subtitle: getPokemonNumber(prevSpecies.id),
+      imgSrc: getArtworkUrl(prevSpecies.id ?? 0),
     },
-    nextPokemon && {
-      href: `/pokemon/${nextPokemon.name}`,
-      title: nextPokemon.name,
-      subtitle: getPokemonNumber(nextPokemon.id),
-      imgSrc: getArtworkUrl(nextPokemon.id),
+    nextSpecies && {
+      href: `/pokemon/${nextSpecies.name}`,
+      title: nextSpecies.name ?? '???',
+      subtitle: getPokemonNumber(nextSpecies.id),
+      imgSrc: getArtworkUrl(nextSpecies.id ?? 0),
       direction: 'right',
     },
   ];
