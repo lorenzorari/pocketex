@@ -1,7 +1,8 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import React from 'react';
-import Particles, { type ParticlesProps } from 'react-tsparticles';
+import Particles from 'react-tsparticles';
 import { RandomPokemonButton } from '@/components/hero-banner/RandomPokemonButton';
 import { SearchTrigger } from '@/components/hero-banner/SearchTrigger';
 import tsparticlesOptions from '@/data/tsparticlesOptions';
@@ -11,16 +12,13 @@ interface Props {
 }
 
 const HeroBanner = (props: Props) => {
-  const initParticles: ParticlesProps['init'] = async (tsParticles) => {
-    tsParticles.load('tsparticles', tsparticlesOptions());
-  };
+  const { resolvedTheme } = useTheme();
 
   return (
     <section className="bg-primary relative h-screen dark:bg-black">
       <Particles
         className="animate-scale-up absolute inset-0 opacity-0 [animation-delay:2s]"
-        init={initParticles}
-        options={tsparticlesOptions(true)}
+        options={tsparticlesOptions(resolvedTheme === 'dark')}
       />
 
       <div className="flex h-full items-center justify-center">
